@@ -1,0 +1,21 @@
+body {
+  background-color: #111111;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+@font-face {
+  font-family: "Misto";
+  src: url("path/to/misto.woff2") format("woff2"),
+    url("path/to/misto.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+.test {
+  color: #1a1a1a;
+}
