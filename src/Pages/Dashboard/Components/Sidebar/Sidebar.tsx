@@ -33,7 +33,7 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary"
         }
-        p-4 w-60 rounded-xl flex items-center justify-center gap-2 active:bg-[#dd353d] cursor-pointer
+        p-4 w-60 rounded-xl flex items-center justify-center gap-4 active:bg-[#dd353d] cursor-pointer
         `}
       >
         <RiDashboardFill className="text-3xl" />
@@ -47,7 +47,7 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-2 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
         `}
       >
         <MdLeaderboard className="text-3xl" />
@@ -61,7 +61,7 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-2 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
         `}
       >
         <CiUser className="text-3xl" />
@@ -75,7 +75,7 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-2 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
         `}
       >
         <IoBagHandleOutline className="text-3xl" />
@@ -89,21 +89,21 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-2 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
         `}
       >
         <GoGraph className="text-3xl" />
         <p>Verify Report</p>
       </div>
       <div
-        onClick={() => handleNavigation("/messages")}
+        onClick={() => handleNavigation("/mails/Inbox")}
         className={`
         ${
-          location.pathname === "/messages"
-            ? "bg-primary text-[#fff] shadow-md shadow-[#000]"
+          location.pathname === "/mails/Inbox"
+            ? "bg-primary text-[#fff]"
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-2 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
         `}
       >
         <IoChatboxEllipsesOutline className="text-3xl" />
@@ -117,7 +117,7 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-2 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
         `}
       >
         <IoSettingsOutline className="text-3xl" />
@@ -130,7 +130,7 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex gap-2 items-center justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex gap-4 items-center justify-center cursor-pointer
         `}
       >
         <PiSignOutBold className="text-3xl" />

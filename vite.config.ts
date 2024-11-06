@@ -30,6 +30,12 @@ export default defineConfig({
 
       //
       "@products": path.resolve("./src/Pages/Products"),
+
+      //
+      "@verify": path.resolve("./src/Pages/Verify"),
+
+      //
+      "@messages": path.resolve("./src/Pages/Messages"),
     },
   },
 });

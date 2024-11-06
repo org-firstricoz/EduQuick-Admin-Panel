@@ -8,6 +8,8 @@ const Login = lazy(() => import("@login/Login"));
 const Settings = lazy(() => import("@settings/Settings"));
 const Creators = lazy(() => import("@creators/Creators"));
 const Products = lazy(() => import("@products/Products"));
+const Verify = lazy(() => import("@verify/Verify"));
+const Inbox = lazy(() => import("@messages/Inbox/Inbox"));
 
 const Router = () => {
   return (
@@ -21,6 +23,8 @@ const Router = () => {
           <Route path="/products" element={<Products />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/creators" element={<Creators />} />
+          <Route path="/verify-report" element={<Verify />} />
+          <Route path="/mails/Inbox" element={<Inbox />} />
         </Routes>
       </BrowserRouter>
     </div>

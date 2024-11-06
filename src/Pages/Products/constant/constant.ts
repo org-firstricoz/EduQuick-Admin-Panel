@@ -7,6 +7,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -14,6 +16,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -21,6 +25,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -28,6 +34,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -35,6 +43,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -42,6 +52,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -49,6 +61,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -56,6 +70,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -63,6 +79,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -70,6 +88,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -77,6 +97,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -84,6 +106,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -91,6 +115,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -98,6 +124,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -105,6 +133,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -112,6 +142,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: false,
   },
   {
     img: UI,
@@ -119,6 +151,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: false,
   },
   {
     img: UI,
@@ -126,6 +160,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: false,
   },
   {
     img: UI,
@@ -133,6 +169,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -140,6 +178,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
   {
     img: UI,
@@ -147,6 +187,8 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: false,
   },
   {
     img: UI,
@@ -154,26 +196,7 @@ export const productData = [
     rating: 4.5,
     price: 100,
     creator: "Alex Lerans",
-  },
-  {
-    img: UI,
-    title: "Learn Figma - UI/UX Design Essential Training",
-    rating: 4.5,
-    price: 100,
-    creator: "Alex Lerans",
-  },
-  {
-    img: UI,
-    title: "Learn Figma - UI/UX Design Essential Training",
-    rating: 4.5,
-    price: 100,
-    creator: "Alex Lerans",
-  },
-  {
-    img: UI,
-    title: "Learn Figma - UI/UX Design Essential Training",
-    rating: 4.5,
-    price: 100,
-    creator: "Alex Lerans",
+    date: "30/10/2024",
+    verification: true,
   },
 ];

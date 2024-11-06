@@ -16,7 +16,9 @@
       "@login/*": ["./src/Pages/Login/*"],
       "@settings/*": ["./src/Pages/Settings/*"],
       "@creators/*": ["./src/Pages/Creators/*"],
-      "@products/*": ["./src/Pages/Products/*"]
+      "@products/*": ["./src/Pages/Products/*"],
+      "@verify/*": ["./src/Pages/Verify/*"],
+      "@messages/*": ["./src/Pages/Messages/*"]
     },
 
     /* Bundler mode */
