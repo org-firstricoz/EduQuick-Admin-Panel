@@ -12,7 +12,7 @@ const TopCourse = () => {
       <div className="w-full h-full overflow-scroll">
         {topCourseData.map((data, i: number) => (
           <div
-            className="flex border-t-2 items-center p-6 justify-between gap-4 mt-4 font-normal text-2xl"
+            className="flex border-t-2 items-center p-2 justify-between gap-4  font-normal text-2xl"
             key={i}
           >
             <p>{data.i}</p>
@@ -32,7 +32,7 @@ const TopCourse = () => {
         ))}
         {topCourseData.map((data, i: number) => (
           <div
-            className="flex border-t-2 items-center p-6 justify-between gap-4 mt-4 font-normal text-2xl"
+            className="flex border-t-2 items-center p-2 justify-between gap-4 font-normal text-2xl"
             key={i}
           >
             <p>{data.i}</p>

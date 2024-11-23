@@ -2,34 +2,32 @@ import { topCourseData } from "@dashboard/constant/constant";
 
 const TopCourse = () => {
   return (
-    <div className="w-1/2 overflow-scroll  border p-4 rounded-xl shadow-[#0a0a0a] shadow-xl">
-      <p className="text-primary text-xl font-semibold">Top Courses</p>
-      <div className="flex justify-between gap-4 mt-4 text-secondary text-sm font-normal">
-        <p>#</p>
-        <p>Name</p>
-        <p>Popularity</p>
-        <p>Sales</p>
-      </div>
-      {topCourseData.map((data, i: number) => (
-        <div
-          className="flex justify-between gap-4 mt-4 font-normal text-base"
-          key={i}
-        >
-          <p>{data.i}</p>
-          <p>{data.title}</p>
-          <div className="bg-[#fff] w-24 rounded-full h-1 ">
-            <div
-              className="bg-[#399918] h-full w-1 rounded-full"
-              style={{
-                width: `${data.popularity}%`,
-              }}
-            />
-          </div>
-          <button className="border-2 border-[#399918] bg-[#fff] text-[#399918] p-1 pl-4 pr-4 rounded-md font-medium">
-            {data.sales}
-          </button>
-        </div>
-      ))}
+    <div className="w-full overflow-scroll  border rounded-xl shadow-[#0a0a0a] shadow-xl">
+      <p className="text-primary text-xl font-semibold m-4">Top Courses</p>
+
+      <table style={{ width: "95%" }} className="m-6">
+        <tr className="text-secondary mt-4 text-sm font-normal">
+          <td>#</td>
+          <td>Name</td>
+          <td>Popularity</td>
+        </tr>
+        {topCourseData.map((data, i: number) => (
+          <tr key={i} className="border-t border-b">
+            <td>{data.i}</td>
+            <td>{data.title}</td>
+            <td>
+              <div className="w-full mt-4 mb-4 rounded-full bg-[#fff] h-1">
+                <div
+                  className={`bg-[#399918] h-full rounded-full`}
+                  style={{
+                    width: `${data.popularity}%`,
+                  }}
+                />
+              </div>
+            </td>
+          </tr>
+        ))}
+      </table>
     </div>
   );
 };

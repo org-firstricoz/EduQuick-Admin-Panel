@@ -20,12 +20,12 @@ const CustomerSatisfaction = () => {
     },
   ];
   return (
-    <div className="w-2/6 overflow-scroll  border p-4 rounded-xl shadow-[#0a0a0a] shadow-xl">
+    <div className="w-2/5 overflow-scroll  border p-4 rounded-xl shadow-[#0a0a0a] shadow-xl">
       <p className="text-primary text-xl font-semibold">
         Customer Satisfaction
       </p>
       <LineChart
-        width={250}
+        width={370}
         height={200}
         data={data}
         className=" flex justify-center  absolute top-10 items-center"

@@ -33,11 +33,15 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary"
         }
-        p-4 w-60 rounded-xl flex items-center justify-center gap-4 active:bg-[#dd353d] cursor-pointer
+        p-4 w-60 rounded-xl flex items-center justify-center gap-1 active:bg-[#dd353d] cursor-pointer
         `}
       >
-        <RiDashboardFill className="text-3xl" />
-        <p>Dashboard</p>
+        <div className="flex justify-start items-center w-1/4  ">
+          <RiDashboardFill className="text-3xl" />
+        </div>
+        <div className="flex justify-start items-center w-3/4  ">
+          <p>Dashboard</p>
+        </div>
       </div>
       <div
         onClick={() => handleNavigation("/leaderboard")}
@@ -47,25 +51,33 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
-        <MdLeaderboard className="text-3xl" />
-        <p>Leaderboard</p>
+        <div className="flex justify-start items-center w-1/4  ">
+          <MdLeaderboard className="text-3xl" />
+        </div>
+        <div className="flex justify-start items-center w-3/4  ">
+          <p>Leaderboard</p>
+        </div>
       </div>
       <div
-        onClick={() => handleNavigation("/creators")}
+        onClick={() => handleNavigation("/content")}
         className={`
         ${
-          location.pathname === "/creators"
+          location.pathname === "/content"
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
-        <CiUser className="text-3xl" />
-        <p>Creators</p>
+        <div className="flex justify-start items-center w-1/4 ">
+          <CiUser className="text-3xl" />
+        </div>
+        <div className="flex justify-start items-center w-3/4 ">
+          <p>Content</p>
+        </div>
       </div>
       <div
         onClick={() => handleNavigation("/products")}
@@ -75,11 +87,15 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
-        <IoBagHandleOutline className="text-3xl" />
-        <p>Products</p>
+        <div className="flex justify-start items-center w-1/4 ">
+          <IoBagHandleOutline className="text-3xl" />
+        </div>
+        <div className="flex justify-start items-center w-3/4 ">
+          <p>Products</p>
+        </div>
       </div>
       <div
         onClick={() => handleNavigation("/verify-report")}
@@ -89,11 +105,15 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
-        <GoGraph className="text-3xl" />
-        <p>Verify Report</p>
+        <div className="flex justify-start items-center w-1/4 ">
+          <GoGraph className="text-3xl" />
+        </div>
+        <div className="flex justify-start items-center w-3/4 ">
+          <p>Verify Report</p>
+        </div>
       </div>
       <div
         onClick={() => handleNavigation("/mails/Inbox")}
@@ -103,11 +123,15 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff]"
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
-        <IoChatboxEllipsesOutline className="text-3xl" />
-        <p>Messages</p>
+        <div className="flex justify-start items-center w-1/4 ">
+          <IoChatboxEllipsesOutline className="text-3xl" />
+        </div>
+        <div className="flex justify-start items-center w-3/4 ">
+          <p>Messages</p>
+        </div>
       </div>
       <div
         onClick={() => handleNavigation("/settings")}
@@ -117,11 +141,15 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-4 justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
-        <IoSettingsOutline className="text-3xl" />
-        <p>Settings</p>
+        <div className="flex justify-start items-center w-1/4 ">
+          <IoSettingsOutline className="text-3xl" />
+        </div>
+        <div className="flex justify-start items-center w-3/4 ">
+          <p>Settings</p>
+        </div>
       </div>
       <div
         className={`
@@ -130,11 +158,15 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex gap-4 items-center justify-center cursor-pointer
+        p-4 w-60 rounded-xl flex gap-1 items-center justify-center cursor-pointer
         `}
       >
-        <PiSignOutBold className="text-3xl" />
-        <p>Sign Out</p>
+        <div className="flex justify-start items-center w-1/4 ">
+          <PiSignOutBold className="text-3xl" />
+        </div>
+        <div className="flex justify-start items-center w-3/4 ">
+          <p>Sign Out</p>
+        </div>
       </div>
     </div>
   );
