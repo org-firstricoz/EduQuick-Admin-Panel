@@ -1,4 +1,4 @@
-import TopCourse from "@leaderboard/Components/TopCourse/TopCourse";
+import TopCourse from "@dashboard/Components/TopCourse/TopCourse";
 
 const HeroSection = () => {
   return (

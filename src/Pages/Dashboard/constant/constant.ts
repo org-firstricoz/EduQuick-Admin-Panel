@@ -12,7 +12,7 @@ export const todaysSalesData = [
   {
     icon: Tag,
     sales: "5",
-    title: "Product Sold",
+    title: "Subscription Sold",
     sub: "+8% from yesterday",
   },
   {

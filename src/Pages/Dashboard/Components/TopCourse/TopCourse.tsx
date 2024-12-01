@@ -1,30 +1,57 @@
-import { topCourseData } from "@dashboard/constant/constant";
+import axios from "axios";
+import { startTransition, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { baseURL } from "../../../../baseURL";
+
+interface Courses {
+  _id: string;
+  title: string;
+  views: number;
+}
 
 const TopCourse = () => {
+  const navigate = useNavigate();
+  const [courses, setCourses] = useState<Courses[]>([]);
+
+  const handleNavigation = (path: string) => {
+    startTransition(() => {
+      navigate(path);
+    });
+  };
+
+  const getTopCourses = async () => {
+    try {
+      const response = await axios.get(
+        `${baseURL}/admin/dashboard/top-courses`
+      );
+      setCourses(response.data.topCourses);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getTopCourses();
+  });
+
   return (
-    <div className="w-full overflow-scroll  border rounded-xl shadow-[#0a0a0a] shadow-xl">
+    <div
+      onClick={() => handleNavigation("/leaderboard")}
+      className="w-full overflow-scroll cursor-pointer  border rounded-xl shadow-[#0a0a0a] shadow-xl"
+    >
       <p className="text-primary text-xl font-semibold m-4">Top Courses</p>
 
-      <table style={{ width: "95%" }} className="m-6">
+      <table style={{ width: "95%" }} className="m-6 text-center">
         <tr className="text-secondary mt-4 text-sm font-normal">
           <td>#</td>
           <td>Name</td>
-          <td>Popularity</td>
+          <td>View</td>
         </tr>
-        {topCourseData.map((data, i: number) => (
-          <tr key={i} className="border-t border-b">
-            <td>{data.i}</td>
+        {courses.map((data, i: number) => (
+          <tr key={i} className="border-t h-12  border-b">
+            <td>Index</td>
             <td>{data.title}</td>
-            <td>
-              <div className="w-full mt-4 mb-4 rounded-full bg-[#fff] h-1">
-                <div
-                  className={`bg-[#399918] h-full rounded-full`}
-                  style={{
-                    width: `${data.popularity}%`,
-                  }}
-                />
-              </div>
-            </td>
+            <td>{data.views}</td>
           </tr>
         ))}
       </table>

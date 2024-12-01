@@ -1,7 +1,17 @@
 import { todaysSalesData } from "@dashboard/constant/constant";
+import { startTransition } from "react";
 import { PiExportBold } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 const TodaysSales = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path: string) => {
+    startTransition(() => {
+      navigate(path);
+    });
+  };
+
   return (
     <div className=" w-3/5 border p-4 rounded-xl shadow-[#0a0a0a] shadow-xl ">
       <div className="flex justify-between items-center">
@@ -14,11 +24,14 @@ const TodaysSales = () => {
           Export
         </button>
       </div>
-      <div className="flex items-center justify-center gap-6 mt-4">
+      <div className="flex items-center  justify-center gap-6 mt-4">
         {todaysSalesData.map((data, i: number) => (
           <div
             key={i}
-            className="w-60 flex flex-col gap-2 h-44 bg-[#E7061240] pl-6 p-2 rounded-2xl"
+            className="w-60 flex cursor-pointer hover:scale-105 transition-all duration-300 flex-col gap-2 h-44 bg-[#E7061240] pl-6 p-2 rounded-2xl"
+            onClick={() =>
+              handleNavigation(data.title.toLowerCase().split(" ").join(""))
+            }
           >
             <div className="p-2 bg-primary w-12 rounded-full">
               <img

@@ -1,6 +1,12 @@
 import { productData } from "@products/constant/constant";
+import { useState } from "react";
+import Dialog from "../../../../Components/Dialog/Dialog";
+import { IoMdClose } from "react-icons/io";
 
 const HeroSection = () => {
+  const handleClose = () => {};
+
+  const [open, setOpen] = useState(false);
   return (
     <div
       className=" w-full overflow-scroll pl-4 pr-4 p-2 flex flex-col gap-4 font-poppins"
@@ -40,13 +46,43 @@ const HeroSection = () => {
               </td>
               <td>{data.verification ? "Verified" : "Pending"}</td>
               <td>
-                <button className="p-2 pl-4 pr-4 rounded-lg bg-primary">
+                <button
+                  onClick={() => setOpen(true)}
+                  className="p-2 pl-4 pr-4 rounded-lg bg-primary"
+                >
                   Edit Product
                 </button>
               </td>
             </tr>
           ))}
         </table>
+        <Dialog width={700} open={open} onClose={() => handleClose}>
+          <IoMdClose
+            onClick={() => setOpen(false)}
+            className="absolute right-2 transition-all duration-300 top-2 text-4xl cursor-pointer p-1 rounded-full hover:bg-[#121212]"
+          />
+          <div className="text-[#fff] p-4 flex flex-col gap-4 items-center justify-center">
+            <h2 className="text-2xl">Course Status</h2>
+            <div className="flex justify-center gap-2">
+              <button className="p-2 pl-4 pr-4 border rounded-full">
+                Completed
+              </button>
+              <button className="p-2 pl-4 pr-4 border rounded-full">
+                Processing
+              </button>
+              <button className="p-2 pl-4 pr-4 border rounded-full">
+                Rejected
+              </button>
+            </div>
+            <button className="p-2 pl-4 pr-4 border rounded-full">
+              Remove
+            </button>
+            <div className="flex w-full">
+              <p className="text-left">*You can edit the course</p>
+            </div>
+            <button className="p-2 pl-8 pr-8 border rounded-full">Edit</button>
+          </div>
+        </Dialog>
       </div>
     </div>
   );

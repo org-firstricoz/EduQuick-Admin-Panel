@@ -1,4 +1,6 @@
 import { productData } from "@products/constant/constant";
+import { FiEdit } from "react-icons/fi";
+import { FaTrash } from "react-icons/fa6";
 
 const HeroSection = () => {
   return (
@@ -9,15 +11,14 @@ const HeroSection = () => {
       }}
     >
       <h2 className="text-primary text-center text-4xl font-semibold">
-        Product Courses
+        Courses
       </h2>
       <div className="w-full h-full overflow-scroll p-4 border-2 rounded-md">
         <table className="w-full  text-center">
           <tr className=" text-secondary h-16 text-xl font-medium">
             <td>#</td>
             <td>Product Name</td>
-            <td>Price</td>
-            <td>Creator</td>
+
             <td>Action</td>
           </tr>
 
@@ -32,14 +33,12 @@ const HeroSection = () => {
                   <p className="text-sm">{data.rating}</p>
                 </div>
               </td>
+
               <td>
-                <h2>${data.price}</h2>
-              </td>
-              <td>{data.creator}</td>
-              <td>
-                <button className="p-2 pl-4 pr-4 rounded-lg bg-primary">
-                  Edit Product
-                </button>
+                <div className="flex bg-[#fff]  mr-2 rounded-full">
+                  <FiEdit className="border-r cursor-pointer hover:bg-[#f0f0f0] rounded-l-full w-1/2 p-2 text-[#000] text-4xl" />
+                  <FaTrash className="border-r cursor-pointer hover:bg-[#f0f0f0] rounded-r-full w-1/2 p-2 text-primary text-4xl" />
+                </div>
               </td>
             </tr>
           ))}
