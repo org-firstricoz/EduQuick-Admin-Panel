@@ -24,7 +24,7 @@ const TopCourse = () => {
       const response = await axios.get(
         `${baseURL}/admin/dashboard/top-courses`
       );
-      setCourses(response.data.topCourses);
+      setCourses(response.data.topCourses.slice(0, 10));
     } catch (error) {
       console.log(error);
     }
@@ -55,6 +55,14 @@ const TopCourse = () => {
           </tr>
         ))}
       </table>
+      <div
+        className="  w-full bottom-4  flex items-center justify-center"
+        // style={{ width: "72%" }}
+      >
+        <button className="p-2 pl-7 pr-7 hover:bg-[#252525] rounded-lg active:bg-[#303030] transition-all duration-300">
+          View all
+        </button>
+      </div>
     </div>
   );
 };

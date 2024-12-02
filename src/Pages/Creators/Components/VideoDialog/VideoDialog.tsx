@@ -56,8 +56,8 @@ const videoDialog = ({
       const loadingToast = toast.loading("Uploading...");
 
       try {
-        const extension = file.type.split("/")[1]; // Get the file extension from the MIME type
-        const type = "videos"; // Set type as per your requirement (e.g., "images")
+        const extension = file.type.split("/")[1];
+        const type = "videos";
 
         const uploadUrlResponse = await axios.post(
           `${baseURL}/admin/storage/upload`,

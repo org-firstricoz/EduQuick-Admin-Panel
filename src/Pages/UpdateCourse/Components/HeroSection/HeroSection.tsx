@@ -1,18 +1,41 @@
-import { MdOutlineFileUpload } from "react-icons/md";
-import BG from "@creators/Assets/BG.png";
+import { startTransition, useEffect, useRef, useState } from "react";
+import { MdOutlineDelete, MdOutlineFileUpload } from "react-icons/md";
 import { RiAiGenerate } from "react-icons/ri";
-import { MdOutlineDelete } from "react-icons/md";
-import { FaRegFile } from "react-icons/fa";
-import { useRef, useState } from "react";
+import BG from "@creators/Assets/BG.png";
 import Dialog from "../../../../Components/Dialog/Dialog";
 import { IoMdClose } from "react-icons/io";
-import toast from "react-hot-toast";
-import { baseURL } from "../../../../baseURL";
+import { FaRegFile } from "react-icons/fa";
 import axios from "axios";
+import { baseURL } from "../../../../baseURL";
+import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 import VideoDialog from "@creators/Components/VideoDialog/VideoDialog";
-import AddTags from "../AddTags/AddTags";
+import AddTags from "@creators/Components/AddTags/AddTags";
+
+interface Course {
+  avgRating?: string;
+  category?: string;
+  createdAt?: string;
+  description?: string;
+  freeCourse?: boolean;
+  imgUrl?: string;
+  rating?: string;
+  tags?: string[];
+  title?: string;
+  trending?: boolean;
+  updatedAt?: string;
+  videoIds?: string[];
+  views?: string;
+  __v?: string;
+  _id?: string;
+}
 
 const HeroSection = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const [course, setCourse] = useState<Course>({});
+
   const [open, setOpen] = useState<boolean>(false);
   const [openVideoDialog, setOpenVideoDialog] = useState<boolean>(false);
   const [openTagDialog, setOpenTagDialog] = useState<boolean>(false);
@@ -26,6 +49,35 @@ const HeroSection = () => {
   const [videoIds, setVideoIds] = useState<string[]>([]);
   const [trending, setTrending] = useState<boolean>(false);
   const [tags, setTags] = useState<string[]>([]);
+
+  const getCurrentCourse = async () => {
+    try {
+      const response = await axios.get(
+        `${baseURL}/user/course-by-courseId?id=${id}`
+      );
+      const fetchedCourse = response.data.course;
+
+      setCourse(fetchedCourse);
+      setTitle(fetchedCourse.title || "");
+      setDescription(fetchedCourse.description || "");
+      setThumbnail(fetchedCourse.imgUrl || "");
+      setCategory(fetchedCourse.category || "");
+      setTrending(fetchedCourse.trending || Boolean);
+      setTags(fetchedCourse.tags);
+      setVideoIds(fetchedCourse.videoIds);
+    } catch (error) {
+      console.log(error);
+      let errorMessage = "Error";
+      if (axios.isAxiosError(error)) {
+        errorMessage =
+          error.response?.data?.message || error.message || errorMessage;
+      }
+      console.log(errorMessage);
+    }
+  };
+  useEffect(() => {
+    getCurrentCourse();
+  }, [id]);
 
   const validation = () => {
     if (imgType === "") {
@@ -52,8 +104,8 @@ const HeroSection = () => {
       const loadingToast = toast.loading("Uploading...");
 
       try {
-        const extension = file.type.split("/")[1]; // Get the file extension from the MIME type
-        const type = "images"; // Set type as per your requirement (e.g., "images")
+        const extension = file.type.split("/")[1];
+        const type = "images";
 
         const uploadUrlResponse = await axios.post(
           `${baseURL}/admin/storage/upload`,
@@ -80,11 +132,10 @@ const HeroSection = () => {
         console.error(error);
         toast.error("Error uploading file!");
       } finally {
-        // Dismiss the loading toast
         toast.dismiss(loadingToast);
       }
 
-      setOpen(false); // Close the dialog after file selection
+      setOpen(false);
     }
   };
 
@@ -104,18 +155,19 @@ const HeroSection = () => {
     return true;
   };
 
-  const handleUploadCourse = async () => {
+  const handleUpdateCourse = async () => {
     const isValid = courseValidation();
     if (!isValid) {
       return;
     }
-    const pendingToast = toast.loading("Uploading course!...");
+    const pendingToast = toast.loading("Updating course!...");
     try {
       setVideoIds(videoIds);
       setTags(tags);
-      const response = await axios.post(
-        `${baseURL}/admin/course`,
+      const response = await axios.patch(
+        `${baseURL}/admin/update-course`,
         {
+          id,
           title,
           description,
           imgUrl: thumbnail,
@@ -131,7 +183,7 @@ const HeroSection = () => {
 
       if (response.data.status) {
         toast.dismiss(pendingToast);
-        toast.success("Course posted!");
+        toast.success("Course updated!");
         setCategory("");
         setDescription("");
         setImgType("");
@@ -140,21 +192,30 @@ const HeroSection = () => {
         setTrending(false);
         setVideoIds([]);
       }
+      startTransition(() => {
+        navigate("/products");
+      });
+      setCourse(course);
     } catch (error) {
-      console.log(error);
+      toast.dismiss(pendingToast);
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data.message;
+        toast.error(errorMessage);
+        console.log(errorMessage);
+      }
     }
   };
 
-  const handleClose = () => {};
+  //   const handleClose = () => {};
+
   return (
-    <div
-      className=" w-full overflow-scroll border ml-4 rounded-md p-10 flex flex-col gap-4 font-poppins"
-      style={{
-        height: "calc(100vh - 100px)",
-      }}
-    >
+    <div className=" w-full h-full  overflow-scroll  rounded-md p-10 flex flex-col gap-4 font-poppins">
+      <h2 className="mt-4 mb-6 text-3xl text-center font-semibold">
+        Update course
+      </h2>
       <input
         onChange={(e) => setTitle(e.target.value)}
+        value={title}
         placeholder="Title"
         className="border placeholder:text-[#fff] bg-[#111] w-1/2 p-3 rounded-md"
       />
@@ -163,6 +224,7 @@ const HeroSection = () => {
         <p className="font-light">Description</p>
         <textarea
           onChange={(e) => setDescription(e.target.value)}
+          value={description}
           className="font-normal bg-[#111] w-full outline-none"
         />
       </div>
@@ -213,7 +275,7 @@ const HeroSection = () => {
           ref={hiddenInput}
           accept={`image/${imgType || "png,jpeg,jpg"}`}
         />
-        <Dialog width={400} open={open} onClose={handleClose}>
+        <Dialog width={400} open={open} onClose={() => null}>
           <button
             onClick={() => setOpen(false)}
             className="absolute top-2 right-2 text-2xl"
@@ -290,6 +352,7 @@ const HeroSection = () => {
         <p>Category</p>
         <select
           onChange={(e) => setCategory(e.target.value)}
+          value={category}
           className="bg-[#111111] rounded-md outline-none border w-fit text-center p-2"
         >
           <option value="">Select Category</option>
@@ -322,10 +385,19 @@ const HeroSection = () => {
         />
         <p>Tags</p>
         <div className="bg-[#111111] flex items-center justify-between rounded-md outline-none border w-full p-2">
-          <div className="flex flex-col gap-3">
+          <div className="grid grid-cols-3 gap-3">
             {tags.map((tag, i) => (
-              <p key={i} className="border p-3 rounded-full">
+              <p
+                key={i}
+                className="border flex items-center justify-between p-3 rounded-full"
+              >
                 {tag}
+                <span
+                  onClick={() => setTags(tags.filter((t) => t !== tag))}
+                  className=" cursor-pointer text-2xl"
+                >
+                  <IoMdClose />
+                </span>
               </p>
             ))}
           </div>
@@ -338,8 +410,8 @@ const HeroSection = () => {
         </div>
       </div>
       <button
-        onClick={handleUploadCourse}
-        className="absolute bottom-8 right-16 bg-primary p-2 pl-6 pr-6 rounded-md"
+        onClick={handleUpdateCourse}
+        className="fixed bottom-10 right-10 bg-primary p-2 pl-6 pr-6 rounded-md"
       >
         Upload
       </button>

@@ -36,6 +36,9 @@ export default defineConfig({
 
       //
       "@messages": path.resolve("./src/Pages/Messages"),
+
+      //
+      "@updateCourse": path.resolve("./src/Pages/updateCourse"),
     },
   },
 });

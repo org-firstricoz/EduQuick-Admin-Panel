@@ -10,6 +10,7 @@ const Creators = lazy(() => import("@creators/Creators"));
 const Products = lazy(() => import("@products/Products"));
 const Verify = lazy(() => import("@verify/Verify"));
 const Inbox = lazy(() => import("@messages/Inbox/Inbox"));
+const UpdateCourse = lazy(() => import("@updateCourse/UpdateCourse"));
 
 const Router = () => {
   return (
@@ -25,6 +26,7 @@ const Router = () => {
           <Route path="/content" element={<Creators />} />
           <Route path="/verify-report" element={<Verify />} />
           <Route path="/mails/Inbox" element={<Inbox />} />
+          <Route path="/update-course/:id" element={<UpdateCourse />} />
         </Routes>
       </BrowserRouter>
     </div>
