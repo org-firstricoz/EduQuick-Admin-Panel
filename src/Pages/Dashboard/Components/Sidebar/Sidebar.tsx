@@ -1,13 +1,17 @@
+import axios from "axios";
 import { startTransition } from "react";
-import { useNavigate } from "react-router-dom";
-import { RiDashboardFill } from "react-icons/ri";
-import { MdLeaderboard } from "react-icons/md";
+import toast from "react-hot-toast";
 import { CiUser } from "react-icons/ci";
-import { IoBagHandleOutline } from "react-icons/io5";
 import { GoGraph } from "react-icons/go";
-import { IoChatboxEllipsesOutline } from "react-icons/io5";
-import { IoSettingsOutline } from "react-icons/io5";
+import {
+  IoBagHandleOutline,
+  IoChatboxEllipsesOutline,
+  IoSettingsOutline,
+} from "react-icons/io5";
+import { MdLeaderboard } from "react-icons/md";
 import { PiSignOutBold } from "react-icons/pi";
+import { RiDashboardFill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -16,6 +20,27 @@ const Sidebar = () => {
     startTransition(() => {
       navigate(path);
     });
+  };
+
+  const handleSignOut = async () => {
+    const pendingToast = toast.loading("Logging out...");
+    try {
+      const response = await axios.get("/api/logout", {
+        withCredentials: true,
+      });
+
+      if (response.status) {
+        toast.dismiss(pendingToast);
+        toast.success("Logged out!");
+        handleNavigation("/login");
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const errroMessage = error.response?.data.message;
+        toast.dismiss(pendingToast);
+        toast.error(errroMessage);
+      }
+    }
   };
 
   return (
@@ -80,10 +105,10 @@ const Sidebar = () => {
         </div>
       </div>
       <div
-        onClick={() => handleNavigation("/products")}
+        onClick={() => handleNavigation("/courses")}
         className={`
         ${
-          location.pathname === "/products"
+          location.pathname === "/courses"
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
@@ -94,7 +119,7 @@ const Sidebar = () => {
           <IoBagHandleOutline className="text-3xl" />
         </div>
         <div className="flex justify-start items-center w-3/4 ">
-          <p>Products</p>
+          <p>Courses</p>
         </div>
       </div>
       <div
@@ -164,7 +189,10 @@ const Sidebar = () => {
         <div className="flex justify-start items-center w-1/4 ">
           <PiSignOutBold className="text-3xl" />
         </div>
-        <div className="flex justify-start items-center w-3/4 ">
+        <div
+          onClick={handleSignOut}
+          className="flex justify-start items-center w-3/4 "
+        >
           <p>Sign Out</p>
         </div>
       </div>

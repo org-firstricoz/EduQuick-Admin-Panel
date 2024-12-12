@@ -39,6 +39,10 @@ export default defineConfig({
 
       //
       "@updateCourse": path.resolve("./src/Pages/updateCourse"),
+
+      "@dialog": path.resolve("./src/Components/Dialog/Dialog"),
+
+      "@baseURL": path.resolve("./src/baseURL"),
     },
   },
 });

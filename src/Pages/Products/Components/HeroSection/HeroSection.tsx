@@ -6,6 +6,7 @@ import { baseURL } from "../../../../baseURL";
 import Dialog from "../../../../Components/Dialog/Dialog";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 interface Course {
   avgRating: string;
@@ -30,6 +31,8 @@ const HeroSection = () => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
   const [id, setId] = useState("");
   const [courseTitle, setCourseTitle] = useState("");
+
+  const token = Cookies.get("token");
 
   const navigate = useNavigate();
 
@@ -68,7 +71,12 @@ const HeroSection = () => {
     const pendingToast = toast.loading("Deleting course!");
     try {
       const response = await axios.delete(
-        `${baseURL}/admin/delete-course?id=${id}`
+        `${baseURL}/admin/delete-course?id=${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setOpenDeleteDialog(false);
       if (response.data.status) {
@@ -92,7 +100,7 @@ const HeroSection = () => {
     <div
       className=" w-full overflow-scroll pl-4 pr-4 p-2 flex flex-col gap-4 font-poppins"
       style={{
-        height: "calc(100vh - 100px)",
+        height: "calc(100vh - 80px)",
       }}
     >
       <h2 className="text-primary text-center text-4xl font-semibold">
@@ -102,7 +110,7 @@ const HeroSection = () => {
         <table className="w-full  text-center">
           <tr className=" text-secondary h-16 text-xl font-medium">
             <td>#</td>
-            <td>Product Name</td>
+            <td>Course Name</td>
             <td>Category</td>
             <td>Action</td>
           </tr>

@@ -2,14 +2,22 @@ import axios from "axios";
 import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts";
 import { baseURL } from "../../../../baseURL";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 const Revenue = () => {
   const [revenue, setRevenue] = useState([]);
 
+  const token = Cookies.get("token");
+
   const getTotalRevenue = async () => {
     try {
       const response = await axios.get(
-        `${baseURL}/admin/dashboard/total-revenue`
+        `${baseURL}/admin/dashboard/total-revenue`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       setRevenue(response.data.weeklyRevenue);
     } catch (error) {

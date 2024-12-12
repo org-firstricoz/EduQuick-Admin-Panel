@@ -1,16 +1,14 @@
-import { startTransition, useEffect, useRef, useState } from "react";
-import { MdOutlineDelete, MdOutlineFileUpload } from "react-icons/md";
-import { RiAiGenerate } from "react-icons/ri";
 import BG from "@creators/Assets/BG.png";
-import Dialog from "../../../../Components/Dialog/Dialog";
-import { IoMdClose } from "react-icons/io";
-import { FaRegFile } from "react-icons/fa";
-import axios from "axios";
-import { baseURL } from "../../../../baseURL";
-import { useNavigate, useParams } from "react-router-dom";
-import toast from "react-hot-toast";
-import VideoDialog from "@creators/Components/VideoDialog/VideoDialog";
 import AddTags from "@creators/Components/AddTags/AddTags";
+import axios from "axios";
+import { startTransition, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import { IoIosArrowBack, IoMdClose } from "react-icons/io";
+import { MdOutlineFileUpload } from "react-icons/md";
+import { RiAiGenerate } from "react-icons/ri";
+import { useNavigate, useParams } from "react-router-dom";
+import { baseURL } from "../../../../baseURL";
+import Dialog from "../../../../Components/Dialog/Dialog";
 
 interface Course {
   avgRating?: string;
@@ -30,6 +28,22 @@ interface Course {
   _id?: string;
 }
 
+interface Video {
+  description: string;
+  dislikes: string;
+  duration: string;
+  id: string;
+  likes: string;
+  quality: string;
+  thumbnailUrl: string;
+  title: string;
+  uploadedBy: string;
+  videoSequence: string;
+  videoUrl: string;
+  views: string;
+  watchTime: string;
+}
+
 const HeroSection = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -37,7 +51,6 @@ const HeroSection = () => {
   const [course, setCourse] = useState<Course>({});
 
   const [open, setOpen] = useState<boolean>(false);
-  const [openVideoDialog, setOpenVideoDialog] = useState<boolean>(false);
   const [openTagDialog, setOpenTagDialog] = useState<boolean>(false);
 
   const [imgType, setImgType] = useState("");
@@ -49,6 +62,24 @@ const HeroSection = () => {
   const [videoIds, setVideoIds] = useState<string[]>([]);
   const [trending, setTrending] = useState<boolean>(false);
   const [tags, setTags] = useState<string[]>([]);
+  const [videos, setVideos] = useState<Video[]>([]);
+
+  const handleNavigation = (path: string) => {
+    startTransition(() => {
+      navigate(path);
+    });
+  };
+
+  const getVideo = async () => {
+    try {
+      const response = await axios.get(
+        `${baseURL}/user/video-by-videoId?id=${videoIds}`
+      );
+      setVideos(response.data.videos);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getCurrentCourse = async () => {
     try {
@@ -76,8 +107,9 @@ const HeroSection = () => {
     }
   };
   useEffect(() => {
+    getVideo();
     getCurrentCourse();
-  }, [id]);
+  }, [id, videoIds]);
 
   const validation = () => {
     if (imgType === "") {
@@ -193,7 +225,7 @@ const HeroSection = () => {
         setVideoIds([]);
       }
       startTransition(() => {
-        navigate("/products");
+        navigate("/courses");
       });
       setCourse(course);
     } catch (error) {
@@ -210,6 +242,10 @@ const HeroSection = () => {
 
   return (
     <div className=" w-full h-full  overflow-scroll  rounded-md p-10 flex flex-col gap-4 font-poppins">
+      <IoIosArrowBack
+        onClick={() => handleNavigation("/courses")}
+        className="p-2 text-4xl rounded-full cursor-pointer border absolute "
+      />
       <h2 className="mt-4 mb-6 text-3xl text-center font-semibold">
         Update course
       </h2>
@@ -219,13 +255,12 @@ const HeroSection = () => {
         placeholder="Title"
         className="border placeholder:text-[#fff] bg-[#111] w-1/2 p-3 rounded-md"
       />
-
       <div className="border w-1/2 p-3 rounded-md">
-        <p className="font-light">Description</p>
         <textarea
+          placeholder="Description"
           onChange={(e) => setDescription(e.target.value)}
           value={description}
-          className="font-normal bg-[#111] w-full outline-none"
+          className="font-normal placeholder:text-[#fff] bg-[#111] w-full outline-none"
         />
       </div>
       <div className="flex flex-col gap-2 w-1/2 p-3 rounded-md">
@@ -310,42 +345,29 @@ const HeroSection = () => {
           </div>
         </Dialog>
       </div>
-      <div className="flex flex-col gap-2 w-1/2 p-3 rounded-md">
-        <VideoDialog
-          openVideoDialog={openVideoDialog}
-          setOpenVideoDialog={setOpenVideoDialog}
-          videoIds={videoIds}
-        />
-        <p>Select Video</p>
-
-        <div
-          onClick={() => setOpenVideoDialog(true)}
-          className="flex items-center gap-2"
-        >
-          <div className="w-48 h-10 rounded-md p-1 gap-1 border flex flex-row-reverse justify-center items-center">
-            <label htmlFor="Videofile">
-              <MdOutlineFileUpload className="text-4xl cursor-pointer transition-all duration-150 p-1 hover:bg-[#1a1a1a] rounded-full" />
-            </label>
-            <label htmlFor="file" className="cursor-pointer">
-              {" "}
-              Upload File
-            </label>
-          </div>
-          <div className="w-72 h-14 bg-[#FFFFFF38] rounded-md ">
-            <div className="flex  items-center h-full pl-2">
-              <FaRegFile className="text-2xl" />
-              <div className="flex flex-col gap-2 pl-2 pr-2 h-full justify-center w-full">
-                <div className="flex items-center justify-between">
-                  <p className="text-xs">img title.png</p>
-                  <button className="bg-[#000] text-[#fff] text-xs p-1 pl-4 pr-4 rounded-full">
-                    Edit
-                  </button>
-                  <MdOutlineDelete className="text-2xl text-primary" />
-                </div>
-                <div className="w-full h-1 bg-primary rounded-full" />
+      <div className="flex flex-col gap-2  p-3 rounded-md">
+        <p>Updated Video</p>
+        <div className="grid grid-cols-4 gap-4">
+          {videos.map((video, i) => (
+            <div
+              onClick={() => {
+                startTransition(() => {
+                  navigate(`/update-video/${video.id}`);
+                });
+              }}
+              key={i}
+              className=" hover:scale-105 duration-300 transition-all cursor-pointer border p-3 rounded-md flex flex-col items-center justify-center"
+            >
+              <img
+                src={video.thumbnailUrl ? video.thumbnailUrl : course.imgUrl}
+                alt=""
+                className="w-full rounded-t-md h-28"
+              />
+              <div className="w-full flex flex-col gap-2 p-3 h-full bg-[#000]">
+                <h2>{video.title}</h2>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
       <div className=" w-1/2 p-3 flex flex-col gap-2">
@@ -365,7 +387,6 @@ const HeroSection = () => {
           <option value="Business">Business</option>
         </select>
       </div>
-
       <div className=" w-1/2 p-3 flex flex-col gap-2">
         <p>Trending</p>
         <select

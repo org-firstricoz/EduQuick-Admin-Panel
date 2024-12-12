@@ -50,7 +50,7 @@ const HeroSection = () => {
                   onClick={() => setOpen(true)}
                   className="p-2 pl-4 pr-4 rounded-lg bg-primary"
                 >
-                  Edit Product
+                  Edit
                 </button>
               </td>
             </tr>
@@ -65,22 +65,20 @@ const HeroSection = () => {
             <h2 className="text-2xl">Course Status</h2>
             <div className="flex justify-center gap-2">
               <button className="p-2 pl-4 pr-4 border rounded-full">
-                Completed
-              </button>
-              <button className="p-2 pl-4 pr-4 border rounded-full">
-                Processing
+                Virified
               </button>
               <button className="p-2 pl-4 pr-4 border rounded-full">
                 Rejected
               </button>
+              <button className="p-2 pl-4 pr-4 border rounded-full">
+                Pending
+              </button>
             </div>
-            <button className="p-2 pl-4 pr-4 border rounded-full">
-              Remove
-            </button>
+            <button className="p-2 pl-4 pr-4 border rounded-full">Edit</button>
             <div className="flex w-full">
-              <p className="text-left">*You can edit the course</p>
+              <p className="text-left">*You can edit the course status</p>
             </div>
-            <button className="p-2 pl-8 pr-8 border rounded-full">Edit</button>
+            <button className="p-2 pl-8 pr-8 border rounded-full">Done</button>
           </div>
         </Dialog>
       </div>

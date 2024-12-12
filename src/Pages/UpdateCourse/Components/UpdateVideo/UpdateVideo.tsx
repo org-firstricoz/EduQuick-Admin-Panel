@@ -1,10 +1,18 @@
+import { useEffect, useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Dialog from "../../../../Components/Dialog/Dialog";
-import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { baseURL } from "../../../../baseURL";
 import axios from "axios";
+
+interface Video {
+  id: number;
+  title: string;
+  description: string;
+  videoSequence: number;
+  videoUrl: string;
+}
 
 interface props {
   openVideoDialog: boolean;
@@ -12,16 +20,37 @@ interface props {
   videoIds: string[];
 }
 
-const videoDialog = ({
+const UpdateVideo = ({
   openVideoDialog,
   setOpenVideoDialog,
   videoIds,
 }: props) => {
+  const id = videoIds;
+
   const hiddenInput = useRef<HTMLInputElement | null>(null);
   const [title, setTitle] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
   const [description, setDescription] = useState("");
   const [videoSequence, setVideoSequence] = useState("");
+  const [videos, setVideos] = useState<Video[]>([]);
+
+  const getCurrentVideo = async () => {
+    try {
+      const response = await axios.get(
+        `${baseURL}/user/video-by-videoId?id=${videoIds}`
+      );
+      setVideos(response.data.videos);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getCurrentVideo();
+  }, [id]);
 
   const validation = () => {
     if (title === "") {
@@ -127,63 +156,73 @@ const videoDialog = ({
 
   return (
     <Dialog width={1000} open={openVideoDialog} onClose={handleClose}>
-      <div className="w-full h-full flex flex-col gap-4">
-        <input
-          type="file"
-          onChange={(e) => handleFileChange(e)}
-          className="hidden"
-          ref={hiddenInput}
-          accept={`video/*`}
-        />
-        <button
-          onClick={() => setOpenVideoDialog(false)}
-          className="absolute top-4 right-4 text-2xl"
-        >
-          <IoMdClose />
-        </button>
-        <h2 className="text-2xl">Details</h2>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Title"
-          className="border placeholder:text-[#fff] bg-[#111] w-1/2 p-3 rounded-md"
-        />
-        <div
-          onClick={handleChooseFile}
-          className="w-48 h-10 rounded-md p-1 gap-1 border flex flex-row-reverse justify-center items-center"
-        >
-          <label htmlFor="Videofile">
-            <MdOutlineFileUpload className="text-4xl cursor-pointer transition-all duration-150 p-1 hover:bg-[#1a1a1a] rounded-full" />
-          </label>
-          <label htmlFor="file" className="cursor-pointer">
-            {" "}
-            Upload File
-          </label>
-        </div>
-        <p>Video series</p>
-        <input
-          value={videoSequence}
-          type="text"
-          onChange={(e) => setVideoSequence(e.target.value)}
-          className="border text-center placeholder:text-[#fff] bg-[#111] w-12 p-3 rounded-md"
-        />
-        <div className="border w-1/2 p-3 rounded-md">
-          <p className="font-light">Description</p>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="font-normal bg-[#111] w-full outline-none"
+      <p className="text-center text-3xl">Update Video</p>
+      <div className="w-full h-full mt-8 flex gap-4">
+        <div className="w-1/2 flex flex-col gap-4 ">
+          <input
+            type="file"
+            onChange={(e) => handleFileChange(e)}
+            className="hidden "
+            ref={hiddenInput}
+            accept={`video/*`}
           />
+          <button
+            onClick={() => setOpenVideoDialog(false)}
+            className="absolute top-4 right-4 text-2xl"
+          >
+            <IoMdClose />
+          </button>
+          <h2 className="text-2xl">Details</h2>
+          <input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Title"
+            className="border placeholder:text-[#fff] bg-[#111]  p-3 rounded-md"
+          />
+          <div
+            onClick={handleChooseFile}
+            className="w-48 h-10 rounded-md p-1 gap-1 border flex flex-row-reverse justify-center items-center"
+          >
+            <label htmlFor="Videofile">
+              <MdOutlineFileUpload className="text-4xl cursor-pointer transition-all duration-150 p-1 hover:bg-[#1a1a1a] rounded-full" />
+            </label>
+            <label htmlFor="file" className="cursor-pointer">
+              {" "}
+              Upload File
+            </label>
+          </div>
+          <p>Video series</p>
+          <input
+            value={videoSequence}
+            type="text"
+            onChange={(e) => setVideoSequence(e.target.value)}
+            className="border text-center placeholder:text-[#fff] bg-[#111] w-12 p-3 rounded-md"
+          />
+          <div className="border  p-3 rounded-md">
+            <p className="font-light">Description</p>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="font-normal bg-[#111] w-full outline-none"
+            />
+          </div>
+          <button
+            onClick={handleVideoUpload}
+            className="mt-4 p-2 pl-5 pr-5 w-20 bg-primary rounded-md"
+          >
+            Done
+          </button>
         </div>
-        <button
-          onClick={handleVideoUpload}
-          className="mt-4 p-2 pl-5 pr-5 w-20 bg-primary rounded-md"
-        >
-          Done
-        </button>
+        <div className="grid items-center  grid-cols-2 gap-4">
+          {videos.map((video, i) => (
+            <div key={i} className="w-60 border">
+              <video src={video.videoUrl} controls className="w-60 h-40" />
+            </div>
+          ))}
+        </div>
       </div>
     </Dialog>
   );
 };
 
-export default videoDialog;
+export default UpdateVideo;
