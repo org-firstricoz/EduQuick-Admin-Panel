@@ -91,6 +91,8 @@ const HeroSection = () => {
         errorMessage =
           error.response?.data?.message || error.message || errorMessage;
       }
+      toast.dismiss(errorMessage);
+      toast.error(errorMessage);
       console.log(errorMessage);
     }
   };

@@ -66,7 +66,9 @@ const TopCoursePage = () => {
 
       <div className="w-full flex flex-col items-center justify-center">
         <div className="w-4/5 overflow-scroll cursor-pointer  border rounded-xl shadow-[#0a0a0a] shadow-xl">
-          <p className="text-primary text-xl font-semibold m-4">Top Courses</p>
+          <p className="text-primary text-3xl text-center font-semibold m-4">
+            Top Courses
+          </p>
 
           <table
             onClick={() => handleNavigation("/leaderboard")}
@@ -80,7 +82,7 @@ const TopCoursePage = () => {
             </tr>
             {courses.map((data, i: number) => (
               <tr key={i} className="border-t h-12  border-b">
-                <td>Index</td>
+                <td>{i < 9 ? `0${i + 1}` : i + 1}</td>
                 <td>{data.title}</td>
                 <td>{data.views}</td>
               </tr>

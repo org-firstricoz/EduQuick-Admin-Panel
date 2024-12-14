@@ -1,7 +1,7 @@
 import Revenue from "@dashboard/Components/Revenue/Revenue";
 import TodaysSales from "@dashboard/Components/TodaysSales/TodaysSales";
 import TopCourse from "@dashboard/Components/TopCourse/TopCourse";
-import Visitors from "@dashboard/Components/Visitors/Visitors";
+// import Visitors from "@dashboard/Components/Visitors/Visitors";
 
 const HeroSection = () => {
   return (
@@ -13,7 +13,7 @@ const HeroSection = () => {
     >
       <div className=" flex gap-4">
         <TodaysSales />
-        <Visitors />
+        {/* <Visitors /> */}
       </div>
 
       <div className=" flex gap-4">

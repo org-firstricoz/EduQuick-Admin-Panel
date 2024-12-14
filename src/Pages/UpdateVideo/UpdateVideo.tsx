@@ -1,13 +1,12 @@
 import { baseURL } from "@baseURL";
+import ThumbnailDialog from "@creators/Components/ThumbnailDialog/ThumbnailDialog";
 import Dialog from "@dialog";
 import axios from "axios";
-import { startTransition, useEffect, useRef, useState } from "react";
+import Cookies from "js-cookie";
+import { startTransition, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { IoMdClose } from "react-icons/io";
-import { MdOutlineFileUpload } from "react-icons/md";
-import { RiAiGenerate } from "react-icons/ri";
+import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
-import BG from "@creators/Assets/BG.png";
 
 interface Video {
   description: string;
@@ -26,22 +25,17 @@ interface Video {
 
 const UpdateVideo = () => {
   const { id } = useParams();
-  const hiddenInput = useRef<HTMLInputElement | null>(null);
   const navigate = useNavigate();
 
+  const token = Cookies.get("token");
+
   const [deleteVideoDialog, setDeleteVideoDialog] = useState<boolean>(false);
+  const [openThumbnailDialog, setOpenThumbnailDialog] =
+    useState<boolean>(false);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [thumbnailUrl, setThumbnail] = useState("");
-  const [open, setOpen] = useState<boolean>(false);
-  const [imgType, setImgType] = useState("");
-
-  console.log({
-    title,
-    description,
-    thumbnailUrl,
-  });
+  const [thumbnail, setThumbnail] = useState("");
 
   const [video, setVideo] = useState<Video[]>([]);
 
@@ -67,76 +61,23 @@ const UpdateVideo = () => {
     getVideo();
   }, [id]);
 
-  const validation = () => {
-    if (imgType === "") {
-      alert("Image Type is required!...");
-      return false;
-    }
-    return true;
-  };
-
-  const handleChooseFile = () => {
-    const isValid = validation();
-    if (!isValid) {
-      return;
-    }
-
-    if (hiddenInput.current) {
-      hiddenInput.current.click();
-    }
-  };
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-
-    if (file) {
-      const loadingToast = toast.loading("Uploading...");
-
-      try {
-        const extension = file.type.split("/")[1]; // Get the file extension from the MIME type
-        const type = "images"; // Set type as per your requirement (e.g., "images")
-
-        const uploadUrlResponse = await axios.post(
-          `${baseURL}/admin/storage/upload`,
-          {
-            extension,
-            type,
-          }
-        );
-
-        if (!uploadUrlResponse.data.status) {
-          throw new Error(uploadUrlResponse.data.message);
-        }
-
-        const { uploadUrl } = uploadUrlResponse.data;
-
-        await axios.put(uploadUrl, file, {
-          headers: {
-            "Content-Type": file.type,
-          },
-        });
-        setThumbnail(uploadUrlResponse.data.mediaUrl);
-        toast.success("Upload successful!");
-      } catch (error) {
-        console.error(error);
-        toast.error("Error uploading file!");
-      } finally {
-        // Dismiss the loading toast
-        toast.dismiss(loadingToast);
-      }
-
-      setOpen(false); // Close the dialog after file selection
-    }
-  };
-
   const handleVideoUpdate = async () => {
     const pendingToast = toast.loading("Updating video...");
     try {
-      const response = axios.patch(`${baseURL}/admin/update-video`, {
-        id,
-        title,
-        description,
-        thumbnailUrl,
-      });
+      const response = axios.patch(
+        `${baseURL}/admin/update-video`,
+        {
+          id,
+          title,
+          description,
+          thumbnailUrl: thumbnail,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log((await response).data);
       if ((await response).data.status) {
         toast.dismiss(pendingToast);
@@ -159,18 +100,21 @@ const UpdateVideo = () => {
     const pendingToast = toast.loading("Deleting Video...");
     try {
       const response = await axios.delete(
-        `${baseURL}/admin/delete-video?id=${id}`
+        `${baseURL}/admin/delete-video?id=${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log(response.data);
-
       if (response.data.status) {
         toast.dismiss(pendingToast);
         toast.success("Video Deleted");
-        startTransition(() => {
-          navigate("/courses");
-        });
       }
     } catch (error) {
+      console.log(error);
+
       if (axios.isAxiosError(error)) {
         toast.dismiss(pendingToast);
         const errorMessage = error.response?.data.message;
@@ -179,8 +123,18 @@ const UpdateVideo = () => {
     }
   };
 
+  const handleNavigation = (path: string) => [
+    startTransition(() => {
+      navigate(path);
+    }),
+  ];
+
   return (
     <div className="w-screen h-screen overflow-scroll flex flex-col gap-4 p-8">
+      <IoChevronBackCircleOutline
+        onClick={() => handleNavigation("/courses")}
+        className="absolute top-6 left-6 text-5xl cursor-pointer"
+      />
       <h2 className="text-center text-3xl">Update Video</h2>
       <input
         type="text"
@@ -198,7 +152,40 @@ const UpdateVideo = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-2 w-1/2 p-3 rounded-md">
+      <div>
+        <ThumbnailDialog
+          openThumbnailDialog={openThumbnailDialog}
+          setOpenThumbnailDialog={setOpenThumbnailDialog}
+          setThumbnail={setThumbnail}
+        />
+        <label>Thumbnail</label>
+        <div
+          onClick={() => setOpenThumbnailDialog(true)}
+          className="border cursor-pointer rounded-md w-48 flex items-center justify-center text-lg h-28"
+        >
+          {thumbnail ? (
+            <>
+              <div
+                className="w-full h-full bg-no-repeat bg-cover"
+                style={{
+                  backgroundImage: `url(${thumbnail})`,
+                }}
+              />
+            </>
+          ) : (
+            " upload file"
+          )}
+        </div>
+        {thumbnail && (
+          <button
+            onClick={() => setOpenThumbnailDialog(true)}
+            className="mt-4 p-2 pl-6 pr-6 border rounded-md"
+          >
+            Choose again
+          </button>
+        )}
+      </div>
+      {/* <div className="flex flex-col gap-2 w-1/2 p-3 rounded-md">
         <p>Thumbnail</p>
         <div className="flex gap-6">
           {thumbnailUrl ? (
@@ -279,7 +266,7 @@ const UpdateVideo = () => {
             </button>
           </div>
         </Dialog>
-      </div>
+      </div> */}
       <div className="flex gap-4">
         <Dialog open={deleteVideoDialog} width={600} onClose={() => null}>
           <div className="w-full h-full flex flex-col items-center justify-center gap-4">

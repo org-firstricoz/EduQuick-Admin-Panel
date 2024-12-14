@@ -1,38 +1,45 @@
-import { mailsData } from "@messages/constant/constant";
-import { CiStar } from "react-icons/ci";
-import { FaStar } from "react-icons/fa";
+import { baseURL } from "@baseURL";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+interface Message {
+  date: string;
+  message: string;
+  userName: string;
+}
 
 const Email = () => {
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  const getContactUsMessages = async () => {
+    try {
+      const response = await axios.get(`${baseURL}/user/contact-us-messages`);
+      console.log(response.data);
+      setMessages(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getContactUsMessages();
+  }, []);
+
   return (
     <div className="w-full flex text-center text-secondary flex-col">
       <table className="w-full">
-        {mailsData.map((data, i: number) => (
-          <tr key={i} className="border-b  h-20">
+        {messages.map((message, i) => (
+          <tr
+            key={i}
+            className=" hover:bg-[#242424] transition-all duration-300 cursor-pointer rounded-md "
+          >
             <td>
-              <input type="checkbox" className="size-5" />
+              <h2 className="p-2 bg-[#00b69b31] rounded-sm font-medium text-xl w-fit text-[#00B69B]">
+                {message.userName}
+              </h2>
             </td>
-            <td>
-              {data.starred ? (
-                <FaStar className="text-2xl" />
-              ) : (
-                <CiStar className="text-3xl" />
-              )}
-            </td>
-            <td>
-              <p className="text-base font-bold">{data.name}</p>
-            </td>
-            <td>
-              <button className="p-2 w-40 bg-[#00b69b4d] text-[#00B69B] rounded-sm">
-                {data.name}
-              </button>
-            </td>
-            <td>
-              <p className="font-bold text-base">
-                {data.msg.length > 20
-                  ? data.msg.slice(0, 20) + "..."
-                  : data.msg}
-              </p>
-            </td>
+            <td>{message.message}</td>
+            <td className="text-left">{message.date}</td>
           </tr>
         ))}
       </table>

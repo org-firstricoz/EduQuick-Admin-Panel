@@ -6,20 +6,16 @@ import toast from "react-hot-toast";
 import { IoClose } from "react-icons/io5";
 
 interface props {
-  thumbnail: string;
   setThumbnail: (value: string) => void;
   openThumbnailDialog: boolean;
   setOpenThumbnailDialog: (value: boolean) => void;
 }
 
 const ThumbnailDialog = ({
-  thumbnail,
   setThumbnail,
   setOpenThumbnailDialog,
   openThumbnailDialog,
 }: props) => {
-  console.log(thumbnail);
-
   const [imgType, setImgType] = useState("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 

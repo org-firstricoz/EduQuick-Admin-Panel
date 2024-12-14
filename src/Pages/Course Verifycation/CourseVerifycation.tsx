@@ -1,9 +1,7 @@
 import { baseURL } from "@baseURL";
 import axios from "axios";
-import { startTransition, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import ReactPlayer from "react-player";
-
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 interface Course {
   avgRating?: string;
   category?: string;
@@ -40,13 +38,13 @@ interface Video {
 
 const CourseVerifycation = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleNavigation = (path: string) => {
-    startTransition(() => {
-      navigate(path);
-    });
-  };
+  // const handleNavigation = (path: string) => {
+  //   startTransition(() => {
+  //     navigate(path);
+  //   });
+  // };
 
   const [course, setCourse] = useState<Course | null>(null);
   const [videos, setVideos] = useState<Video[]>([]);

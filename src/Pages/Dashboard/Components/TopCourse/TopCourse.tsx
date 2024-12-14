@@ -58,7 +58,7 @@ const TopCourse = () => {
         </tr>
         {courses.map((data, i: number) => (
           <tr key={i} className="border-t h-12  border-b">
-            <td>Index</td>
+            <td>{i < 9 ? `0${i + 1}` : i + 1}</td>
             <td>{data.title}</td>
             <td>{data.views}</td>
           </tr>

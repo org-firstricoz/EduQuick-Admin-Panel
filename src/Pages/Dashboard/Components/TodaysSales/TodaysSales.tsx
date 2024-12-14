@@ -45,7 +45,7 @@ const TodaysSales = () => {
   };
 
   return (
-    <div className=" w-3/5 border p-4 rounded-xl shadow-[#0a0a0a] shadow-xl ">
+    <div className=" w-full border p-4 rounded-xl shadow-[#0a0a0a] shadow-xl ">
       <div className="flex justify-between items-center">
         <div className="flex flex-col ">
           <p className="text-primary text-xl font-semibold">Today's Sales</p>

@@ -29,17 +29,8 @@ const UpdateAdmin = () => {
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [imgType, setImgType] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const [avatar, setAvatar] = useState<string | null>(null);
   const [gender, setGender] = useState("");
-
-  console.log({
-    adminData: {
-      fullName,
-      gender,
-      avatar,
-      phoneNumber,
-    },
-  });
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -55,6 +46,7 @@ const UpdateAdmin = () => {
       });
       console.log(response.data);
       setAdmin(response.data.admin);
+      setAvatar(response.data.admin.profileImageUrl);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const errorMessage = error.response?.data.message;
@@ -86,10 +78,10 @@ const UpdateAdmin = () => {
       const response = await axios.patch(
         `${baseURL}/admin/profile/${id}`,
         {
-          fullName,
-          phoneNumber,
-          profileImageUrl: avatar,
-          gender,
+          fullName: fullName ? fullName : admin?.fullName,
+          phoneNumber: phoneNumber ? phoneNumber : admin?.phoneNumber,
+          profileImageUrl: avatar ? avatar : admin?.profileImageUrl,
+          gender: admin?.gender,
         },
         {
           headers: {
@@ -248,16 +240,17 @@ const UpdateAdmin = () => {
         type="text"
         onChange={(e) => setFullName(e.target.value)}
         placeholder={admin?.fullName}
-        className="w-1/2 p-2 border bg-[#111111] text-lg  rounded-md"
+        className="w-1/2 p-2 border placeholder:text-[#fff] bg-[#111111] text-lg  rounded-md"
       />
-      <input
-        type="text"
-        onChange={(e) => setPhoneNumber(e.target.value)}
-        placeholder={admin?.phoneNumber ? admin?.phoneNumber : "Phone Number"}
-        className="w-1/2 p-2 border bg-[#111111] text-lg  rounded-md"
-      />
-
-      <div className="flex gap-4">
+      <div className="flex items-center  justify-end">
+        <input
+          type="text"
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          placeholder={admin?.phoneNumber ? admin?.phoneNumber : "Phone Number"}
+          className="w-1/2 p-2 border placeholder:text-[#fff] bg-[#111111] text-lg  rounded-md"
+        />
+      </div>
+      {/* <div className="flex gap-4">
         <label htmlFor="Male">Male</label>
         <input
           type="radio"
@@ -265,7 +258,7 @@ const UpdateAdmin = () => {
           id="Male"
           className="accent-[#111111]"
           value="Male"
-          checked={gender === "Male"}
+          // checked={gender === "Male"}
           onChange={(e) => setGender(e.target.value)}
         />
         <label htmlFor="Female">Female</label>
@@ -275,17 +268,19 @@ const UpdateAdmin = () => {
           id="Female"
           className="accent-[#111111]"
           value="Female"
-          checked={gender === "Female"}
+          // checked={gender === "Female"}ss
           onChange={(e) => setGender(e.target.value)}
         />
-      </div>
+      </div> */}
 
-      <button
-        onClick={updateAdmin}
-        className="bg-primary w-fit pl-4 pr-4 p-2 rounded-md"
-      >
-        Update Admin
-      </button>
+      <div className="flex justify-center">
+        <button
+          onClick={updateAdmin}
+          className="bg-primary w-fit pl-4 pr-4 p-2 rounded-md"
+        >
+          Update Admin
+        </button>
+      </div>
     </div>
   );
 };

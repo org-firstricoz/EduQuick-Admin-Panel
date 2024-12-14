@@ -12,6 +12,7 @@ import { MdLeaderboard } from "react-icons/md";
 import { PiSignOutBold } from "react-icons/pi";
 import { RiDashboardFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -22,10 +23,15 @@ const Sidebar = () => {
     });
   };
 
+  const token = Cookies.get("token");
+
   const handleSignOut = async () => {
     const pendingToast = toast.loading("Logging out...");
     try {
       const response = await axios.get("/api/logout", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         withCredentials: true,
       });
 

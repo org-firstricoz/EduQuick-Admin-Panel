@@ -1,12 +1,59 @@
-import { productData } from "@products/constant/constant";
-import { useState } from "react";
-import Dialog from "../../../../Components/Dialog/Dialog";
+import { baseURL } from "@baseURL";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import Dialog from "../../../../Components/Dialog/Dialog";
+
+interface Course {
+  adminFeedback: string;
+  avgRating: string;
+  category: string;
+  createdAt: string;
+  description: string;
+  freeCourse: boolean;
+  imgUrl: string;
+  rating: string;
+  tags: string[];
+  title: string;
+  trending: boolean;
+  updatedAt: string;
+  uploadedBy: string;
+  verificationStatus: string;
+  videoIds: string[];
+  views: string;
+  __v: string;
+  _id: string;
+}
 
 const HeroSection = () => {
-  const handleClose = () => {};
+  const token = Cookies.get("token");
+
+  const [courses, setCourses] = useState<Course[]>([]);
 
   const [open, setOpen] = useState(false);
+
+  const getPendingCourses = async () => {
+    try {
+      const response = await axios.get(
+        `${baseURL}/user/courses/get-courses-by-verification-status?status=Pending`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data.courses);
+      setCourses(response.data.courses);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getPendingCourses();
+  }, []);
+
   return (
     <div
       className=" w-full overflow-scroll pl-4 pr-4 p-2 flex flex-col gap-4 font-poppins"
@@ -24,27 +71,18 @@ const HeroSection = () => {
         <table className="w-full  text-center">
           <tr className=" text-secondary h-16 text-xl font-medium">
             <td>#</td>
-            <td>Product Name</td>
+            <td>Course Name</td>
             <td>Date</td>
             <td>Verification</td>
             <td>Action</td>
           </tr>
 
-          {productData.map((data, i: number) => (
+          {courses.map((course, i: number) => (
             <tr key={i} className="font-medium text-xl bg-[#000] ">
-              <td>
-                <img src={data.img} className="w-24 h-20" alt="" />
-              </td>
-              <td>
-                <div className="flex  flex-col">
-                  <h2>{data.title}</h2>
-                  <p className="text-sm">{data.rating}</p>
-                </div>
-              </td>
-              <td>
-                <h2>${data.date}</h2>
-              </td>
-              <td>{data.verification ? "Verified" : "Pending"}</td>
+              <td className="p-4">{i < 9 ? `0${i + 1}` : i + 1}</td>
+              <td>{course.title}</td>
+              <td>{new Date(course.createdAt).toLocaleDateString()}</td>
+              <td>{course.verificationStatus}</td>
               <td>
                 <button
                   onClick={() => setOpen(true)}
@@ -56,7 +94,7 @@ const HeroSection = () => {
             </tr>
           ))}
         </table>
-        <Dialog width={700} open={open} onClose={() => handleClose}>
+        <Dialog width={700} open={open} onClose={() => null}>
           <IoMdClose
             onClick={() => setOpen(false)}
             className="absolute right-2 transition-all duration-300 top-2 text-4xl cursor-pointer p-1 rounded-full hover:bg-[#121212]"

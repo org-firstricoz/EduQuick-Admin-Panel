@@ -174,7 +174,6 @@ const UpdateVideo = ({
           </button>
           <h2 className="text-2xl">Details</h2>
           <input
-            value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Title"
             className="border placeholder:text-[#fff] bg-[#111]  p-3 rounded-md"
