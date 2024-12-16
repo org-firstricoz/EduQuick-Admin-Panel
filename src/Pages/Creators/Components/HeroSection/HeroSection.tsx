@@ -1,12 +1,13 @@
-import { useState } from "react";
-import ThumbnailDialog from "../ThumbnailDialog/ThumbnailDialog";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { baseURL } from "@baseURL";
+import axios from "axios";
 import Cookies from "js-cookie";
-import ContentCreators from "../ContentCreators/ContentCreators";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { FaUser } from "react-icons/fa6";
+import ContentCreators from "../ContentCreators/ContentCreators";
+import ThumbnailDialog from "../ThumbnailDialog/ThumbnailDialog";
 import VideoDialog from "../VideoDialog/VideoDialog";
+import Dialog from "@dialog";
 
 interface Creator {
   BillingCycle: string;
@@ -33,20 +34,27 @@ const HeroSection = () => {
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [videoIds, setVideoIds] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
   const [category, setCategory] = useState("");
   const [free, setFree] = useState<boolean>(false);
   const [trending, setTrending] = useState<boolean>(false);
+
+  const [tag, setTag] = useState("");
+
+  console.log({ tags: tags });
 
   //   Dialog States
   const [openThumbnailDialog, setOpenThumbnailDialog] =
     useState<boolean>(false);
   const [openCreatorsDialog, setOpenCreatorsDialog] = useState<boolean>(false);
   const [openVideoDialog, setOpenVideoDialog] = useState<boolean>(false);
+  const [openTagDialog, setOpenTagDialog] = useState<boolean>(false);
 
   const handleUploadCourse = async () => {
     const pendingToast = toast.loading("Uploading course...");
     try {
       setVideoIds(videoIds);
+      setTags(tags);
       const response = await axios.post(
         `${baseURL}/admin/course`,
         {
@@ -57,7 +65,7 @@ const HeroSection = () => {
           category,
           trending,
           freeCourse: free,
-          tags: ["Mobile"],
+          tags,
           uploadedBy: creator?.id,
         },
         {
@@ -80,6 +88,24 @@ const HeroSection = () => {
         toast.error(errorMessage || "Server Error!");
       }
     }
+  };
+
+  const validation = () => {
+    if (tag === "") {
+      toast.error("Tag is required!");
+      return free;
+    }
+    return true;
+  };
+
+  const handleAddTag = () => {
+    const isValid = validation();
+    if (!isValid) {
+      return;
+    }
+    tags.push(tag);
+    setTag("");
+    setOpenTagDialog(false);
   };
 
   return (
@@ -217,6 +243,45 @@ const HeroSection = () => {
           <option value="false">No</option>
         </select>
       </div>
+      <div className="w-1/2 border p-2 rounded-md">
+        <div className="grid grid-cols-4 gap-4">
+          {tags.map((tag, i) => (
+            <p className="text-base font-medium" key={i}>
+              {tag}
+            </p>
+          ))}
+        </div>
+        <div className="flex justify-end">
+          <Dialog open={openTagDialog} width={400} onClose={() => null}>
+            <div className="flex items-center flex-col gap-3 w-full h-full">
+              <input
+                type="text"
+                placeholder="Enter tag"
+                value={tag}
+                onChange={(e) => setTag(e.target.value)}
+                className="border rounded-md w-full bg-[#1d1d1d] outline-none p-2"
+              />
+              <button
+                onClick={handleAddTag}
+                className="bg-primary pl-6 pr-6 rounded-md w-fit p-2 "
+              >
+                Add Tag
+              </button>
+            </div>
+          </Dialog>
+          <button
+            onClick={() => setOpenTagDialog(true)}
+            className="p-2 pl-6 pr-6 bg-primary  rounded-full"
+          >
+            Add Tag
+          </button>
+        </div>
+      </div>
+      {/* <AddTags
+        openTagDialog={openTagDialog}
+        tags={tags}
+        setOpenTagDialog={setOpenCreatorsDialog}
+      /> */}
       <button
         onClick={handleUploadCourse}
         className="fixed bottom-8 rounded-md right-16 bg-primary p-2 pl-6 pr-6"

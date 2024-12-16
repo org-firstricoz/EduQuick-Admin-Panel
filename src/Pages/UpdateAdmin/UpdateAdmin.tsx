@@ -236,13 +236,14 @@ const UpdateAdmin = () => {
           </button>
         </Dialog>
       </div>
-      <input
-        type="text"
-        onChange={(e) => setFullName(e.target.value)}
-        placeholder={admin?.fullName}
-        className="w-1/2 p-2 border placeholder:text-[#fff] bg-[#111111] text-lg  rounded-md"
-      />
-      <div className="flex items-center  justify-end">
+
+      <div className="flex items-center gap-10 pl-10 pr-10  justify-center">
+        <input
+          type="text"
+          onChange={(e) => setFullName(e.target.value)}
+          placeholder={admin?.fullName}
+          className="w-1/2 p-2 border placeholder:text-[#fff] bg-[#111111] text-lg  rounded-md"
+        />
         <input
           type="text"
           onChange={(e) => setPhoneNumber(e.target.value)}

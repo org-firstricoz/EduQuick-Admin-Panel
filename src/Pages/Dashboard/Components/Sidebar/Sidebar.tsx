@@ -1,5 +1,5 @@
 import axios from "axios";
-import { startTransition } from "react";
+import { startTransition, useState } from "react";
 import toast from "react-hot-toast";
 import { CiUser } from "react-icons/ci";
 import { GoGraph } from "react-icons/go";
@@ -13,9 +13,12 @@ import { PiSignOutBold } from "react-icons/pi";
 import { RiDashboardFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import Dialog from "@dialog";
 
 const Sidebar = () => {
   const navigate = useNavigate();
+
+  const [logoutDialog, setLogoutDialog] = useState<boolean>(false);
 
   const handleNavigation = (path: string) => {
     startTransition(() => {
@@ -37,7 +40,9 @@ const Sidebar = () => {
 
       if (response.status) {
         toast.dismiss(pendingToast);
+        setLogoutDialog(false);
         toast.success("Logged out!");
+        Cookies.remove("token");
         handleNavigation("/login");
       }
     } catch (error) {
@@ -196,11 +201,33 @@ const Sidebar = () => {
           <PiSignOutBold className="text-3xl" />
         </div>
         <div
-          onClick={handleSignOut}
+          onClick={() => setLogoutDialog(true)}
           className="flex justify-start items-center w-3/4 "
         >
           <p>Sign Out</p>
         </div>
+        <Dialog open={logoutDialog} width={400} onClose={() => null}>
+          <div className="w-full relative z-50 h-full flex flex-col gap-4">
+            <p className="text-xl font-medium text-[#fff]">
+              Are you sure you want to{" "}
+              <span className="text-primary font-semibold">Signout?</span>
+            </p>
+            <div className="flex items-center justify-center gap-6">
+              <button
+                onClick={() => setLogoutDialog(false)}
+                className="bg-primary text-[#fff] rounded-md p-2 pl-6 pr-6"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSignOut}
+                className="border text-[#fff] rounded-md p-2 pl-6 pr-6"
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </Dialog>
       </div>
     </div>
   );

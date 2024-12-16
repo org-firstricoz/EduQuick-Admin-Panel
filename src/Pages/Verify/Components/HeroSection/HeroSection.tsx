@@ -1,9 +1,12 @@
 import { baseURL } from "@baseURL";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import Dialog from "../../../../Components/Dialog/Dialog";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import FeedbackDialog from "../FeedbackDialog/FeedbackDialog";
 
 interface Course {
   adminFeedback: string;
@@ -28,10 +31,13 @@ interface Course {
 
 const HeroSection = () => {
   const token = Cookies.get("token");
+  const navigate = useNavigate();
+  const [id, setId] = useState("");
 
   const [courses, setCourses] = useState<Course[]>([]);
 
   const [open, setOpen] = useState(false);
+  const [openFeedback, setOpenFeedback] = useState<boolean>(false);
 
   const getPendingCourses = async () => {
     try {
@@ -43,16 +49,46 @@ const HeroSection = () => {
           },
         }
       );
-      console.log(response.data.courses);
       setCourses(response.data.courses);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleCourseVerify = async () => {
+    const pendingToast = toast.loading("Verifying Course...");
+    try {
+      const response = await axios.patch(
+        `${baseURL}/user/courses/${id}/update-course-verification-status`,
+        {
+          status: "Verified",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+
+      if (response.data.status) {
+        toast.dismiss(pendingToast);
+        toast.success("Course verified!");
+        setOpen(false);
+      }
+    } catch (error) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        toast.dismiss(pendingToast);
+        const errorMessage = error.response?.data.message;
+        toast.error(errorMessage);
+      }
+    }
+  };
+
   useEffect(() => {
     getPendingCourses();
-  }, []);
+  }, [courses, id]);
 
   return (
     <div
@@ -85,7 +121,10 @@ const HeroSection = () => {
               <td>{course.verificationStatus}</td>
               <td>
                 <button
-                  onClick={() => setOpen(true)}
+                  onClick={() => {
+                    setOpen(true);
+                    setId(course._id);
+                  }}
                   className="p-2 pl-4 pr-4 rounded-lg bg-primary"
                 >
                   Edit
@@ -94,6 +133,7 @@ const HeroSection = () => {
             </tr>
           ))}
         </table>
+
         <Dialog width={700} open={open} onClose={() => null}>
           <IoMdClose
             onClick={() => setOpen(false)}
@@ -102,23 +142,44 @@ const HeroSection = () => {
           <div className="text-[#fff] p-4 flex flex-col gap-4 items-center justify-center">
             <h2 className="text-2xl">Course Status</h2>
             <div className="flex justify-center gap-2">
-              <button className="p-2 pl-4 pr-4 border rounded-full">
-                Virified
+              <button
+                onClick={handleCourseVerify}
+                className="p-2 pl-4 pr-4 border rounded-full"
+              >
+                Verified
               </button>
-              <button className="p-2 pl-4 pr-4 border rounded-full">
+
+              <button
+                onClick={() => setOpenFeedback(true)}
+                className="p-2 pl-4 pr-4 border rounded-full"
+              >
                 Rejected
               </button>
-              <button className="p-2 pl-4 pr-4 border rounded-full">
+              <button className="p-2 bg-primary pl-4 pr-4  rounded-full">
                 Pending
               </button>
             </div>
-            <button className="p-2 pl-4 pr-4 border rounded-full">Edit</button>
+            <button
+              onClick={() => {
+                startTransition(() => {
+                  navigate(`/course-verifycation/${id}`);
+                });
+              }}
+              className="p-2 pl-4 pr-4 border rounded-full"
+            >
+              Edit
+            </button>
             <div className="flex w-full">
               <p className="text-left">*You can edit the course status</p>
             </div>
-            <button className="p-2 pl-8 pr-8 border rounded-full">Done</button>
           </div>
         </Dialog>
+        <FeedbackDialog
+          openFeedback={openFeedback}
+          setOpenFeedback={setOpenFeedback}
+          setOpen={setOpen}
+          id={id}
+        />
       </div>
     </div>
   );
