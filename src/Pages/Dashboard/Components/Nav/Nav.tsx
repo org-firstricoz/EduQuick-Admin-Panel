@@ -1,4 +1,3 @@
-import { IoSearch } from "react-icons/io5";
 import { baseURL } from "@baseURL";
 import User from "@creators/Assets/User.png";
 import axios from "axios";
@@ -83,22 +82,7 @@ const Nav = () => {
       <h1 className="text-primary font-jockey font-normal text-4xl">
         EDUQUICK
       </h1>
-      <div className="h-full flex items-center gap-10">
-        <h2 className="text-3xl font-semibold font-poppins text-primary">
-          Dashboard
-        </h2>
-        <div className="border p-4 flex items-center rounded-3xl gap-2">
-          <IoSearch className="text-primary text-xl" />
-          <input
-            type="text"
-            className="h-5 bg-[#111111] placeholder:text-primary outline-none text-primary font-poppins text-lg "
-            placeholder="Search"
-            style={{
-              width: 500,
-            }}
-          />
-        </div>
-      </div>
+
       <div className="flex items-center gap-2">
         {isLoggedIn ? (
           <div

@@ -12,6 +12,7 @@ interface props {
   setOpenVideoDialog: (value: boolean) => void;
   videoIds: string[];
   uploadedBy: string;
+  videoURLs: string[];
 }
 
 const VideoDialog = ({
@@ -19,6 +20,7 @@ const VideoDialog = ({
   setOpenVideoDialog,
   videoIds,
   uploadedBy,
+  videoURLs,
 }: props) => {
   const token = Cookies.get("token");
 
@@ -62,6 +64,7 @@ const VideoDialog = ({
 
         console.log(uploadUrlResponse.data);
         setVideoUrl(uploadUrlResponse.data.mediaUrl);
+        videoURLs.push(uploadUrlResponse.data.mediaUrl);
 
         if (!uploadUrlResponse.data.status) {
           throw new Error(uploadUrlResponse.data.message);
@@ -213,10 +216,12 @@ const VideoDialog = ({
           className="w-fit bg-[#111111] p-2 border outline-none rounded-md"
         >
           <option>Select</option>
-          <option value="1080p">1080p</option>
-          <option value="720p">720p</option>
-          <option value="360p">360p</option>
-          <option value="240p">240p</option>
+          <option value="1080">1080p</option>
+          <option value="720">720p</option>
+          <option value="480">480p</option>
+          <option value="360">360p</option>
+          <option value="240">240p</option>
+          <option value="144">144p</option>
         </select>
         <button
           className="bg-primary pl-6 pr-6 p-2 rounded-md w-fit"

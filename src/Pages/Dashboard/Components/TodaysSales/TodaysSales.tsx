@@ -1,12 +1,11 @@
 import { baseURL } from "@baseURL";
 import axios from "axios";
-import { startTransition, useEffect, useState } from "react";
-import { PiExportBold } from "react-icons/pi";
-import { useNavigate } from "react-router-dom";
-import { FiBarChart } from "react-icons/fi";
-import { IoIosPricetag } from "react-icons/io";
-import { HiUserAdd } from "react-icons/hi";
 import Cookies from "js-cookie";
+import { startTransition, useEffect, useState } from "react";
+import { FiBarChart } from "react-icons/fi";
+import { HiUserAdd } from "react-icons/hi";
+import { IoIosPricetag } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const TodaysSales = () => {
   const navigate = useNavigate();
@@ -51,10 +50,6 @@ const TodaysSales = () => {
           <p className="text-primary text-xl font-semibold">Today's Sales</p>
           <p className="text-secondary text-base font-normal">Sales Summery</p>
         </div>
-        <button className="border hover:bg-[#292929] transition-all duration-150 active:bg-[#464646] flex items-center gap-2 text-primary p-2 pl-4 pr-4 font-medium text-sm rounded-md">
-          <PiExportBold className="text-lg" />
-          Export
-        </button>
       </div>
       <div className="flex items-center  justify-center gap-6 mt-4">
         <div className="w-60 flex cursor-pointer hover:scale-105 transition-all duration-300 flex-col gap-2 h-fit bg-[#E7061240] p-6 rounded-2xl">

@@ -41,8 +41,8 @@ const Router = () => {
             element={<CourseVerifycation />}
           />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/content" element={<Creators />} />
-          <Route path="/verify-report" element={<Verify />} />
+          <Route path="/create" element={<Creators />} />
+          <Route path="/verify-course" element={<Verify />} />
           <Route path="/top-courses" element={<TopCoursePage />} />
           <Route path="/mails/Inbox" element={<Inbox />} />
           <Route path="/update-course/:id" element={<UpdateCourse />} />

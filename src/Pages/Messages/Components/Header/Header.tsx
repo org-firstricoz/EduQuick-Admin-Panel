@@ -5,7 +5,7 @@ import { MdDelete } from "react-icons/md";
 
 const Header = () => {
   return (
-    <div className="flex justify-between pl-6 p-2 pr-6">
+    <div className="flex  justify-between pl-6 p-2 pr-6">
       <div className="w-1/2 flex items-center justify-center gap-2 pl-4 bg-[#D5D5D5] rounded-xl">
         <label htmlFor="search" className="text-2xl cursor-pointer">
           <IoSearch className="text-2xl text-[#000]" />

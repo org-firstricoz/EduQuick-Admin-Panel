@@ -1,19 +1,17 @@
+import Dialog from "@dialog";
 import axios from "axios";
+import Cookies from "js-cookie";
 import { startTransition, useState } from "react";
 import toast from "react-hot-toast";
 import { CiUser } from "react-icons/ci";
 import { GoGraph } from "react-icons/go";
-import {
-  IoBagHandleOutline,
-  IoChatboxEllipsesOutline,
-  IoSettingsOutline,
-} from "react-icons/io5";
+import { IoBagHandleOutline, IoChatboxEllipsesOutline } from "react-icons/io5";
 import { MdLeaderboard } from "react-icons/md";
 import { PiSignOutBold } from "react-icons/pi";
 import { RiDashboardFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
-import Dialog from "@dialog";
+import { FaUsers } from "react-icons/fa";
+import { MdSubscriptions } from "react-icons/md";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -69,7 +67,7 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary"
         }
-        p-4 w-60 rounded-xl flex items-center justify-center gap-1 active:bg-[#dd353d] cursor-pointer
+        p-3 w-60 rounded-xl flex items-center justify-center gap-1 active:bg-[#dd353d] cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4  ">
@@ -80,6 +78,42 @@ const Sidebar = () => {
         </div>
       </div>
       <div
+        onClick={() => handleNavigation("/users")}
+        className={`
+        ${
+          location.pathname === "/users"
+            ? "bg-primary text-[#fff] "
+            : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+        }
+        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        `}
+      >
+        <div className="flex justify-start items-center w-1/4  ">
+          <FaUsers className="text-3xl" />
+        </div>
+        <div className="flex justify-start items-center w-3/4  ">
+          <p>Users</p>
+        </div>
+      </div>
+      <div
+        onClick={() => handleNavigation("/subscription")}
+        className={`
+        ${
+          location.pathname === "/subscription"
+            ? "bg-primary text-[#fff] "
+            : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+        }
+        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        `}
+      >
+        <div className="flex justify-start items-center w-1/4  ">
+          <MdSubscriptions className="text-3xl" />
+        </div>
+        <div className="flex justify-start items-center w-3/4  ">
+          <p>Subscription</p>
+        </div>
+      </div>
+      <div
         onClick={() => handleNavigation("/leaderboard")}
         className={`
         ${
@@ -87,7 +121,7 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4  ">
@@ -98,21 +132,21 @@ const Sidebar = () => {
         </div>
       </div>
       <div
-        onClick={() => handleNavigation("/content")}
+        onClick={() => handleNavigation("/create")}
         className={`
         ${
-          location.pathname === "/content"
+          location.pathname === "/create"
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4 ">
           <CiUser className="text-3xl" />
         </div>
         <div className="flex justify-start items-center w-3/4 ">
-          <p>Content</p>
+          <p>Create</p>
         </div>
       </div>
       <div
@@ -123,7 +157,7 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4 ">
@@ -134,21 +168,21 @@ const Sidebar = () => {
         </div>
       </div>
       <div
-        onClick={() => handleNavigation("/verify-report")}
+        onClick={() => handleNavigation("/verify-course")}
         className={`
         ${
-          location.pathname === "/verify-report"
+          location.pathname === "/verify-course"
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4 ">
           <GoGraph className="text-3xl" />
         </div>
         <div className="flex justify-start items-center w-3/4 ">
-          <p>Verify Report</p>
+          <p>Verify Course</p>
         </div>
       </div>
       <div
@@ -159,7 +193,7 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff]"
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4 ">
@@ -169,7 +203,7 @@ const Sidebar = () => {
           <p>Messages</p>
         </div>
       </div>
-      <div
+      {/* <div
         onClick={() => handleNavigation("/settings")}
         className={`
         ${
@@ -177,7 +211,7 @@ const Sidebar = () => {
             ? "bg-primary text-[#fff] "
             : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4 ">
@@ -186,49 +220,41 @@ const Sidebar = () => {
         <div className="flex justify-start items-center w-3/4 ">
           <p>Settings</p>
         </div>
-      </div>
+      </div> */}
+
       <div
-        className={`
-        ${
-          location.pathname === "/sign-out"
-            ? "bg-primary text-[#fff] "
-            : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
-        }
-        p-4 w-60 rounded-xl flex gap-1 items-center justify-center cursor-pointer
-        `}
+        onClick={() => setLogoutDialog(true)}
+        className="bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646] p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer"
       >
         <div className="flex justify-start items-center w-1/4 ">
           <PiSignOutBold className="text-3xl" />
         </div>
-        <div
-          onClick={() => setLogoutDialog(true)}
-          className="flex justify-start items-center w-3/4 "
-        >
+        <div className="flex justify-start items-center w-3/4 ">
           <p>Sign Out</p>
         </div>
-        <Dialog open={logoutDialog} width={400} onClose={() => null}>
-          <div className="w-full relative z-50 h-full flex flex-col gap-4">
-            <p className="text-xl font-medium text-[#fff]">
-              Are you sure you want to{" "}
-              <span className="text-primary font-semibold">Signout?</span>
-            </p>
-            <div className="flex items-center justify-center gap-6">
-              <button
-                onClick={() => setLogoutDialog(false)}
-                className="bg-primary text-[#fff] rounded-md p-2 pl-6 pr-6"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleSignOut}
-                className="border text-[#fff] rounded-md p-2 pl-6 pr-6"
-              >
-                Sign Out
-              </button>
-            </div>
-          </div>
-        </Dialog>
       </div>
+      <Dialog open={logoutDialog} width={400} onClose={() => null}>
+        <div className="w-full relative z-50 h-full flex flex-col gap-4">
+          <p className="text-xl font-medium text-[#fff]">
+            Are you sure you want to{" "}
+            <span className="text-primary font-semibold">Signout?</span>
+          </p>
+          <div className="flex items-center justify-center gap-6">
+            <button
+              onClick={() => setLogoutDialog(false)}
+              className="bg-primary text-[#fff] rounded-md p-2 pl-6 pr-6"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSignOut}
+              className="border text-[#fff] rounded-md p-2 pl-6 pr-6"
+            >
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 };

@@ -32,6 +32,8 @@ const HeroSection = () => {
   const [id, setId] = useState("");
   const [courseTitle, setCourseTitle] = useState("");
 
+  const [search, setSearch] = useState("");
+
   const token = Cookies.get("token");
 
   const navigate = useNavigate();
@@ -45,7 +47,7 @@ const HeroSection = () => {
   const getCourses = async () => {
     try {
       const response = await axios.get(`${baseURL}/user/courses/all`);
-      setCourses(response.data.courses);
+      setCourses(response.data.courses.reverse());
     } catch (error) {
       console.log(error);
       let errorMessage = "An unexpected error occurred.";
@@ -105,10 +107,21 @@ const HeroSection = () => {
         height: "calc(100vh - 80px)",
       }}
     >
-      <h2 className="text-primary text-center text-4xl font-semibold">
-        Courses
-      </h2>
-      <div className="w-full h-full overflow-scroll p-4 border-2 rounded-md">
+      <div className="flex justify-between w-full">
+        <h2 className="text-primary text-center text-4xl font-semibold">
+          Courses
+        </h2>
+        <div className="border flex items-center border-[#e70612] text-primary rounded-full ">
+          <input
+            type="text"
+            placeholder="Search course by title or category"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-96 rounded-full p-2 pl-4 pr-4 text-base bg-[#111111] h-full"
+          />
+        </div>
+      </div>
+      <div className="w-full h-full overflow-scroll p-4  rounded-md">
         <table className="w-full  text-center">
           <tr className=" text-secondary h-16 text-xl font-medium">
             <td>#</td>
@@ -117,35 +130,44 @@ const HeroSection = () => {
             <td>Action</td>
           </tr>
 
-          {courses.map((data, i: number) => (
-            <tr key={i} className="font-medium text-xl bg-[#000] ">
-              <td>
-                <img src={data.imgUrl} className="w-32 h-20" alt="" />
-              </td>
-              <td>
-                <h2 className="text-base">
-                  {data.title.length > 25
-                    ? data.title.slice(0, 25) + "..."
-                    : data.title}
-                </h2>
-              </td>
-              <td>
-                <h2 className="text-base">{data.category}</h2>
-              </td>
-              <td>
-                <div className="flex bg-[#fff]  mr-2 rounded-full">
-                  <FiEdit
-                    onClick={() => handleNavigation(data)}
-                    className="border-r cursor-pointer hover:bg-[#f0f0f0] rounded-l-full w-1/2 p-2 text-[#000] text-4xl"
-                  />
-                  <FaTrash
-                    onClick={() => handleDeleteClick(data)}
-                    className="border-r cursor-pointer hover:bg-[#f0f0f0] rounded-r-full w-1/2 p-2 text-primary text-4xl"
-                  />
-                </div>
-              </td>
-            </tr>
-          ))}
+          {courses
+            .filter(
+              (course) =>
+                course.title.toLowerCase().includes(search.toLowerCase()) ||
+                course.category.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((data, i: number) => (
+              <tr
+                key={i}
+                className="font-medium border-b text-xl duration-300 transition-all hover:bg-[#1d1d1d] cursor-pointer bg-[#181818] "
+              >
+                <td>
+                  <img src={data.imgUrl} className="w-32 h-20" alt="" />
+                </td>
+                <td>
+                  <h2 className="text-base">
+                    {data.title.length > 25
+                      ? data.title.slice(0, 25) + "..."
+                      : data.title}
+                  </h2>
+                </td>
+                <td>
+                  <h2 className="text-base">{data.category}</h2>
+                </td>
+                <td>
+                  <div className="flex bg-[#fff]  mr-2 rounded-full">
+                    <FiEdit
+                      onClick={() => handleNavigation(data)}
+                      className="border-r cursor-pointer hover:bg-[#f0f0f0] rounded-l-full w-1/2 p-2 text-[#000] text-4xl"
+                    />
+                    <FaTrash
+                      onClick={() => handleDeleteClick(data)}
+                      className="border-r cursor-pointer hover:bg-[#f0f0f0] rounded-r-full w-1/2 p-2 text-primary text-4xl"
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
         </table>
       </div>
       <Dialog open={openDeleteDialog} width={450} onClose={handleClose}>

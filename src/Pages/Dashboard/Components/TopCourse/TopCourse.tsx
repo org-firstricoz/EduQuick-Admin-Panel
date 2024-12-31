@@ -68,12 +68,14 @@ const TopCourse = () => {
         className="  w-full bottom-4  flex items-center justify-center"
         // style={{ width: "72%" }}
       >
-        <button
-          onClick={() => handleNavigation("/top-courses")}
-          className="p-2 pl-7 pr-7 hover:bg-[#252525] rounded-lg active:bg-[#303030] transition-all duration-300"
-        >
-          View all
-        </button>
+        {courses.length > 10 && (
+          <button
+            onClick={() => handleNavigation("/top-courses")}
+            className="p-2 pl-7 pr-7 hover:bg-[#252525] rounded-lg active:bg-[#303030] transition-all duration-300"
+          >
+            View all
+          </button>
+        )}
       </div>
     </div>
   );

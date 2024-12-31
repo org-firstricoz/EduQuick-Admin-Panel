@@ -7,6 +7,8 @@ import Dialog from "../../../../Components/Dialog/Dialog";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import FeedbackDialog from "../FeedbackDialog/FeedbackDialog";
+import { ImFilter } from "react-icons/im";
+import FilterDialog from "../FilterDialog/FilterDialog";
 
 interface Course {
   adminFeedback: string;
@@ -36,20 +38,23 @@ const HeroSection = () => {
 
   const [courses, setCourses] = useState<Course[]>([]);
 
+  const [filter, setFilter] = useState("Pending");
+
   const [open, setOpen] = useState(false);
   const [openFeedback, setOpenFeedback] = useState<boolean>(false);
+  const [openFilter, setOpenFilter] = useState<boolean>(false);
 
-  const getPendingCourses = async () => {
+  const getCourses = async () => {
     try {
       const response = await axios.get(
-        `${baseURL}/user/courses/get-courses-by-verification-status?status=Pending`,
+        `${baseURL}/user/courses/get-courses-by-verification-status?status=${filter}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      setCourses(response.data.courses);
+      setCourses(response.data.courses.reverse());
     } catch (error) {
       console.log(error);
     }
@@ -87,7 +92,7 @@ const HeroSection = () => {
   };
 
   useEffect(() => {
-    getPendingCourses();
+    getCourses();
   }, [courses, id]);
 
   return (
@@ -103,6 +108,21 @@ const HeroSection = () => {
           ?
         </span>
       </h2>
+      <div className="flex justify-end">
+        <FilterDialog
+          filter={filter}
+          setFilter={setFilter}
+          openFilter={openFilter}
+          setOpenFilter={setOpenFilter}
+        />
+        <button
+          onClick={() => setOpenFilter(true)}
+          className="border flex items-center justify-center gap-4 w-fit p-3 pl-6 pr-6 rounded-md"
+        >
+          <ImFilter className="text-2xl" />
+          <p>{filter}</p>
+        </button>
+      </div>
       <div className="w-full h-full overflow-scroll p-4 border-2 rounded-md">
         <table className="w-full  text-center">
           <tr className=" text-secondary h-16 text-xl font-medium">
@@ -114,9 +134,16 @@ const HeroSection = () => {
           </tr>
 
           {courses.map((course, i: number) => (
-            <tr key={i} className="font-medium text-xl bg-[#000] ">
+            <tr
+              key={i}
+              className="font-medium text-xl bg-[#1d1d1d] rounded-md hover:bg-[#2d2d2d] cursor-pointer duration-300 "
+            >
               <td className="p-4">{i < 9 ? `0${i + 1}` : i + 1}</td>
-              <td>{course.title}</td>
+              <td>
+                {course.title.length > 20
+                  ? `${course.title.slice(0, 20)}...`
+                  : course.title}
+              </td>
               <td>{new Date(course.createdAt).toLocaleDateString()}</td>
               <td>{course.verificationStatus}</td>
               <td>
@@ -144,18 +171,26 @@ const HeroSection = () => {
             <div className="flex justify-center gap-2">
               <button
                 onClick={handleCourseVerify}
-                className="p-2 pl-4 pr-4 border rounded-full"
+                className={`p-2 pl-4 pr-4 border rounded-full ${
+                  filter === "Verified" && "bg-primary border-none"
+                }`}
               >
                 Verified
               </button>
 
               <button
                 onClick={() => setOpenFeedback(true)}
-                className="p-2 pl-4 pr-4 border rounded-full"
+                className={`p-2 pl-4 pr-4 border rounded-full ${
+                  filter === "Rejected" && "bg-primary border-none"
+                }`}
               >
                 Rejected
               </button>
-              <button className="p-2 bg-primary pl-4 pr-4  rounded-full">
+              <button
+                className={`p-2 pl-4 pr-4 border rounded-full ${
+                  filter === "Pending" && "bg-primary border-none"
+                }`}
+              >
                 Pending
               </button>
             </div>

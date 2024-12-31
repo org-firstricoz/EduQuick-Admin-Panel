@@ -1,7 +1,7 @@
 import { baseURL } from "@baseURL";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaUser } from "react-icons/fa6";
 import ContentCreators from "../ContentCreators/ContentCreators";
@@ -39,9 +39,14 @@ const HeroSection = () => {
   const [free, setFree] = useState<boolean>(false);
   const [trending, setTrending] = useState<boolean>(false);
 
+  // Video URL
+  const [videoURls, setVideoURLs] = useState<string[]>([]);
+
   const [tag, setTag] = useState("");
 
-  console.log({ tags: tags });
+  useEffect(() => {
+    setVideoURLs(videoURls);
+  }, [videoURls]);
 
   //   Dialog States
   const [openThumbnailDialog, setOpenThumbnailDialog] =
@@ -195,6 +200,7 @@ const HeroSection = () => {
           setOpenVideoDialog={setOpenVideoDialog}
           videoIds={videoIds}
           uploadedBy={creator?.id ? creator.id : ""}
+          videoURLs={videoURls}
         />
         <label>Select Video</label>
         <div
@@ -203,6 +209,13 @@ const HeroSection = () => {
         >
           upload file
         </div>
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        {videoURls.map((videoURL, i) => (
+          <div key={i} className="w-fit p-2 ">
+            <video src={videoURL} controls />
+          </div>
+        ))}
       </div>
       <div className="flex flex-col gap-2">
         <label>Category</label>
@@ -246,7 +259,10 @@ const HeroSection = () => {
       <div className="w-1/2 border p-2 rounded-md">
         <div className="grid grid-cols-4 gap-4">
           {tags.map((tag, i) => (
-            <p className="text-base font-medium" key={i}>
+            <p
+              className="text-base p-2 text-center rounded-full font-medium border"
+              key={i}
+            >
               {tag}
             </p>
           ))}

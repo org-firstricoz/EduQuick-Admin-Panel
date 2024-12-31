@@ -29,7 +29,7 @@ const SubscriptionHolders = () => {
   const getSubscriptionHolders = async () => {
     try {
       const response = await axios.get(
-        `${baseURL}/subscriptions/subscription-holders?start=1&limit=2`,
+        `${baseURL}/subscriptions/subscription-holders`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -87,7 +87,7 @@ const SubscriptionHolders = () => {
           </tr>
           {subscriptionHolders.map((subscriptionholder, i) => (
             <tr key={i} className="border-t">
-              <td className="p-4">index</td>
+              <td className="p-4">{i < 9 ? `0${i + 1}` : i + 1}</td>
               <td>{subscriptionholder.Name}</td>
               <td>{subscriptionholder.Email}</td>
               <td>{subscriptionholder.Subscription}</td>
