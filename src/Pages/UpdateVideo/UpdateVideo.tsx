@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import { startTransition, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 interface Video {
   description: string;
@@ -25,6 +25,7 @@ interface Video {
 
 const UpdateVideo = () => {
   const { id } = useParams();
+  const [videoId] = useSearchParams();
   const navigate = useNavigate();
 
   const token = Cookies.get("token");
@@ -42,7 +43,7 @@ const UpdateVideo = () => {
   const getVideo = async () => {
     try {
       const response = await axios.get(
-        `${baseURL}/user/video-by-videoId?id=${id}`
+        `${baseURL}/user/${id}/video-by-videoId?id=${videoId.get("video")}`
       );
       setVideo(response.data.videos[0]);
       setTitle(response.data.videos[0].title);
@@ -185,88 +186,7 @@ const UpdateVideo = () => {
           </button>
         )}
       </div>
-      {/* <div className="flex flex-col gap-2 w-1/2 p-3 rounded-md">
-        <p>Thumbnail</p>
-        <div className="flex gap-6">
-          {thumbnailUrl ? (
-            <div>
-              <div
-                className="w-48 h-28 bg-primary bg-cover bg-no-repeat rounded-md"
-                style={{ backgroundImage: `url(${thumbnailUrl})` }}
-              />
-              <button
-                onClick={() => setOpen(true)}
-                className="p-2 pl-5 pr-5 transition-all duration-300 rounded-full mt-2 hover:bg-[#1b1b1b]"
-              >
-                Choose again
-              </button>
-            </div>
-          ) : (
-            <div
-              onClick={() => setOpen(true)}
-              className="w-48 h-28 rounded-md border flex flex-col justify-center items-center"
-            >
-              <MdOutlineFileUpload className="text-4xl cursor-pointer transition-all duration-150 p-1 hover:bg-[#1a1a1a] rounded-full" />
 
-              <label className="cursor-pointer"> Upload File</label>
-            </div>
-          )}
-
-          <div
-            className="w-48 h-28 rounded-md border"
-            style={{
-              backgroundImage: `url(${BG})`,
-              backgroundSize: "cover",
-            }}
-          >
-            <div className="w-full h-full bg-[#1a1a1a83] rounded-md flex flex-col justify-center items-center">
-              <RiAiGenerate className="text-4xl cursor-pointer transition-all duration-150 p-1 hover:bg-[#1a1a1a] rounded-full" />
-              <p className="cursor-pointer">Auto-Generated</p>
-            </div>
-          </div>
-        </div>
-        <input
-          type="file"
-          onChange={(e) => handleFileChange(e)}
-          className="hidden"
-          ref={hiddenInput}
-          accept={`image/${imgType || "png,jpeg,jpg"}`}
-        />
-        <Dialog width={400} open={open} onClose={() => null}>
-          <button
-            onClick={() => setOpen(false)}
-            className="absolute top-2 right-2 text-2xl"
-          >
-            <IoMdClose />
-          </button>
-          <div className="w-full h-full flex flex-col gap-2 justify-center items-center">
-            <p>Image Type</p>
-            <select
-              className="bg-[#000] text-center p-2 border outline-none rounded-md"
-              onChange={(e) => setImgType(e.target.value)}
-            >
-              <option value="">Select Image Type</option>
-              <option value="png">PNG</option>
-              <option value="jpeg">JPEG</option>
-              <option value="jpg">JPG</option>
-            </select>
-          </div>
-          <div className="w-full mt-4 h-full flex flex-col gap-2 justify-center items-center">
-            <p>Image Content</p>
-            <input
-              type="text"
-              className="p-2 w-2/3 border rounded-md bg-[#000] text-[#fff]"
-              placeholder="Bussiness"
-            />
-            <button
-              onClick={handleChooseFile}
-              className="mt-4 p-2 pl-5 pr-5 bg-primary rounded-md"
-            >
-              Done
-            </button>
-          </div>
-        </Dialog>
-      </div> */}
       <div className="flex gap-4">
         <Dialog open={deleteVideoDialog} width={600} onClose={() => null}>
           <div className="w-full h-full flex flex-col items-center justify-center gap-4">

@@ -54,9 +54,9 @@ const Sidebar = () => {
 
   return (
     <div
-      className="font-poppins  w-60 text-lg flex flex-col justify-center items-center gap-1"
+      className="font-poppins  overflow-scroll bg-secondary rounded-r-xl w-80 text-lg flex flex-col justify-start items-center gap-1"
       style={{
-        height: "calc(100vh - 100px)",
+        height: "calc(100vh - 83px)",
       }}
     >
       <div
@@ -64,10 +64,10 @@ const Sidebar = () => {
         className={`
         ${
           location.pathname === "/"
-            ? "bg-primary text-[#fff] "
-            : "bg-[#111111] text-secondary"
+            ? "bg-primary shadow-[#111] shadow-md text-[#fff] "
+            : " text-secondary"
         }
-        p-3 w-60 rounded-xl flex items-center justify-center gap-1 active:bg-[#dd353d] cursor-pointer
+        p-3 rounded-xl flex items-center w-full transition-all duration-150 active:bg-[#464646]  justify-center gap-1  cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4  ">
@@ -82,10 +82,10 @@ const Sidebar = () => {
         className={`
         ${
           location.pathname === "/users"
-            ? "bg-primary text-[#fff] "
-            : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
+            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4  ">
@@ -100,10 +100,10 @@ const Sidebar = () => {
         className={`
         ${
           location.pathname === "/subscription"
-            ? "bg-primary text-[#fff] "
-            : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
+            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4  ">
@@ -118,10 +118,10 @@ const Sidebar = () => {
         className={`
         ${
           location.pathname === "/leaderboard"
-            ? "bg-primary text-[#fff] "
-            : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
+            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4  ">
@@ -136,10 +136,10 @@ const Sidebar = () => {
         className={`
         ${
           location.pathname === "/create"
-            ? "bg-primary text-[#fff] "
-            : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
+            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4 ">
@@ -154,10 +154,10 @@ const Sidebar = () => {
         className={`
         ${
           location.pathname === "/courses"
-            ? "bg-primary text-[#fff] "
-            : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
+            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4 ">
@@ -172,10 +172,10 @@ const Sidebar = () => {
         className={`
         ${
           location.pathname === "/verify-course"
-            ? "bg-primary text-[#fff] "
-            : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
+            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4 ">
@@ -186,45 +186,45 @@ const Sidebar = () => {
         </div>
       </div>
       <div
-        onClick={() => handleNavigation("/mails/Inbox")}
+        onClick={() => handleNavigation("/support")}
         className={`
         ${
-          location.pathname === "/mails/Inbox"
-            ? "bg-primary text-[#fff]"
-            : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+          location.pathname === "/support"
+            ? "bg-primary shadow-[#000] shadow-md text-[#fff]"
+            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4 ">
           <IoChatboxEllipsesOutline className="text-3xl" />
         </div>
         <div className="flex justify-start items-center w-3/4 ">
-          <p>Messages</p>
+          <p>Support</p>
         </div>
       </div>
-      {/* <div
-        onClick={() => handleNavigation("/settings")}
+      <div
+        onClick={() => handleNavigation("/admin")}
         className={`
         ${
-          location.pathname === "/settings"
-            ? "bg-primary text-[#fff] "
-            : "bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+          location.pathname === "/admin"
+            ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
+            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
-        p-3 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer
+        p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4 ">
-          <IoSettingsOutline className="text-3xl" />
+          <CiUser className="text-3xl" />
         </div>
         <div className="flex justify-start items-center w-3/4 ">
-          <p>Settings</p>
+          <p>Admin</p>
         </div>
-      </div> */}
+      </div>
 
       <div
         onClick={() => setLogoutDialog(true)}
-        className="bg-[#111111] text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646] p-4 w-60 rounded-xl flex items-center gap-1 justify-center cursor-pointer"
+        className=" text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646] p-4 w-full rounded-xl flex items-center gap-1 justify-center cursor-pointer"
       >
         <div className="flex justify-start items-center w-1/4 ">
           <PiSignOutBold className="text-3xl" />

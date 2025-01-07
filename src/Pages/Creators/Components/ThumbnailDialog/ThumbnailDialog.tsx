@@ -4,6 +4,7 @@ import axios from "axios";
 import { baseURL } from "@baseURL";
 import toast from "react-hot-toast";
 import { IoClose } from "react-icons/io5";
+import Cookies from "js-cookie";
 
 interface props {
   setThumbnail: (value: string) => void;
@@ -18,6 +19,7 @@ const ThumbnailDialog = ({
 }: props) => {
   const [imgType, setImgType] = useState("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const token = Cookies.get("token");
 
   const handleChooseFile = () => {
     if (fileInputRef.current) {
@@ -41,6 +43,11 @@ const ThumbnailDialog = ({
           {
             extension,
             type,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
 

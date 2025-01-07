@@ -6,7 +6,7 @@ const Leaderboard = () => {
   return (
     <div>
       <Nav />
-      <div className="flex pl-7 pr-7">
+      <div className="flex ">
         <Sidebar />
         <HeroSection />
       </div>

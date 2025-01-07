@@ -83,6 +83,11 @@ const Login = () => {
             type={showPassword ? "text" : "password"}
             className="outline-none  w-full bg-[#111111] h-full text-xl text-[#fff] placeholder:text-[#fff] "
             placeholder="Password"
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleLogin();
+              }
+            }}
           />
           <div
             className="text-3xl transition-all duration-150 cursor-pointer hover:bg-[#1b1b1b] active:bg-[#272727] p-4 rounded-full"

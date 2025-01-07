@@ -115,7 +115,7 @@ const HeroSection = () => {
 
   return (
     <div
-      className="w-full p-6 rounded-md overflow-scroll flex flex-col gap-4 border m-4"
+      className="w-full bg-secondary p-6 rounded-md overflow-scroll flex flex-col gap-4 border m-4"
       style={{
         maxHeight: 520,
       }}
@@ -151,14 +151,14 @@ const HeroSection = () => {
         onChange={(e) => setTitle(e.target.value)}
         type="text"
         placeholder="Title"
-        className="w-1/2 bg-[#111111] placeholder:text-[#fff] outline-none border p-3 text-lg rounded-md"
+        className="w-1/2 bg-secondary placeholder:text-[#fff] outline-none border p-3 text-lg rounded-md"
       />
       <div className="w-1/2 border rounded-md ">
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
-          className="w-full rounded-md p-2 placeholder:text-[#fff] text-lg outline-none h-16 bg-[#111111]"
+          className="w-full rounded-md p-2 placeholder:text-[#fff] text-lg outline-none h-16 bg-secondary"
         />
       </div>
       <div>
@@ -217,45 +217,50 @@ const HeroSection = () => {
           </div>
         ))}
       </div>
-      <div className="flex flex-col gap-2">
-        <label>Category</label>
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
-        >
-          <option value="">Select</option>
-          <option value="Mobile Tricks">Mobile Tricks</option>
-          <option value="Share Market">Share Market</option>
-          <option value="YouTube">YouTube</option>
-          <option value="Part Time">Part Time</option>
-          <option value="Sarkari Kaam">Sarkari Kaam</option>
-          <option value="Business">Business</option>
-          <option value="Astrology">Astrology</option>
-        </select>
+      <div className="flex w-1/2 gap-6">
+        <div className="flex flex-col gap-2">
+          <label>Category</label>
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
+          >
+            <option value="">Select</option>
+            <option value="Mobile Tricks">Mobile Tricks</option>
+            <option value="Share Market">Share Market</option>
+            <option value="YouTube">YouTube</option>
+            <option value="Part Time">Part Time</option>
+            <option value="Sarkari Kaam">Sarkari Kaam</option>
+            <option value="Business">Business</option>
+            <option value="Astrology">Astrology</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label>Trending</label>
+          <select
+            value={trending.toString()} // Convert boolean to string for the select value
+            onChange={(e) => setTrending(e.target.value === "true")} // Convert string back to boolean
+            className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
+          >
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label> Free Course</label>
+          <select
+            value={free.toString()} // Convert boolean to string for the select value
+            onChange={(e) => setFree(e.target.value === "true")} // Convert string back to boolean
+            className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
+          >
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
       </div>
-      <div className="flex flex-col gap-2">
-        <label> Free Course</label>
-        <select
-          value={free.toString()} // Convert boolean to string for the select value
-          onChange={(e) => setFree(e.target.value === "true")} // Convert string back to boolean
-          className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
-        >
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-      </div>
-      <div className="flex flex-col gap-2">
-        <label>Trending</label>
-        <select
-          value={trending.toString()} // Convert boolean to string for the select value
-          onChange={(e) => setTrending(e.target.value === "true")} // Convert string back to boolean
-          className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
-        >
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-      </div>
+
       <div className="w-1/2 border p-2 rounded-md">
         <div className="grid grid-cols-4 gap-4">
           {tags.map((tag, i) => (

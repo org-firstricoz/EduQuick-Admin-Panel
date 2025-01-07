@@ -237,7 +237,7 @@ const UpdateAdmin = () => {
         </Dialog>
       </div>
 
-      <div className="flex items-center gap-10 pl-10 pr-10  justify-center">
+      <div className="flex flex-col items-center gap-4 pl-10 pr-10  justify-center">
         <input
           type="text"
           onChange={(e) => setFullName(e.target.value)}

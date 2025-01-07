@@ -78,7 +78,7 @@ const Nav = () => {
   };
 
   return (
-    <div className="flex justify-between pl-7 p-4  pr-7 items-center">
+    <div className="flex justify-between pl-7 p-2  pr-7 items-center">
       <h1 className="text-primary font-jockey font-normal text-4xl">
         EDUQUICK
       </h1>

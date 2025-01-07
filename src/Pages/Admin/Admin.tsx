@@ -1,12 +1,12 @@
 import Nav from "@dashboard/Components/Nav/Nav";
 import Sidebar from "@dashboard/Components/Sidebar/Sidebar";
-import HeroSection from "./HeroSection";
+import HeroSection from "./Components/HeroSection";
 
-const SubscriptionHolders = () => {
+const Admin = () => {
   return (
     <div>
       <Nav />
-      <div className="flex">
+      <div className="flex pr-7">
         <Sidebar />
         <HeroSection />
       </div>
@@ -14,4 +14,4 @@ const SubscriptionHolders = () => {
   );
 };
 
-export default SubscriptionHolders;
+export default Admin;

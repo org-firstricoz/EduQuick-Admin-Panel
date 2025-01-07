@@ -23,6 +23,7 @@ const SubscriptionHolders = lazy(
   () => import("../Pages/SubscriptionHolders/SubscriptionHolders")
 );
 const UsersPage = lazy(() => import("../Pages/UsersPage/UsersPage"));
+const AdminPage = lazy(() => import("../Pages/Admin/Admin"));
 
 const Router = () => {
   return (
@@ -33,6 +34,7 @@ const Router = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/subscription" element={<SubscriptionHolders />} />
           <Route path="/users" element={<UsersPage />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/courses" element={<Products />} />
@@ -44,9 +46,9 @@ const Router = () => {
           <Route path="/create" element={<Creators />} />
           <Route path="/verify-course" element={<Verify />} />
           <Route path="/top-courses" element={<TopCoursePage />} />
-          <Route path="/mails/Inbox" element={<Inbox />} />
+          <Route path="/support" element={<Inbox />} />
           <Route path="/update-course/:id" element={<UpdateCourse />} />
-          <Route path="/update-video/:id" element={<UpdateVideo />} />
+          <Route path="/update-video/:id/videos" element={<UpdateVideo />} />
           <Route path="/admin/profile/:id" element={<UpdateAdmin />} />
         </Routes>
       </BrowserRouter>

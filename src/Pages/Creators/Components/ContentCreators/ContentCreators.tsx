@@ -70,7 +70,7 @@ const ContentCreators = ({
           {creators.map((creator, i) => (
             <div
               key={i}
-              className="w-56 hover:scale-105 duration-300 transition-all cursor-pointer border rounded-md p-4 flex flex-col gap-1 items-center justify-center"
+              className="w-56 hover:scale-105 duration-300 bg-[#202224] transition-all cursor-pointer border rounded-md p-4 flex flex-col gap-1 items-center justify-center"
               onClick={() => {
                 setCreator(creator);
                 setOpenCreatorsDialog(false);
@@ -80,7 +80,7 @@ const ContentCreators = ({
                 <img
                   src={creator.profileImageUrl}
                   alt={creator.Name}
-                  className=" rounded-full w-16"
+                  className=" rounded-full w-20 h-20"
                 />
               ) : (
                 <FaUser className="border p-2 rounded-full text-6xl" />

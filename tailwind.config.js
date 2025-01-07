@@ -15,6 +15,7 @@ export default {
     },
     backgroundColor: {
       primary: "#E70612",
+      secondary: "#202224",
     },
   },
   plugins: [],

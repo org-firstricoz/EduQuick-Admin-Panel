@@ -59,7 +59,13 @@ const HeroSection = () => {
       const response = await axios.get(
         `${baseURL}/user/course-by-courseId?id=${id}`
       );
+      const data = response.data.course;
       setCourse(response.data.course);
+      setTitle(data.title);
+      setDescription(data.description);
+      setCategory(data.category);
+      setTrending(data.trending);
+      setVideoIds(data.videoIds);
     } catch (error) {
       console.log(error);
     }
@@ -70,12 +76,12 @@ const HeroSection = () => {
       navigate(path);
     }),
   ];
-
   const getCurrentCourseVideos = async () => {
     try {
       const response = await axios.get(
-        `${baseURL}/user/video-by-videoId?id=${course?.videoIds}`
+        `${baseURL}/user/${id}/video-by-videoId?id=${videoIds}`
       );
+      console.log(response.data);
       setVideos(response.data.videos);
     } catch (error) {
       console.log(error);
@@ -84,8 +90,13 @@ const HeroSection = () => {
 
   useEffect(() => {
     getCurrentCourse();
-    getCurrentCourseVideos();
-  }, [id, course?.videoIds]);
+  }, [id]);
+
+  useEffect(() => {
+    if (videoIds.length > 0) {
+      getCurrentCourseVideos();
+    }
+  }, [videoIds]);
 
   const handleUpdateCourse = async () => {
     const pendingToast = toast.loading("Updating course...");
@@ -112,7 +123,7 @@ const HeroSection = () => {
       if (response.data.status) {
         toast.dismiss(pendingToast);
         toast.success("Course updated successfully!");
-        handleNavigation("/course");
+        handleNavigation("/courses");
       }
     } catch (error) {
       console.log(error);
@@ -137,14 +148,16 @@ const HeroSection = () => {
       </h2>
       <input
         type="text"
-        placeholder={course?.title}
+        placeholder="Title"
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
         className="w-1/2 border placeholder:text-[#fff] rounded-md outline-none p-2 text-xl bg-[#111111]"
       />
       <div className="w-1/2 border rounded-md ">
         <textarea
+          value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder={course?.description}
+          placeholder="Description"
           className="w-full rounded-md placeholder:text-[#fff] p-2 text-lg outline-none h-16 bg-[#111111]"
         />
       </div>
@@ -156,7 +169,7 @@ const HeroSection = () => {
               key={i}
               onClick={() => {
                 startTransition(() => {
-                  navigate(`/update-video/${video.id}`);
+                  navigate(`/update-video/${id}/videos?video=${video.id}`);
                 });
               }}
               className="bg-[#000] cursor-pointer flex flex-col gap-2 w-72 p-2 rounded-t-md"
@@ -171,39 +184,6 @@ const HeroSection = () => {
           ))}
         </div>
       </div>
-      {/* <div>
-        <ThumbnailDialog
-          openThumbnailDialog={openThumbnailDialog}
-          setOpenThumbnailDialog={setOpenThumbnailDialog}
-          setThumbnail={setThumbnail}
-        />
-        <label>Thumbnail</label>
-        <div
-          onClick={() => setOpenThumbnailDialog(true)}
-          className="border cursor-pointer rounded-md w-48 flex items-center justify-center text-lg h-28"
-        >
-          {thumbnail ? (
-            <>
-              <div
-                className="w-full h-full bg-no-repeat bg-cover"
-                style={{
-                  backgroundImage: `url(${thumbnail})`,
-                }}
-              />
-            </>
-          ) : (
-            " upload file"
-          )}
-        </div>
-        {thumbnail && (
-          <button
-            onClick={() => setOpenThumbnailDialog(true)}
-            className="mt-4 p-2 pl-6 pr-6 border rounded-md"
-          >
-            Choose again
-          </button>
-        )}
-      </div> */}
       <div className="flex flex-col gap-2">
         <label>Category</label>
         <select
@@ -220,17 +200,6 @@ const HeroSection = () => {
           <option value="Astrology">Astrology</option>
         </select>
       </div>
-      {/* <div className="flex flex-col gap-2">
-        <label> Free Course</label>
-        <select
-          value={free.toString()}
-          onChange={(e) => setFree(e.target.value === "true")}
-          className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
-        >
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-      </div> */}
       <div className="flex flex-col gap-2">
         <label>Trending</label>
         <select

@@ -54,7 +54,7 @@ const HeroSection = () => {
           },
         }
       );
-      setCourses(response.data.courses.reverse());
+      setCourses(response.data.data.reverse());
     } catch (error) {
       console.log(error);
     }
@@ -123,7 +123,7 @@ const HeroSection = () => {
           <p>{filter}</p>
         </button>
       </div>
-      <div className="w-full h-full overflow-scroll p-4 border-2 rounded-md">
+      <div className="w-full h-full overflow-scroll p-4  rounded-md">
         <table className="w-full  text-center">
           <tr className=" text-secondary h-16 text-xl font-medium">
             <td>#</td>
@@ -136,7 +136,7 @@ const HeroSection = () => {
           {courses.map((course, i: number) => (
             <tr
               key={i}
-              className="font-medium text-xl bg-[#1d1d1d] rounded-md hover:bg-[#2d2d2d] cursor-pointer duration-300 "
+              className="font-medium border-b text-xl bg-[#1d1d1d] rounded-md hover:bg-[#2d2d2d] cursor-pointer duration-300 "
             >
               <td className="p-4">{i < 9 ? `0${i + 1}` : i + 1}</td>
               <td>

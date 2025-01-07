@@ -1,6 +1,7 @@
 import { baseURL } from "@baseURL";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 interface Message {
   date: string;
@@ -10,10 +11,15 @@ interface Message {
 
 const Email = () => {
   const [messages, setMessages] = useState<Message[]>([]);
+  const token = Cookies.get("token");
 
   const getContactUsMessages = async () => {
     try {
-      const response = await axios.get(`${baseURL}/user/contact-us-messages`);
+      const response = await axios.get(`${baseURL}/user/contact-us-messages`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log(response.data);
       setMessages(response.data);
     } catch (error) {
@@ -26,19 +32,32 @@ const Email = () => {
   }, []);
 
   return (
-    <div className="w-full flex text-center text-secondary flex-col">
-      <table className="w-full">
+    <div className="w-full flex text-left text-[#fff] flex-col">
+      <table className="w-full pl-2">
+        <tr className="bg-[#fff] text-secondary h-12 text-lg">
+          <td>Name</td>
+          <td>Contact</td>
+          <td>Subject</td>
+          <td>Status</td>
+          <td>Action</td>
+        </tr>
         {messages.map((message, i) => (
           <tr
             key={i}
-            className=" hover:bg-[#242424] transition-all duration-300 cursor-pointer rounded-md "
+            className=" hover:bg-[#242424] border-b border transition-all duration-300 cursor-pointer rounded-md "
           >
             <td>
-              <h2 className="p-2 bg-[#00b69b31] rounded-sm font-medium text-xl w-fit text-[#00B69B]">
-                {message.userName}
+              <h2 className="p-2  rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
+                {message.userName.length > 10
+                  ? `${message.userName.slice(0, 10)}...`
+                  : message.userName}
               </h2>
             </td>
-            <td>{message.message}</td>
+            <td>
+              {message.message.length > 50
+                ? `${message.message.slice(0, 50)}...`
+                : message.message}
+            </td>
             <td className="text-left">{message.date}</td>
           </tr>
         ))}

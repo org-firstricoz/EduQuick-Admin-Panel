@@ -1,5 +1,4 @@
 import Emails from "@messages/Components/Emails/Emails";
-import Sidebar from "@messages/Components/Sidebar/Sidebar";
 
 const HeroSection = () => {
   return (
@@ -9,9 +8,8 @@ const HeroSection = () => {
         height: "calc(100vh - 100px)",
       }}
     >
-      <h2 className="text-primary  text-4xl font-semibold">Inbox</h2>
+      <h2 className="text-primary  text-4xl font-semibold">Complaints</h2>
       <div className="flex  h-full mt-1 gap-2">
-        <Sidebar />
         <Emails />
       </div>
     </div>

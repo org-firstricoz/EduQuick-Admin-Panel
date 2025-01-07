@@ -10,7 +10,7 @@ const Dashboard = () => {
   return (
     <div>
       <Nav />
-      <div className="flex pl-7 pr-7">
+      <div className="flex pr-7">
         <Sidebar />
         <HeroSection />
       </div>
