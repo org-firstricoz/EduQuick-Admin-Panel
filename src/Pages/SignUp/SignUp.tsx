@@ -17,18 +17,17 @@ const SignUp = () => {
   const handleCreateAccount = async () => {
     const pendingToast = toast.loading("Creating account ...");
     try {
-      const response = await axios.post(`${baseURL}/admin/register`, {
+      await axios.post(`${baseURL}/admin/register`, {
         fullName,
         email,
         password,
       });
-      if (response.data.status) {
-        toast.dismiss(pendingToast);
-        toast.success("Welcome to EduQuick");
-        startTransition(() => {
-          navigate("/login");
-        });
-      }
+
+      toast.dismiss(pendingToast);
+      toast.success("Welcome to EduQuick");
+      startTransition(() => {
+        navigate("/login");
+      });
     } catch (error) {
       console.log(error);
       toast.dismiss(pendingToast);

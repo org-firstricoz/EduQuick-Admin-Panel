@@ -145,9 +145,9 @@ const HeroSection = () => {
   const handleClose = () => {};
   return (
     <div
-      className=" w-full overflow-scroll pl-4 pr-4 p-2 flex flex-col gap-4 font-poppins"
+      className=" w-full overflow-scroll  pl-4 pr-4 p-2 flex flex-col gap-4 font-poppins"
       style={{
-        height: "calc(100vh - 100px)",
+        height: "calc(100vh - 80px)",
       }}
     >
       <div className=" flex justify-between w-full">
@@ -167,7 +167,7 @@ const HeroSection = () => {
           />
         </div>
       </div>
-      <div className="w-full h-full overflow-scroll p-4 rounded-md">
+      <div className="w-full h-full overflow-scroll p-2 rounded-md">
         <table className="w-full text-center">
           <thead>
             <tr className="text-secondary bg-secondary rounded-md h-16 text-xl font-medium">

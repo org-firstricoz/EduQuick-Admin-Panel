@@ -55,7 +55,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className="font-poppins  overflow-scroll bg-secondary rounded-r-xl w-80 text-lg flex flex-col justify-start items-center gap-1"
+      className="font-poppins shadow-[#000] shadow-xl overflow-scroll bg-secondary rounded-tr-xl w-80 text-lg flex flex-col justify-start items-center gap-1"
       style={{
         height: "calc(100vh - 83px)",
       }}
@@ -68,7 +68,7 @@ const Sidebar = () => {
             ? "bg-primary shadow-[#111] shadow-md text-[#fff] "
             : " text-secondary"
         }
-        p-3 rounded-xl flex items-center w-full transition-all duration-150 active:bg-[#464646]  justify-center gap-1  cursor-pointer
+        p-3 rounded-r-md  flex items-center w-full transition-all duration-150 active:bg-[#464646]  justify-center gap-1  cursor-pointer
         `}
       >
         <div className="flex justify-start items-center w-1/4  ">
