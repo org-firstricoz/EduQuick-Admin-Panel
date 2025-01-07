@@ -67,21 +67,22 @@ const Login = () => {
           EDUQUICK
         </h1>
       </div>
-      <div className="w-9/12 border flex flex-col gap-4 rounded-md p-24">
+      <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary gap-4 rounded-md p-24">
         <h2 className="font-semibold text-4xl">Account Login</h2>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="outline-none border-b-2 w-full bg-[#111111] h-16 text-xl text-[#fff] placeholder:text-[#fff] "
+          className="outline-none border-b-2 w-full bg-secondary h-16 text-xl text-[#fff] placeholder:text-[#fff] "
           placeholder="Email Adress"
+          autoFocus
         />
         <div className="w-full flex items-center pr-10 h-16 border-b-2">
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type={showPassword ? "text" : "password"}
-            className="outline-none  w-full bg-[#111111] h-full text-xl text-[#fff] placeholder:text-[#fff] "
+            className="outline-none  w-full bg-secondary h-full text-xl text-[#fff] placeholder:text-[#fff] "
             placeholder="Password"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -109,7 +110,7 @@ const Login = () => {
 
         <button
           onClick={handleLogin}
-          className="bg-[#fff] text-[#111111] p-3 rounded-md font-medium text-lg mt-8 active:bg-[#d4d4d4]"
+          className="bg-[#fff] text-[#111111] shadow-[#000] shadow-md p-3 rounded-md font-medium text-lg mt-8 active:bg-[#d4d4d4]"
         >
           Login{" "}
         </button>

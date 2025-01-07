@@ -5,6 +5,7 @@ const Dashboard = lazy(() => import("@dashboard/Dashboard"));
 const Leaderboard = lazy(() => import("@leaderboard/Leaderboard"));
 const NotFound = lazy(() => import("@notfound"));
 const Login = lazy(() => import("@login/Login"));
+const SignUp = lazy(() => import("../Pages/SignUp/SignUp"));
 const Settings = lazy(() => import("@settings/Settings"));
 const Creators = lazy(() => import("@creators/Creators"));
 const Products = lazy(() => import("@products/Products"));
@@ -32,6 +33,7 @@ const Router = () => {
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="/subscription" element={<SubscriptionHolders />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/admin" element={<AdminPage />} />

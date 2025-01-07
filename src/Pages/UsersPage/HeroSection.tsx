@@ -93,11 +93,11 @@ const HeroSection = () => {
 
       {/* Users table */}
       <div className="flex flex-col items-center justify-center mt-4">
-        <table className="w-full mb-6 text-center border">
+        <table className="w-full mb-6 text-left border">
           <tr>
             <td className="p-5">#</td>
             <td>Name</td>
-            <td>Email</td>
+            <td>Email & Phone No.</td>
             <td>Subscription</td>
             <td>Action</td>
           </tr>
@@ -123,7 +123,10 @@ const HeroSection = () => {
                 <tr key={i} className="border-t">
                   <td className="p-3">{i < 9 ? `0${i + 1}` : i + 1}</td>
                   <td>{user.Name}</td>
-                  <td>{user.Email}</td>
+                  <td className="flex flex-col font-extralight">
+                    <p>{user.Email}</p>
+                    <p>+91 {user.PhoneNumber}</p>
+                  </td>
                   <td>{user.Subscription}</td>
                   <td
                     onClick={() => {

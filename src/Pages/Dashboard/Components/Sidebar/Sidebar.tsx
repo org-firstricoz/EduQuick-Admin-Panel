@@ -12,6 +12,7 @@ import { RiDashboardFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { FaUsers } from "react-icons/fa";
 import { MdSubscriptions } from "react-icons/md";
+import { MdOutlineAddCircle } from "react-icons/md";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -143,7 +144,7 @@ const Sidebar = () => {
         `}
       >
         <div className="flex justify-start items-center w-1/4 ">
-          <CiUser className="text-3xl" />
+          <MdOutlineAddCircle className="text-3xl" />
         </div>
         <div className="flex justify-start items-center w-3/4 ">
           <p>Create</p>

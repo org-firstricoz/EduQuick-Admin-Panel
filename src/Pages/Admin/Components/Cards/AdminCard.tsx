@@ -17,7 +17,7 @@ interface props {
 
 const AdminCard = ({ admin }: props) => {
   return (
-    <div className="bg-[#111] hover:scale-95 cursor-pointer transition-all duration-300 flex flex-col gap-1 p-2 rounded-md w-full">
+    <div className="bg-[#111] shadow-[#000] shadow-md hover:scale-95 cursor-pointer transition-all duration-300 flex flex-col gap-1 p-2 rounded-md w-full">
       <p>Unknown</p>
       <p className="text-xs text-[#696969]">{admin?.role}</p>
       <hr className="w-[100px] border-[#696969]" />
