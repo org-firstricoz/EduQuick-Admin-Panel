@@ -77,27 +77,29 @@ const HeroSection = () => {
     <div
       className=" w-full overflow-scroll  pl-8 pr-8 p-2 ml-4 mr-4 rounded-xl flex flex-col gap-4 font-poppins"
       style={{
-        height: "calc(100vh - 100px)",
+        height: "calc(100vh - 80px)",
       }}
     >
       <div className="flex  justify-between">
         <h2 className="text-primary text-3xl font-semibold">Users</h2>
-        <div
-          onClick={() => setOpenFilter(true)}
-          className="border flex cursor-pointer items-center p-2 rounded-md"
-        >
-          <FaFilter className="w-12" />
-          {!filter ? "Filter" : filter}
+        <div className="flex items-center gap-2">
+          <div
+            onClick={() => setOpenFilter(true)}
+            className="border flex cursor-pointer items-center p-2 rounded-md"
+          >
+            <FaFilter className="w-12" />
+            {!filter ? "Filter" : filter}
+          </div>
         </div>
       </div>
 
       {/* Users table */}
-      <div className="flex flex-col items-center justify-center mt-4">
-        <table className="w-full mb-6 text-left border">
+      <div className="flex flex-col items-center  bg-secondary p-4 rounded-md shadow-[#000] shadow-md justify-center">
+        <table className="w-full mb-6 text-left">
           <tr>
             <td className="p-5">#</td>
             <td>Name</td>
-            <td>Email & Phone No.</td>
+            <td>Email</td>
             <td>Subscription</td>
             <td>Action</td>
           </tr>
@@ -123,10 +125,7 @@ const HeroSection = () => {
                 <tr key={i} className="border-t">
                   <td className="p-3">{i < 9 ? `0${i + 1}` : i + 1}</td>
                   <td>{user.Name}</td>
-                  <td className="flex flex-col font-extralight">
-                    <p>{user.Email}</p>
-                    <p>+91 {user.PhoneNumber}</p>
-                  </td>
+                  <td>{user.Email}</td>
                   <td>{user.Subscription}</td>
                   <td
                     onClick={() => {

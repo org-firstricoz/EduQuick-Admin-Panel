@@ -43,7 +43,7 @@ const TopCourse = () => {
   });
 
   return (
-    <div className="w-full overflow-scroll cursor-pointer bg-secondary border rounded-xl shadow-[#0a0a0a] shadow-xl">
+    <div className="w-full overflow-scroll cursor-pointer bg-secondary mb-2 rounded-xl shadow-[#0a0a0a] shadow-xl">
       <p className="text-primary text-xl font-semibold m-4">Top Courses</p>
 
       <table

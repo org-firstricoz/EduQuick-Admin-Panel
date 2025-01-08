@@ -32,7 +32,7 @@ const Email = () => {
   }, []);
 
   return (
-    <div className="w-full flex text-left text-[#fff] flex-col">
+    <div className="w-full flex text-left  text-[#fff] flex-col">
       <table className="w-full pl-2">
         <tr className="bg-[#fff] text-secondary h-12 text-lg">
           <td>Name</td>
@@ -44,7 +44,7 @@ const Email = () => {
         {messages.map((message, i) => (
           <tr
             key={i}
-            className=" hover:bg-[#242424] border-b border transition-all duration-300 cursor-pointer rounded-md "
+            className=" hover:bg-[#242424] border-b transition-all duration-300 cursor-pointer rounded-md "
           >
             <td>
               <h2 className="p-2  rounded-sm font-normal  w-56 text-nowrap overflow-hidden">

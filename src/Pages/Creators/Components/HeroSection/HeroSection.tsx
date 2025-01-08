@@ -115,7 +115,7 @@ const HeroSection = () => {
 
   return (
     <div
-      className="w-full bg-secondary p-6 rounded-md overflow-scroll flex flex-col gap-4 border m-4"
+      className="w-full bg-secondary p-6 shadow-[#000] shadow-md rounded-md overflow-scroll flex flex-col gap-4 m-4"
       style={{
         maxHeight: 520,
       }}
@@ -305,7 +305,7 @@ const HeroSection = () => {
       /> */}
       <button
         onClick={handleUploadCourse}
-        className="fixed bottom-8 rounded-md right-16 bg-primary p-2 pl-6 pr-6"
+        className="fixed bottom-16 rounded-md right-16 bg-primary p-2 pl-6 pr-6"
       >
         upload course
       </button>

@@ -167,10 +167,10 @@ const HeroSection = () => {
           />
         </div>
       </div>
-      <div className="w-full h-full overflow-scroll p-2 rounded-md">
+      <div className="w-full h-full overflow-scroll bg-secondary shadow-md shadow-[#000] p-4 rounded-md">
         <table className="w-full text-center">
           <thead>
-            <tr className="text-secondary bg-secondary rounded-md h-16 text-xl font-medium">
+            <tr className="text-secondary rounded-md h-16 text-xl font-medium">
               <td>#</td>
               <td>Course Name</td>
               <td>Category</td>

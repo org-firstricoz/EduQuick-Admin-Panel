@@ -6,9 +6,9 @@ import TopCourse from "@dashboard/Components/TopCourse/TopCourse";
 const HeroSection = () => {
   return (
     <div
-      className=" w-full  overflow-scroll pl-4 pr-4 p-2 flex flex-col gap-4 font-poppins"
+      className=" w-full overflow-scroll pl-4 pr-4 p-2 flex flex-col gap-4 font-poppins"
       style={{
-        height: "calc(100vh - 100px)",
+        height: "calc(100vh - 80px)",
       }}
     >
       <div className=" flex gap-4">

@@ -3,6 +3,7 @@ import Dialog from "@dialog";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaFilter } from "react-icons/fa6";
 import { useSearchParams } from "react-router-dom";
 
@@ -15,6 +16,7 @@ interface Subscription {
   Price: string;
   StartDate: string;
   Subscription: string;
+  SubscriptionId: string;
 }
 
 const HeroSection = () => {
@@ -46,6 +48,7 @@ const HeroSection = () => {
           },
         }
       );
+      console.log(response.data);
 
       setSubscriptionHolders(response.data.data);
       setTotalPages(response.data.totalPages);
@@ -60,6 +63,26 @@ const HeroSection = () => {
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
     setSearchParams({ page: pageNumber.toString(), limit: limit.toString() });
+  };
+
+  const handleNotify = async () => {
+    const pendingToast = toast.loading("Notifying...");
+    try {
+      const response = await axios.post(
+        `${baseURL}/subscriptions/${user?.SubscriptionId}/notify`,
+        // {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      toast.dismiss(pendingToast);
+      toast.error("Error notify");
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -97,8 +120,8 @@ const HeroSection = () => {
       </div>
 
       {/* Subscription Holders table */}
-      <div className="flex flex-col items-center justify-center  mt-4">
-        <table className="w-full text-center border">
+      <div className="flex flex-col items-center justify-center bg-secondary shadow-[#000] shadow-md p-4 rounded-md ">
+        <table className="w-full text-center ">
           <tr>
             <td className="p-4">#</td>
             <td>Name</td>
@@ -158,6 +181,12 @@ const HeroSection = () => {
             {user?.ExpiryDate
               ? new Date(user.ExpiryDate).toDateString()
               : "N/A"}
+            <button
+              onClick={handleNotify}
+              className="p-2 pl-6 pr-6 bg-primary rounded-md"
+            >
+              Notify
+            </button>
           </div>
         </Dialog>
 
