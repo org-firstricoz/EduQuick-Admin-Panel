@@ -49,7 +49,7 @@ const HeroSection = () => {
     <div
       className=" w-full overflow-scroll p-2  pl-8 pr-8  ml-4 mr-4 rounded-xl flex flex-col gap-4 font-poppins"
       style={{
-        height: "calc(100vh - 80px)",
+        height: "calc(100vh - 65px)",
       }}
     >
       <h2 className="text-3xl text-primary font-semibold">Super Admin Panel</h2>

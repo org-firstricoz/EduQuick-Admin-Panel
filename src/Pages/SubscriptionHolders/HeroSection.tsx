@@ -5,7 +5,9 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaFilter } from "react-icons/fa6";
+import { PiExportBold } from "react-icons/pi";
 import { useSearchParams } from "react-router-dom";
+import FormatDialog from "../../Components/FormatDialog";
 
 interface Subscription {
   BillingCycle: string;
@@ -27,6 +29,7 @@ const HeroSection = () => {
   const [user, setUser] = useState<Subscription | null>();
 
   const [open, setOpen] = useState(false);
+  const [openFormat, setOpenFormat] = useState(false);
   const [filter, setFilter] = useState("");
   const [openFilterr, setOpenFilter] = useState(false);
 
@@ -66,18 +69,20 @@ const HeroSection = () => {
   };
 
   const handleNotify = async () => {
+    console.log(user);
+
     const pendingToast = toast.loading("Notifying...");
     try {
-      const response = await axios.post(
+      const response = await axios.get(
         `${baseURL}/subscriptions/${user?.SubscriptionId}/notify`,
-        // {},
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log(response.data);
+      toast.dismiss(pendingToast);
+      toast.success(response.data.message);
     } catch (error) {
       toast.dismiss(pendingToast);
       toast.error("Error notify");
@@ -102,7 +107,7 @@ const HeroSection = () => {
     <div
       className=" w-full overflow-scroll  pl-8 pr-8 p-2 ml-4 mr-4 rounded-xl flex flex-col gap-4 font-poppins"
       style={{
-        height: "calc(100vh - 100px)",
+        height: "calc(100vh - 65px)",
       }}
     >
       {/* Page Nav */}
@@ -121,6 +126,18 @@ const HeroSection = () => {
 
       {/* Subscription Holders table */}
       <div className="flex flex-col items-center justify-center bg-secondary shadow-[#000] shadow-md p-4 rounded-md ">
+        <FormatDialog
+          title="Subscription Holders"
+          url="user/users-or-creators"
+          open={openFormat}
+          setOpen={setOpenFormat}
+        />
+        <button
+          onClick={() => setOpenFormat(true)}
+          className="relative flex items-center gap-2 border p-2 pl-4 pr-4 rounded-md text-primary font-semibold tracking-wider left-[400px]"
+        >
+          <PiExportBold className="text-2xl" /> Export
+        </button>
         <table className="w-full text-center ">
           <tr>
             <td className="p-4">#</td>
@@ -139,7 +156,11 @@ const HeroSection = () => {
               <tr key={i} className="border-t">
                 <td className="p-4">{i < 9 ? `0${i + 1}` : i + 1}</td>
                 <td>{subscriptionholder.Name}</td>
-                <td>{subscriptionholder.Email}</td>
+                <td>
+                  <a href={`mailto:${subscriptionholder.Email}`}>
+                    {subscriptionholder.Email}
+                  </a>
+                </td>
                 <td>{subscriptionholder.Subscription}</td>
                 <td>
                   {new Date(subscriptionholder.ExpiryDate).toLocaleDateString()}

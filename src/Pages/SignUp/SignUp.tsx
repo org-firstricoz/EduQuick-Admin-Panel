@@ -61,7 +61,7 @@ const SignUp = () => {
           onChange={(e) => setEmail(e.target.value)}
           className="outline-none border-b-2 w-full bg-secondary h-16 text-xl text-[#fff] placeholder:text-[#fff] "
           placeholder="Email Adress"
-          autoFocus
+          // autoFocus
         />
         <div className="w-full flex items-center pr-10 h-16 border-b-2">
           <input

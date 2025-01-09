@@ -5,6 +5,8 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
+import { PiExportBold } from "react-icons/pi";
+import FormatDialog from "../../Components/FormatDialog";
 
 interface User {
   BillingCycle: string;
@@ -21,6 +23,7 @@ interface User {
 const HeroSection = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [open, setOpen] = useState(false);
+  const [openFormat, setOpenFormat] = useState(false);
   const [openfilter, setOpenFilter] = useState(false);
   const [user, setUser] = useState<User | null>();
 
@@ -77,7 +80,7 @@ const HeroSection = () => {
     <div
       className=" w-full overflow-scroll  pl-8 pr-8 p-2 ml-4 mr-4 rounded-xl flex flex-col gap-4 font-poppins"
       style={{
-        height: "calc(100vh - 80px)",
+        height: "calc(100vh - 65px)",
       }}
     >
       <div className="flex  justify-between">
@@ -95,6 +98,18 @@ const HeroSection = () => {
 
       {/* Users table */}
       <div className="flex flex-col items-center  bg-secondary p-4 rounded-md shadow-[#000] shadow-md justify-center">
+        <FormatDialog
+          open={openFormat}
+          setOpen={setOpenFormat}
+          url="user/users-or-creators?role=User"
+          title="Users"
+        />
+        <button
+          onClick={() => setOpenFormat(true)}
+          className="relative flex items-center gap-2 border p-2 pl-4 pr-4 rounded-md text-primary font-semibold tracking-wider left-[400px]"
+        >
+          <PiExportBold className="text-2xl" /> Export
+        </button>
         <table className="w-full mb-6 text-left">
           <tr>
             <td className="p-5">#</td>

@@ -5,7 +5,7 @@ const HeroSection = () => {
     <div
       className=" w-full overflow-scroll pl-4 pr-4 flex flex-col font-poppins"
       style={{
-        height: "calc(100vh - 100px)",
+        height: "calc(100vh - 65px)",
       }}
     >
       <h2 className="text-primary  text-4xl font-semibold">Complaints</h2>

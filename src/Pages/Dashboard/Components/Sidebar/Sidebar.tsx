@@ -57,7 +57,7 @@ const Sidebar = () => {
     <div
       className="font-poppins shadow-[#000] shadow-xl overflow-scroll bg-secondary rounded-tr-xl w-80 text-lg flex flex-col justify-start items-center gap-1"
       style={{
-        height: "calc(100vh - 83px)",
+        height: "calc(100vh - 69px)",
       }}
     >
       <div

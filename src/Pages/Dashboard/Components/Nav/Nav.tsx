@@ -87,13 +87,13 @@ const Nav = () => {
         {isLoggedIn ? (
           <div
             onClick={() => handleNavigation(`/admin/profile/${admin?.id}`)}
-            className="flex items-center cursor-pointer justify-center gap-1"
+            className="flex items-center cursor-pointer justify-center gap-2"
           >
             <img
               src={
                 adminUser?.profileImageUrl ? adminUser.profileImageUrl : User
               }
-              className="w-16 h-16 rounded-full"
+              className="w-12 h-12 rounded-full"
               alt="Admin Profile Image"
             />
             <div className="flex flex-col">
