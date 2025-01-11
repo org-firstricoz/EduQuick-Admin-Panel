@@ -97,6 +97,9 @@ const HeroSection = () => {
           headers: {
             Authorization: `Bearer ${token}`,
           },
+          params: {
+            id,
+          },
         }
       );
       setOpenDeleteDialog(false);

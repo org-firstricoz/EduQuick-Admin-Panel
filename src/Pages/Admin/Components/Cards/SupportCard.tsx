@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 interface props {
   icon: ReactNode;
   text: string;
-  count: number;
+  count: number | undefined;
 }
 
 const SupportCard = ({ icon, text, count }: props) => {

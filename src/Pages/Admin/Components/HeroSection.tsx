@@ -23,14 +23,30 @@ interface Admin {
   _id: string;
 }
 
+interface Specialization {
+  admins: Admin[];
+  totalAdmins: number;
+  totalPages: number;
+}
+
 const HeroSection = () => {
   const token = Cookies.get("token");
 
   const [admins, setAdmins] = useState<Admin[]>([]);
+  const [techAdmins, setTechAdmins] = useState<Specialization | null>(null);
+  const [otherAdmins, setOtherAdmins] = useState<Specialization | null>(null);
+  const [complaintAdmins, setComplaintAdmins] = useState<Specialization | null>(
+    null
+  );
+  const [supportAdmins, setSupportAdmins] = useState<Specialization | null>(
+    null
+  );
+
+  const [status, setStatus] = useState("Verified");
 
   const getAdmins = async () => {
     try {
-      const response = await axios.get(`${baseURL}/admin/all`, {
+      const response = await axios.get(`${baseURL}/admin/status/${status}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,9 +57,89 @@ const HeroSection = () => {
     }
   };
 
+  const getTechAdmins = async () => {
+    try {
+      const response = await axios.get(
+        `${baseURL}/admin/specialization/Technical Support`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setTechAdmins(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCustomerSupportAdmins = async () => {
+    try {
+      const response = await axios.get(
+        `${baseURL}/admin/specialization/Customer Support`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setSupportAdmins(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getComplaintSupportAdmins = async () => {
+    try {
+      const response = await axios.get(
+        `${baseURL}/admin/specialization/Complaint Support`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setComplaintAdmins(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getOtherAdmins = async () => {
+    try {
+      const response = await axios.get(
+        `${baseURL}/admin/specialization/Other`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setOtherAdmins(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getOtherAdmins();
+  }, [otherAdmins]);
+
+  useEffect(() => {
+    getComplaintSupportAdmins();
+  }, [complaintAdmins]);
+
+  useEffect(() => {
+    getCustomerSupportAdmins();
+  }, [supportAdmins]);
+
+  useEffect(() => {
+    getTechAdmins();
+  }, [techAdmins]);
+
   useEffect(() => {
     getAdmins();
-  }, [location.pathname]);
+  }, [status]);
 
   return (
     <div
@@ -56,23 +152,27 @@ const HeroSection = () => {
       <div className="flex w-full gap-4">
         <SupportCard
           icon={<TiGroup />}
-          text="customer Support Admins"
-          count={7}
+          text="Technical Support"
+          count={techAdmins?.admins.length}
         />
         <SupportCard
           icon={<MdContactSupport />}
-          text="complaint Support Admins"
-          count={3}
+          text="Customer Support"
+          count={supportAdmins?.admins.length}
         />
-        <SupportCard icon={<FaWarehouse />} text="support Admins" count={2} />
+        <SupportCard
+          icon={<FaWarehouse />}
+          text="Complaint Support"
+          count={complaintAdmins?.admins.length}
+        />
         <SupportCard
           icon={<GiWallet />}
-          text="sales Support Admins"
-          count={1}
+          text="Others"
+          count={otherAdmins?.admins.length}
         />
       </div>
       <div className="flex gap-2">
-        <ApproveAdmin admins={admins} />
+        <ApproveAdmin status={status} setStatus={setStatus} admins={admins} />
         <TotalAdmin adminsCount={admins.length} />
       </div>
     </div>

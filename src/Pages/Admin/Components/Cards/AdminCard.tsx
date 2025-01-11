@@ -27,14 +27,12 @@ const AdminCard = ({ admin }: props) => {
           <FaUserCircle className="text-4xl" />
         )}
         <div>
-          <p>Unknown</p>
+          <p>{admin.fullName}</p>
           <p className="text-xs text-[#696969]">{admin?.role}</p>
         </div>
       </div>
       <hr className="w-[200px] border-[#696969]" />
-      <p className="text-sm">
-        Full Name: <span className="font-light">{admin?.fullName}</span>
-      </p>
+
       <p className="text-sm">
         Mobile:{" "}
         <span className="font-light">

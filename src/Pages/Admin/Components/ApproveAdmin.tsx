@@ -16,27 +16,38 @@ interface Admin {
 
 interface props {
   admins: Admin[];
+  status: string;
+  setStatus: (value: string) => void;
 }
 
-const ApproveAdmin = ({ admins }: props) => {
+const ApproveAdmin = ({ admins, status, setStatus }: props) => {
   return (
     <div className="w-3/4  shadow-[#000] shadow-md rounded-md bg-secondary flex flex-col p-4 gap-4 justify-center">
       <h2 className="text-left text-2xl font-normal">Approve Admins</h2>
       <div className="flex gap-2">
         <button
-          className={`bg-primary rounded-full p-1 shadow-md shadow-[#000] pl-6 pr-6`}
+          onClick={() => setStatus("Verified")}
+          className={`p-2 pl-4 pr-4 rounded-full shadow-[#111] shadow-md ${
+            status === "Verified" ? "bg-primary" : "bg-secondary border"
+          }`}
         >
           Verified
         </button>
         <button
-          className={`border rounded-full p-1 shadow-md shadow-[#000] pl-6 pr-6`}
-        >
-          Rejected
-        </button>
-        <button
-          className={` border rounded-full p-1 shadow-md shadow-[#000] pl-6 pr-6`}
+          onClick={() => setStatus("Pending")}
+          className={`p-2 pl-4 pr-4 rounded-full shadow-[#111] shadow-md ${
+            status === "Pending" ? "bg-primary" : "bg-secondary border"
+          }`}
         >
           Pending
+        </button>
+        <button
+          onClick={() => setStatus("Rejected")}
+          className={`p-2 pl-4 pr-4 rounded-full shadow-[#111] shadow-md ${
+            status === "Rejected" ? "bg-primary" : "bg-secondary border"
+          }`}
+        >
+          Rejected
         </button>
       </div>
       <div className="border items-center rounded-md shadow-[#000] shadow-md flex gap-2 pl-3 w-full">

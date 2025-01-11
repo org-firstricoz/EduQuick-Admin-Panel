@@ -15,7 +15,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
 
   const handleCreateAccount = async () => {
-    const pendingToast = toast.loading("Creating account ...");
+    const pendingToast = toast.loading("Creating account...");
     try {
       await axios.post(`${baseURL}/admin/register`, {
         fullName,
@@ -23,10 +23,15 @@ const SignUp = () => {
         password,
       });
 
+      await axios.post(`${baseURL}/admin/send-otp`, {
+        name: fullName,
+        email,
+      });
+
       toast.dismiss(pendingToast);
-      toast.success("Welcome to EduQuick");
+      toast.success("please verify your to join EduQuick");
       startTransition(() => {
-        navigate("/login");
+        navigate("/otp-verification");
       });
     } catch (error) {
       console.log(error);

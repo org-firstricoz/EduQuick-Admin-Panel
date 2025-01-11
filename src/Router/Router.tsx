@@ -25,6 +25,12 @@ const SubscriptionHolders = lazy(
 );
 const UsersPage = lazy(() => import("../Pages/UsersPage/UsersPage"));
 const AdminPage = lazy(() => import("../Pages/Admin/Admin"));
+const OTPVerification = lazy(
+  () => import("../Pages/OTP Verification/OTPVerification")
+);
+const PendingAdmins = lazy(
+  () => import("../Pages/PendingAdmins/PendingAdmins")
+);
 
 const Router = () => {
   return (
@@ -33,10 +39,12 @@ const Router = () => {
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/otp-verification" element={<OTPVerification />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/subscription" element={<SubscriptionHolders />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/pending-request" element={<PendingAdmins />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/courses" element={<Products />} />
