@@ -44,7 +44,7 @@ const Router = () => {
           <Route path="/subscription" element={<SubscriptionHolders />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/admin" element={<AdminPage />} />
-          <Route path="/pending-request" element={<PendingAdmins />} />
+          <Route path="/pending-requests" element={<PendingAdmins />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/courses" element={<Products />} />

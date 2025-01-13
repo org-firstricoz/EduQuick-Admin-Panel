@@ -1,5 +1,7 @@
 import { FiSearch } from "react-icons/fi";
 import AdminCard from "./Cards/AdminCard";
+import { startTransition } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Admin {
   createdAt: string;
@@ -21,6 +23,8 @@ interface props {
 }
 
 const ApproveAdmin = ({ admins, status, setStatus }: props) => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-3/4  shadow-[#000] shadow-md rounded-md bg-secondary flex flex-col p-4 gap-4 justify-center">
       <h2 className="text-left text-2xl font-normal">Approve Admins</h2>
@@ -34,7 +38,13 @@ const ApproveAdmin = ({ admins, status, setStatus }: props) => {
           Verified
         </button>
         <button
-          onClick={() => setStatus("Pending")}
+          onClick={() => {
+            {
+              startTransition(() => {
+                navigate("/pending-requests");
+              });
+            }
+          }}
           className={`p-2 pl-4 pr-4 rounded-full shadow-[#111] shadow-md ${
             status === "Pending" ? "bg-primary" : "bg-secondary border"
           }`}
