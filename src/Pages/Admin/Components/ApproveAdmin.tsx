@@ -1,7 +1,6 @@
-import { FiSearch } from "react-icons/fi";
-import AdminCard from "./Cards/AdminCard";
 import { startTransition } from "react";
 import { useNavigate } from "react-router-dom";
+import AdminCard from "./Cards/AdminCard";
 
 interface Admin {
   createdAt: string;
@@ -60,14 +59,14 @@ const ApproveAdmin = ({ admins, status, setStatus }: props) => {
           Rejected
         </button>
       </div>
-      <div className="border items-center rounded-md shadow-[#000] shadow-md flex gap-2 pl-3 w-full">
+      {/* <div className="border items-center rounded-md shadow-[#000] shadow-md flex gap-2 pl-3 w-full">
         <FiSearch className="text-2xl" />
         <input
           type="text"
-          placeholder="Search name, email or etc"
+          placeholder="Search name, email."
           className="p-2 rounded-md outline-none w-full bg-secondary"
         />
-      </div>
+      </div> */}
       {admins.map((admin, i) => (
         <AdminCard key={i} admin={admin} />
       ))}
