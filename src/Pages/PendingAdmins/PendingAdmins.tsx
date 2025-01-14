@@ -1,8 +1,9 @@
 import { baseURL } from "@baseURL";
 import Nav from "@dashboard/Components/Nav/Nav";
-import axios from "axios";
+import axios, { isAxiosError } from "axios";
 import Cookies from "js-cookie";
 import { startTransition, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaCheck } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
@@ -46,6 +47,36 @@ const PendingAdmins = () => {
     getPendingAdmins();
   }, []);
 
+  const updateAdminStatus = async (admin: Admin, status: string) => {
+    const pendingToast = toast.loading("Updating admin...");
+    try {
+      const response = await axios.patch(
+        `${baseURL}/admin/status/${admin._id}`,
+        {
+          status,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status) {
+        toast.dismiss(pendingToast);
+        toast.success("Admin status updated successfully");
+        getPendingAdmins();
+      }
+    } catch (error) {
+      toast.dismiss(pendingToast);
+      console.log(error);
+
+      if (isAxiosError(error)) {
+        const errMessage = error.response?.data.message;
+        toast.error(errMessage);
+      }
+    }
+  };
+
   const handleNavigate = (path: string) => {
     startTransition(() => {
       navigate(path);
@@ -80,8 +111,14 @@ const PendingAdmins = () => {
                   <td>{admin.role}</td>
                   <td>
                     <div className="flex gap-4 items-center justify-start">
-                      <IoMdClose className="text-4xl p-1 rounded-full bg-primary cursor-pointer" />
-                      <FaCheck className="text-4xl p-1 rounded-full bg-[#08ec00] cursor-pointer" />
+                      <IoMdClose
+                        onClick={() => updateAdminStatus(admin, "Rejected")}
+                        className="text-4xl p-1 rounded-full bg-primary cursor-pointer"
+                      />
+                      <FaCheck
+                        onClick={() => updateAdminStatus(admin, "Verified")}
+                        className="text-4xl p-1 rounded-full bg-[#08ec00] cursor-pointer"
+                      />
                     </div>
                   </td>
                 </tr>

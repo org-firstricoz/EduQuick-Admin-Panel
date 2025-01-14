@@ -17,6 +17,7 @@ interface AdminUser {
   phoneNumber: string;
   profileImageUrl: string;
   role: string;
+  specialization: string;
   updatedAt: string;
   __v: string;
   _id: string;
@@ -91,7 +92,7 @@ const UpdateAdmin = () => {
           fullName: fullName,
           phoneNumber: phoneNumber,
           profileImageUrl: avatar ? avatar : admin?.profileImageUrl,
-          gender: gender,
+          gender: gender ? gender : admin?.gender,
         },
         {
           headers: {
@@ -299,12 +300,22 @@ const UpdateAdmin = () => {
         />
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-8">
         <button
           onClick={updateAdmin}
           className="bg-primary w-fit pl-4 pr-4 p-2 rounded-md"
         >
           Update Admin
+        </button>
+        <button
+          onClick={() => {
+            startTransition(() => {
+              navigate(`/admin/change-password?admin=${id}`);
+            });
+          }}
+          className="bg-primary w-fit pl-4 pr-4 p-2 rounded-md"
+        >
+          Change Password
         </button>
       </div>
     </div>

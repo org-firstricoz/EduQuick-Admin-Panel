@@ -11,7 +11,7 @@ const Creators = lazy(() => import("@creators/Creators"));
 const Products = lazy(() => import("@products/Products"));
 const Verify = lazy(() => import("@verify/Verify"));
 const Inbox = lazy(() => import("@messages/Inbox/Inbox"));
-const UpdateCourse = lazy(() => import("../Pages/UpdateCourse/UpdateCourse"));
+const UpdateCourse = lazy(() => import("@updateCourse/UpdateCourse"));
 const TopCoursePage = lazy(
   () => import("../Pages/TopCoursePage/TopCoursePage")
 );
@@ -31,6 +31,9 @@ const OTPVerification = lazy(
 const PendingAdmins = lazy(
   () => import("../Pages/PendingAdmins/PendingAdmins")
 );
+const UpdatePassword = lazy(
+  () => import("../Pages/UpdatePassword/UpdatePassword")
+);
 
 const Router = () => {
   return (
@@ -44,6 +47,8 @@ const Router = () => {
           <Route path="/subscription" element={<SubscriptionHolders />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/change-password" element={<UpdatePassword />} />
+          <Route path="/admin/profile/:id" element={<UpdateAdmin />} />
           <Route path="/pending-requests" element={<PendingAdmins />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
@@ -59,7 +64,6 @@ const Router = () => {
           <Route path="/support" element={<Inbox />} />
           <Route path="/update-course/:id" element={<UpdateCourse />} />
           <Route path="/update-video/:id/videos" element={<UpdateVideo />} />
-          <Route path="/admin/profile/:id" element={<UpdateAdmin />} />
         </Routes>
       </BrowserRouter>
     </div>
