@@ -2,7 +2,7 @@ import axios from "axios";
 import { startTransition, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { FiEdit } from "react-icons/fi";
-import { baseURL } from "../../../../baseURL";
+import { baseURL } from "@baseURL";
 import Dialog from "../../../../Components/Dialog/Dialog";
 import toast from "react-hot-toast";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -71,7 +71,7 @@ const HeroSection = () => {
     } else {
       handleCourseSearch();
     }
-  }, [search, page]);
+  }, [search, page, courses.length]);
 
   useEffect(() => {
     const pageParam = searchParams.get("page");
@@ -106,6 +106,7 @@ const HeroSection = () => {
       if (response.data.status) {
         toast.dismiss(pendingToast);
         toast.success("Course deleted!");
+        getCourses();
       }
       console.log(response.data);
     } catch (error) {
