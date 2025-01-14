@@ -8,6 +8,7 @@ interface Admin {
   phoneNumber: string;
   profileImageUrl: string;
   role: string;
+  specialization: string;
   updatedAt: string;
   __v: string;
   _id: string;
@@ -42,6 +43,12 @@ const AdminCard = ({ admin }: props) => {
       <p className="text-sm">
         Email:{" "}
         <span className="font-light">{admin?.email ? admin.email : "N/A"}</span>
+      </p>
+      <p className="text-sm">
+        Specialization:{" "}
+        <span className="font-light">
+          {admin?.specialization ? admin.specialization : "N/A"}
+        </span>
       </p>
     </div>
   );

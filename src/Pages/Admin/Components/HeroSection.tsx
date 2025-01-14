@@ -18,6 +18,7 @@ interface Admin {
   phoneNumber: string;
   profileImageUrl: string;
   role: string;
+  specialization: string;
   updatedAt: string;
   __v: string;
   _id: string;
