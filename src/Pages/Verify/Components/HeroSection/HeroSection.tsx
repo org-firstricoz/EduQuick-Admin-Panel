@@ -1,13 +1,12 @@
 import { baseURL } from "@baseURL";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { startTransition, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { ImFilter } from "react-icons/im";
 import { IoMdClose } from "react-icons/io";
 import Dialog from "../../../../Components/Dialog/Dialog";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import FeedbackDialog from "../FeedbackDialog/FeedbackDialog";
-import { ImFilter } from "react-icons/im";
 import FilterDialog from "../FilterDialog/FilterDialog";
 
 interface Course {
@@ -33,7 +32,6 @@ interface Course {
 
 const HeroSection = () => {
   const token = Cookies.get("token");
-  const navigate = useNavigate();
   const [id, setId] = useState("");
 
   const [courses, setCourses] = useState<Course[]>([]);
