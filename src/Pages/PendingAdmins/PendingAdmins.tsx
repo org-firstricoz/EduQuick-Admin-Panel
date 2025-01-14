@@ -1,5 +1,6 @@
 import { baseURL } from "@baseURL";
 import Nav from "@dashboard/Components/Nav/Nav";
+import { useTitle } from "@hooks";
 import axios, { isAxiosError } from "axios";
 import Cookies from "js-cookie";
 import { startTransition, useEffect, useState } from "react";
@@ -27,6 +28,8 @@ interface Admin {
 const PendingAdmins = () => {
   const token = Cookies.get("token");
   const navigate = useNavigate();
+
+  useTitle("Pending Admins • EduQuick");
 
   const [admins, setAdmins] = useState<Admin[]>([]);
 

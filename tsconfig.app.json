@@ -21,7 +21,8 @@
       "@messages/*": ["./src/Pages/Messages/*"],
       "@updateCourse/*": ["./src/Pages/UpdateCourse/*"],
       "@dialog": ["./src/Components/Dialog/Dialog"],
-      "@baseURL": ["./src/baseURL"]
+      "@baseURL": ["./src/baseURL"],
+      "@hooks": ["./src/hooks/hooks"]
     },
 
     /* Bundler mode */

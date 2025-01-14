@@ -1,4 +1,5 @@
 import { baseURL } from "@baseURL";
+import { useTitle } from "@hooks";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
@@ -8,6 +9,8 @@ import { useSearchParams } from "react-router-dom";
 
 const UpdatePassword = () => {
   const [disable, setDisable] = useState(true);
+
+  useTitle(`Change Password • EduQuick`);
 
   const token = Cookies.get("token");
 

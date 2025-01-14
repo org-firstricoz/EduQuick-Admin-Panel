@@ -8,6 +8,7 @@ import { IoMdClose } from "react-icons/io";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
+import { useTitle } from "@hooks";
 
 interface AdminUser {
   createdAt: string;
@@ -37,6 +38,8 @@ const UpdateAdmin = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const [admin, setAdmin] = useState<AdminUser | null>(null);
+
+  useTitle(`${admin?.fullName} • EduQuick`);
 
   console.log({
     fullName,

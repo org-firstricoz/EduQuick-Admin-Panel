@@ -5,6 +5,7 @@ import { startTransition, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
+import { useTitle } from "@hooks";
 
 interface Course {
   avgRating?: string;
@@ -53,6 +54,8 @@ const HeroSection = () => {
   const [videoIds, setVideoIds] = useState<string[]>([]);
   const [category, setCategory] = useState("");
   const [trending, setTrending] = useState<boolean>(false);
+
+  useTitle(`${title} • EduQuick`);
 
   const getCurrentCourse = async () => {
     try {

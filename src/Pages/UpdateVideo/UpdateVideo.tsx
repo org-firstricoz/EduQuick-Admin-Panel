@@ -1,6 +1,7 @@
 import { baseURL } from "@baseURL";
 import ThumbnailDialog from "@creators/Components/ThumbnailDialog/ThumbnailDialog";
 import Dialog from "@dialog";
+import { useTitle } from "@hooks";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { startTransition, useEffect, useState } from "react";
@@ -37,6 +38,8 @@ const UpdateVideo = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [thumbnail, setThumbnail] = useState("");
+
+  useTitle(`${title} • EduQuick`);
 
   const [video, setVideo] = useState<Video[]>([]);
 

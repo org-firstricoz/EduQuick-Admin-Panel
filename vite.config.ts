@@ -43,6 +43,8 @@ export default defineConfig({
       "@dialog": path.resolve("./src/Components/Dialog/Dialog"),
 
       "@baseURL": path.resolve("./src/baseURL"),
+
+      "@hooks": path.resolve("./src/hooks/hooks"),
     },
   },
 });
