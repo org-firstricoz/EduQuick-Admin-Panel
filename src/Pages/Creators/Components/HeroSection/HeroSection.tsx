@@ -126,12 +126,12 @@ const HeroSection = () => {
         setCreator={setCreator}
       />
       {creator ? (
-        <button className="w-fit borrder flex items-center gap-2 rounded-md border p-2 ">
+        <button className=" borrder w-fit flex items-center gap-2 rounded-md border p-2 ">
           {creator.profileImageUrl ? (
             <img
               src={creator.profileImageUrl}
               alt={creator.Name}
-              className=" rounded-full w-14"
+              className=" rounded-full w-14 h-14"
             />
           ) : (
             <FaUser className="border p-2 rounded-full text-5xl" />
@@ -205,7 +205,7 @@ const HeroSection = () => {
         <label>Select Video</label>
         <div
           onClick={() => setOpenVideoDialog(true)}
-          className="border rounded-md w-48 flex items-center justify-center text-lg h-fit p-2"
+          className="border cursor-pointer rounded-md w-48 flex items-center justify-center text-lg h-fit p-2"
         >
           upload file
         </div>
@@ -223,7 +223,7 @@ const HeroSection = () => {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
+            className="w-fit p-2 rounded-md border outline-none bg-secondary"
           >
             <option value="">Select</option>
             <option value="Mobile Tricks">Mobile Tricks</option>
@@ -241,7 +241,7 @@ const HeroSection = () => {
           <select
             value={trending.toString()} // Convert boolean to string for the select value
             onChange={(e) => setTrending(e.target.value === "true")} // Convert string back to boolean
-            className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
+            className="w-fit p-2 rounded-md border outline-none bg-secondary"
           >
             <option value="true">Yes</option>
             <option value="false">No</option>
@@ -253,7 +253,7 @@ const HeroSection = () => {
           <select
             value={free.toString()} // Convert boolean to string for the select value
             onChange={(e) => setFree(e.target.value === "true")} // Convert string back to boolean
-            className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
+            className="w-fit p-2 rounded-md border outline-none bg-secondary"
           >
             <option value="true">Yes</option>
             <option value="false">No</option>
@@ -305,7 +305,7 @@ const HeroSection = () => {
       /> */}
       <button
         onClick={handleUploadCourse}
-        className="fixed bottom-16 rounded-md right-16 bg-primary p-2 pl-6 pr-6"
+        className=" w-fit rounded-md  bg-primary p-2 pl-6 pr-6"
       >
         upload course
       </button>

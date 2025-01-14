@@ -59,6 +59,11 @@ const VideoDialog = ({
           {
             extension,
             type,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
         );
 
@@ -146,14 +151,14 @@ const VideoDialog = ({
           onChange={(e) => setTitle(e.target.value)}
           type="text"
           placeholder="Title"
-          className="w-1/2 bg-[#111111] outline-none border p-3 text-lg rounded-md"
+          className="w-1/2 bg-secondary outline-none border p-3 text-lg rounded-md"
         />
         <div className="w-1/2 border rounded-md ">
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
-            className="w-full rounded-md p-2 text-lg outline-none h-16 bg-[#111111]"
+            className="w-full rounded-md p-2 text-lg outline-none h-16 bg-secondary"
           />
         </div>
         <input
@@ -161,7 +166,7 @@ const VideoDialog = ({
           onChange={(e) => setVideoSequence(e.target.value)}
           type="number"
           placeholder="Video Sequence"
-          className="w-fit bg-[#111111] outline-none border p-3 text-lg rounded-md"
+          className="w-fit bg-secondary outline-none border p-3 text-lg rounded-md"
         />
         <div>
           <ThumbnailDialog
@@ -208,20 +213,20 @@ const VideoDialog = ({
           onChange={(e) => setDuration(e.target.value)}
           type="number"
           placeholder="Video duration"
-          className="w-1/2 bg-[#111111] outline-none border p-3 text-lg rounded-md"
+          className="w-1/2 bg-secondary outline-none border p-3 text-lg rounded-md"
         />
         <select
           value={quality}
           onChange={(e) => setQuality(e.target.value)}
-          className="w-fit bg-[#111111] p-2 border outline-none rounded-md"
+          className="w-fit bg-secondary p-2 border outline-none rounded-md"
         >
-          <option>Select</option>
-          <option value="1080">1080p</option>
-          <option value="720">720p</option>
-          <option value="480">480p</option>
-          <option value="360">360p</option>
-          <option value="240">240p</option>
-          <option value="144">144p</option>
+          <option>Video Quality</option>
+          <option value="1080p">1080p</option>
+          <option value="720p">720p</option>
+          <option value="480p">480p</option>
+          <option value="360p">360p</option>
+          <option value="240p">240p</option>
+          <option value="144p">144p</option>
         </select>
         <button
           className="bg-primary pl-6 pr-6 p-2 rounded-md w-fit"

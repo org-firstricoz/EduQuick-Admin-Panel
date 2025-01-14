@@ -194,16 +194,7 @@ const HeroSection = () => {
                 Pending
               </button>
             </div>
-            <button
-              onClick={() => {
-                startTransition(() => {
-                  navigate(`/course-verifycation/${id}`);
-                });
-              }}
-              className="p-2 pl-4 pr-4 border rounded-full"
-            >
-              Edit
-            </button>
+
             <div className="flex w-full">
               <p className="text-left">*You can edit the course status</p>
             </div>
