@@ -11,7 +11,7 @@ const Creators = lazy(() => import("@creators/Creators"));
 const Products = lazy(() => import("@products/Products"));
 const Verify = lazy(() => import("@verify/Verify"));
 const Inbox = lazy(() => import("@messages/Inbox/Inbox"));
-const UpdateCourse = lazy(() => import("@updateCourse/UpdateCourse"));
+const UpdateCourse = lazy(() => import("../Pages/UpdateCourse/UpdateCourse"));
 const TopCoursePage = lazy(
   () => import("../Pages/TopCoursePage/TopCoursePage")
 );
