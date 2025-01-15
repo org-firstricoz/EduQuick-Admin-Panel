@@ -4,11 +4,15 @@ import axios from "axios";
 import { startTransition, useState } from "react";
 import toast from "react-hot-toast";
 import OtpInput from "react-otp-input";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const OTPVerification = () => {
   const [otp, setOtp] = useState("");
-  const [email, setEmail] = useState("");
+
+  const [searchQuery] = useSearchParams();
+
+  const name = searchQuery.get("name");
+  const email = searchQuery.get("email");
 
   useTitle("Verify OTP • EduQuick");
 
@@ -18,9 +22,6 @@ const OTPVerification = () => {
     if (otp === "") {
       toast.error("OTP required!");
       return false;
-    }
-    if (email === "") {
-      toast.error("Email is required!");
     }
     return true;
   };
@@ -53,6 +54,26 @@ const OTPVerification = () => {
     }
   };
 
+  const sendOTP = async () => {
+    const pendingToast = toast.loading("OTP sending...");
+    try {
+      await axios.post(`${baseURL}/admin/send-otp`, {
+        name,
+        email,
+      });
+
+      toast.dismiss(pendingToast);
+      toast.success("OTP sent!");
+    } catch (error) {
+      console.log(error);
+      toast.dismiss(pendingToast);
+      if (axios.isAxiosError(error)) {
+        const errMessage = error.response?.data.message;
+        toast.error(errMessage);
+      }
+    }
+  };
+
   return (
     <div className="p-6 flex flex-col items-center gap-4">
       <div className="w-full">
@@ -60,27 +81,19 @@ const OTPVerification = () => {
           EDUQUICK
         </h1>
       </div>
-      <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary gap-4 rounded-md p-24">
+      <div className="w-2/3 shadow-[#000] shadow-md flex flex-col items-start bg-secondary gap-2 rounded-md p-24">
         <h2 className="font-semibold text-4xl">OTP Verification</h2>
         <p className="text-secondary">
-          Enter the verification code & email we just sent on your email address
+          Enter the verification code we just sent on your email address
         </p>
-
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="outline-none border-b-2 w-full bg-secondary h-16 text-xl text-[#fff] placeholder:text-[#fff] "
-          placeholder="Verify Email Adress"
-          // autoFocus
-        />
 
         <OtpInput
           value={otp}
           onChange={setOtp}
           containerStyle={{
-            justifyContent: "center",
-            gap: "5rem",
+            justifyContent: "space-between",
+            gap: "7rem",
+            marginTop: "1rem",
           }}
           inputStyle={{
             color: "#E52E2E",
@@ -100,10 +113,22 @@ const OTPVerification = () => {
 
         <button
           onClick={verifyOTP}
-          className="bg-[#fff] text-[#111111] shadow-[#000] shadow-md p-3 rounded-md font-medium text-lg mt-8 active:bg-[#d4d4d4]"
+          className="bg-[#fff] w-full text-[#111111] shadow-[#000] shadow-md p-3 rounded-md font-medium text-lg mt-8 active:bg-[#d4d4d4]"
         >
           Verify{" "}
         </button>
+
+        <div className="flex w-full justify-center">
+          <p className="text-center font-normal text-xl mt-6">
+            Don't received code?{" "}
+            <span
+              className="text-primary font-medium cursor-pointer"
+              onClick={sendOTP}
+            >
+              Resend
+            </span>{" "}
+          </p>
+        </div>
       </div>
     </div>
   );
