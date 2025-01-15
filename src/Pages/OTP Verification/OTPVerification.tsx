@@ -1,4 +1,5 @@
 import { baseURL } from "@baseURL";
+import { useTitle } from "@hooks";
 import axios from "axios";
 import { startTransition, useState } from "react";
 import toast from "react-hot-toast";
@@ -8,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 const OTPVerification = () => {
   const [otp, setOtp] = useState("");
   const [email, setEmail] = useState("");
+
+  useTitle("Verify OTP • EduQuick");
 
   const navigate = useNavigate();
 

@@ -1,4 +1,5 @@
 import { baseURL } from "@baseURL";
+import { useTitle } from "@hooks";
 import axios from "axios";
 import { startTransition, useState } from "react";
 import toast from "react-hot-toast";
@@ -7,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  useTitle("Register Admin • EduQuick");
 
   const navigate = useNavigate();
 

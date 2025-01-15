@@ -51,7 +51,7 @@ const UpdatePassword = () => {
       toast.dismiss(pendingToast);
       console.log(error);
       if (axios.isAxiosError(error)) {
-        const errMessage = error.response?.data.msg;
+        const errMessage = error.response?.data.message;
         toast.error(errMessage);
       }
     }

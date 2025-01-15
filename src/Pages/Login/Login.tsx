@@ -6,9 +6,12 @@ import { FaRegEye } from "react-icons/fa6";
 import { baseURL } from "../../baseURL";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useTitle } from "@hooks";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  useTitle("Login • EduQuick");
 
   const navigate = useNavigate();
 
