@@ -120,6 +120,13 @@ const VideoDialog = ({
         toast.success(response.data.message);
         videoIds.push(response.data.videoId);
         setOpenVideoDialog(false);
+        setDescription("");
+        setDuration("");
+        setQuality("");
+        setThumbnail("");
+        setVideoSequence("");
+        setVideoUrl("");
+        setTitle("");
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {

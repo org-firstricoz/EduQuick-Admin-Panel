@@ -68,9 +68,13 @@ const ApproveAdmin = ({ admins, status, setStatus }: props) => {
           className="p-2 rounded-md outline-none w-full bg-secondary"
         />
       </div> */}
-      {admins.map((admin, i) => (
-        <AdminCard key={i} admin={admin} />
-      ))}
+      {admins.length === 0 ? (
+        <div className="text-center bg-secondary text-lg font-bold text-red-500">
+          No admins found
+        </div>
+      ) : (
+        admins.map((admin, i) => <AdminCard key={i} admin={admin} />)
+      )}
     </div>
   );
 };

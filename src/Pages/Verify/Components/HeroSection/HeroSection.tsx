@@ -131,32 +131,36 @@ const HeroSection = () => {
             <td>Action</td>
           </tr>
 
-          {courses.map((course, i: number) => (
-            <tr
-              key={i}
-              className="font-medium border-b text-xl bg-[#111111] rounded-md hover:bg-[#2d2d2d] cursor-pointer duration-300 "
-            >
-              <td className="p-4">{i < 9 ? `0${i + 1}` : i + 1}</td>
-              <td>
-                {course.title.length > 20
-                  ? `${course.title.slice(0, 20)}...`
-                  : course.title}
-              </td>
-              <td>{new Date(course.createdAt).toLocaleDateString()}</td>
-              <td>{course.verificationStatus}</td>
-              <td>
-                <button
-                  onClick={() => {
-                    setOpen(true);
-                    setId(course._id);
-                  }}
-                  className="p-2 pl-4 pr-4 rounded-lg bg-primary"
-                >
-                  Edit
-                </button>
-              </td>
-            </tr>
-          ))}
+          {courses.length === 0 ? (
+            <div className="text-center text-2xl p-4">No courses available</div>
+          ) : (
+            courses.map((course, i: number) => (
+              <tr
+                key={i}
+                className="font-medium border-b text-xl bg-[#111111] rounded-md hover:bg-[#2d2d2d] cursor-pointer duration-300 "
+              >
+                <td className="p-4">{i < 9 ? `0${i + 1}` : i + 1}</td>
+                <td>
+                  {course.title.length > 20
+                    ? `${course.title.slice(0, 20)}...`
+                    : course.title}
+                </td>
+                <td>{new Date(course.createdAt).toLocaleDateString()}</td>
+                <td>{course.verificationStatus}</td>
+                <td>
+                  <button
+                    onClick={() => {
+                      setOpen(true);
+                      setId(course._id);
+                    }}
+                    className="p-2 pl-4 pr-4 rounded-lg bg-primary"
+                  >
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
         </table>
 
         <Dialog width={700} open={open} onClose={() => null}>

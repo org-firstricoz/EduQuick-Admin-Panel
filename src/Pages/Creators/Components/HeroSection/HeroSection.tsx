@@ -213,7 +213,7 @@ const HeroSection = () => {
       <div className="grid grid-cols-4 gap-4">
         {videoURls.map((videoURL, i) => (
           <div key={i} className="w-fit p-2 ">
-            <video src={videoURL} controls />
+            <video src={videoURL} />
           </div>
         ))}
       </div>
