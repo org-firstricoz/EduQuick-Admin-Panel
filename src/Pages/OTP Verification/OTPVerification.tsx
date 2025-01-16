@@ -1,12 +1,24 @@
 import { baseURL } from "@baseURL";
 import { useTitle } from "@hooks";
 import axios from "axios";
-import { startTransition, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import OtpInput from "react-otp-input";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 const OTPVerification = () => {
+  const location = useLocation();
+
+  const from = location.state?.from;
+
+  useEffect(() => {
+    if (!from) {
+      navigate("/not-found");
+    }
+  });
+
+  console.log(from);
+
   const [otp, setOtp] = useState("");
 
   const [searchQuery] = useSearchParams();
@@ -42,7 +54,13 @@ const OTPVerification = () => {
       toast.dismiss(pendingToast);
 
       startTransition(() => {
-        navigate("/login");
+        if (from === "/sign-up") {
+          navigate("/login");
+        } else if (from === "/verify-email") {
+          navigate(`/admin/change-password?admin=${email}`, {
+            state: { from: location.pathname },
+          });
+        }
       });
     } catch (error) {
       console.log(error);

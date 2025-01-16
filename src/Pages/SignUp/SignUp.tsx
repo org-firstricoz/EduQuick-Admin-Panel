@@ -34,7 +34,9 @@ const SignUp = () => {
       toast.dismiss(pendingToast);
       toast.success("please verify your email to join EduQuick");
       startTransition(() => {
-        navigate(`/otp-verification?email=${email}&name=${fullName}`);
+        navigate(`/otp-verification?email=${email}&name=${fullName}`, {
+          state: { from: location.pathname },
+        });
       });
     } catch (error) {
       console.log(error);

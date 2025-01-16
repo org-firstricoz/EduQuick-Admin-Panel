@@ -35,6 +35,8 @@ const UpdatePassword = lazy(
   () => import("../Pages/UpdatePassword/UpdatePassword")
 );
 
+const VerifyEmail = lazy(() => import("../Pages/VerifyEmail/VerifyEmail"));
+
 const Router = () => {
   return (
     <div>
@@ -42,6 +44,7 @@ const Router = () => {
         <Routes>
           <Route path="*" element={<NotFound />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/otp-verification" element={<OTPVerification />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/subscription" element={<SubscriptionHolders />} />

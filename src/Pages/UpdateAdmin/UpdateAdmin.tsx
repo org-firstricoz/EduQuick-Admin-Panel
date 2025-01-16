@@ -310,16 +310,6 @@ const UpdateAdmin = () => {
         >
           Update Admin
         </button>
-        <button
-          onClick={() => {
-            startTransition(() => {
-              navigate(`/admin/change-password?admin=${id}`);
-            });
-          }}
-          className="bg-primary w-fit pl-4 pr-4 p-2 rounded-md"
-        >
-          Change Password
-        </button>
       </div>
     </div>
   );

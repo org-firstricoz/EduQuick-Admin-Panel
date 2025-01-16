@@ -117,15 +117,24 @@ const Login = () => {
         >
           Login{" "}
         </button>
-        {/* <p className="text-lg font-medium text-center">
+        <p className="text-lg font-medium text-center">
           Forgot you Password?{" "}
-          <span className="underline cursor-pointer">Reset Password</span>
-        </p> */}
+          <span
+            onClick={() => {
+              startTransition(() => {
+                navigate("/verify-email");
+              });
+            }}
+            className="underline cursor-pointer"
+          >
+            Reset Password
+          </span>
+        </p>
 
-        {/* <p className="text-lg font-medium text-center">
+        <p className="text-lg font-medium text-center">
           New to EduQuick? Start learning with us today.{" "}
           <span className="text-primary cursor-pointer">Sign in</span>
-        </p> */}
+        </p>
       </div>
     </div>
   );

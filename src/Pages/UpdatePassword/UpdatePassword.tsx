@@ -5,16 +5,28 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 const UpdatePassword = () => {
   const [disable, setDisable] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useTitle(`Change Password • EduQuick`);
+
+  const from = location.state?.from;
+
+  useEffect(() => {
+    if (from !== "/otp-verification") {
+      navigate("/not-found");
+    }
+  }, [from, navigate]);
 
   const token = Cookies.get("token");
 
   const [searchQuery] = useSearchParams();
+
+  const email = searchQuery.get("admin");
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -33,9 +45,11 @@ const UpdatePassword = () => {
     const pendingToast = toast.loading("Changing password...");
     try {
       const response = await axios.patch(
-        `${baseURL}/admin/${searchQuery.get("admin")}/change-password`,
+        `${baseURL}/admin/change-password`,
         {
-          password,
+          email,
+          newPassword: password,
+          confirmPassword,
         },
         {
           params: {
@@ -47,6 +61,11 @@ const UpdatePassword = () => {
         }
       );
       console.log(response.data);
+      if (response.data.success) {
+        toast.dismiss(pendingToast);
+        toast.success(response.data.message);
+        navigate("/login");
+      }
     } catch (error) {
       toast.dismiss(pendingToast);
       console.log(error);
