@@ -26,7 +26,9 @@ interface Video {
 
 const UpdateVideo = () => {
   const { id } = useParams();
-  const [videoId] = useSearchParams();
+  const [searchQuery] = useSearchParams();
+
+  const videoId = searchQuery.get("video");
   const navigate = useNavigate();
 
   const token = Cookies.get("token");
@@ -46,7 +48,7 @@ const UpdateVideo = () => {
   const getVideo = async () => {
     try {
       const response = await axios.get(
-        `${baseURL}/user/${id}/video-by-videoId?id=${videoId.get("video")}`
+        `${baseURL}/user/${id}/video-by-videoId?id=${videoId}`
       );
       setVideo(response.data.videos[0]);
       setTitle(response.data.videos[0].title);
@@ -71,7 +73,7 @@ const UpdateVideo = () => {
       const response = axios.patch(
         `${baseURL}/admin/update-video`,
         {
-          id,
+          id: videoId,
           title,
           description,
           thumbnailUrl: thumbnail,
@@ -93,7 +95,7 @@ const UpdateVideo = () => {
     } catch (error) {
       console.log(error);
       if (axios.isAxiosError(error)) {
-        const errorMessage = error.response?.data.error;
+        const errorMessage = error.response?.data.message;
         toast.dismiss(pendingToast);
         toast.error(errorMessage);
       }
@@ -104,7 +106,7 @@ const UpdateVideo = () => {
     const pendingToast = toast.loading("Deleting Video...");
     try {
       const response = await axios.delete(
-        `${baseURL}/admin/delete-video?id=${id}`,
+        `${baseURL}/admin/delete-video?id=${videoId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -115,6 +117,7 @@ const UpdateVideo = () => {
       if (response.data.status) {
         toast.dismiss(pendingToast);
         toast.success("Video Deleted");
+        navigate("/courses");
       }
     } catch (error) {
       console.log(error);
