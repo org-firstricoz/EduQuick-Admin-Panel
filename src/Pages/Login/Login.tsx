@@ -133,7 +133,16 @@ const Login = () => {
 
         <p className="text-lg font-medium text-center">
           New to EduQuick? Start learning with us today.{" "}
-          <span className="text-primary cursor-pointer">Sign in</span>
+          <span
+            onClick={() => {
+              startTransition(() => {
+                navigate("/sign-up");
+              });
+            }}
+            className="text-primary cursor-pointer"
+          >
+            Sign up
+          </span>
         </p>
       </div>
     </div>
