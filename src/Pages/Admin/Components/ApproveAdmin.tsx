@@ -26,7 +26,7 @@ const ApproveAdmin = ({ admins, status, setStatus }: props) => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-3/4  shadow-[#000] shadow-md rounded-md bg-secondary flex flex-col p-4 gap-4 justify-center">
+    <div className="w-full  shadow-[#000] shadow-md rounded-md bg-secondary flex flex-col p-10 gap-4 justify-center">
       <h2 className="text-left text-2xl font-normal">Approve Admins</h2>
       <div className="flex gap-2">
         <button

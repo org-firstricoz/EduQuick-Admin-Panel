@@ -3,8 +3,9 @@ import { TiGroup } from "react-icons/ti";
 import { GiWallet } from "react-icons/gi";
 import { MdContactSupport } from "react-icons/md";
 import { FaWarehouse } from "react-icons/fa6";
+import { IoIosPeople } from "react-icons/io";
 import ApproveAdmin from "./ApproveAdmin";
-import TotalAdmin from "./Cards/TotalAdmin";
+// import TotalAdmin from "./Cards/TotalAdmin";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { baseURL } from "@baseURL";
@@ -171,10 +172,15 @@ const HeroSection = () => {
           text="Others"
           count={otherAdmins?.admins.length}
         />
+        <SupportCard
+          icon={<IoIosPeople />}
+          text="Total member"
+          count={admins.length}
+        />
       </div>
       <div className="flex gap-2">
         <ApproveAdmin status={status} setStatus={setStatus} admins={admins} />
-        <TotalAdmin adminsCount={admins.length} />
+        {/* <TotalAdmin adminsCount={admins.length} /> */}
       </div>
     </div>
   );
