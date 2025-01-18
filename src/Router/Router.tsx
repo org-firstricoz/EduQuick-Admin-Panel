@@ -37,6 +37,10 @@ const UpdatePassword = lazy(
 
 const VerifyEmail = lazy(() => import("../Pages/VerifyEmail/VerifyEmail"));
 
+const AdminBySpecialization = lazy(
+  () => import("../Pages/AdminBySpecialization/AdminBySpecialization")
+);
+
 const Router = () => {
   return (
     <div>
@@ -50,6 +54,7 @@ const Router = () => {
           <Route path="/subscription" element={<SubscriptionHolders />} />
           <Route path="/users" element={<UsersPage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admins" element={<AdminBySpecialization />} />
           <Route path="/admin/change-password" element={<UpdatePassword />} />
           <Route path="/admin/profile/:id" element={<UpdateAdmin />} />
           <Route path="/pending-requests" element={<PendingAdmins />} />

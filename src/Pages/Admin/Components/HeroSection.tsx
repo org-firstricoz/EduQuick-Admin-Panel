@@ -117,6 +117,7 @@ const HeroSection = () => {
           },
         }
       );
+
       setOtherAdmins(response.data);
     } catch (error) {
       console.log(error);
@@ -169,7 +170,7 @@ const HeroSection = () => {
         />
         <SupportCard
           icon={<GiWallet />}
-          text="Others"
+          text="Other"
           count={otherAdmins?.admins.length}
         />
         <SupportCard
