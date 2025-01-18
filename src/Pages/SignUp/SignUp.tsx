@@ -15,7 +15,9 @@ const SignUp = () => {
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("Admin");
+  const [role, setRole] = useState("");
+  const [specializtion, setSpecializtion] = useState("Other");
 
   const handleCreateAccount = async () => {
     const pendingToast = toast.loading("Creating account...");
@@ -24,6 +26,8 @@ const SignUp = () => {
         fullName,
         email,
         password,
+        role,
+        specializtion,
       });
 
       await axios.post(`${baseURL}/admin/send-otp`, {
@@ -55,13 +59,13 @@ const SignUp = () => {
           EDUQUICK
         </h1>
       </div>
-      <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary gap-4 rounded-md p-20">
+      <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary gap-4 rounded-md p-14">
         <h2 className="font-semibold text-4xl">Create Account</h2>
         <input
           type="text"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          className="outline-none border-b-2 w-full bg-secondary h-16 text-xl text-[#fff] placeholder:text-[#fff] "
+          className="outline-none  border-b w-full bg-secondary h-12 text-lg text-[#fff] placeholder:text-[#fff] "
           placeholder="Full Name"
           autoFocus
         />
@@ -69,16 +73,16 @@ const SignUp = () => {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="outline-none border-b-2 w-full bg-secondary h-16 text-xl text-[#fff] placeholder:text-[#fff] "
+          className="outline-none  border-b w-full bg-secondary h-12 text-lg text-[#fff] placeholder:text-[#fff] "
           placeholder="Email Adress"
           // autoFocus
         />
-        <div className="w-full flex items-center pr-10 h-16 border-b-2">
+        <div className="w-full flex items-center pr-10 h-12  border-b">
           <input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type={showPassword ? "text" : "password"}
-            className="outline-none  w-full bg-secondary h-full text-xl text-[#fff] placeholder:text-[#fff] "
+            className="outline-none  w-full bg-secondary h-full text-lg text-[#fff] placeholder:text-[#fff] "
             placeholder="Password"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -93,6 +97,25 @@ const SignUp = () => {
             {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
           </div>
         </div>
+
+        <select
+          className="bg-secondary p-2 text-lg border rounded-md"
+          onChange={(e) => setRole(e.target.value)}
+          value={role}
+        >
+          <option value="Admin">Admin</option>
+          <option value="Super Admin">Super Admin</option>
+        </select>
+        <select
+          className="bg-secondary p-2 text-lg border rounded-md"
+          onChange={(e) => setSpecializtion(e.target.value)}
+          value={specializtion}
+        >
+          <option value="Customer Support">Customer Support</option>
+          <option value="Complaint Support">Complaint Support</option>
+          <option value="Sales Support">Sales Support</option>
+          <option value="Other">Other</option>
+        </select>
 
         <button
           onClick={handleCreateAccount}
