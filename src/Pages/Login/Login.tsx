@@ -70,7 +70,7 @@ const Login = () => {
           EDUQUICK
         </h1>
       </div>
-      <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary gap-4 rounded-md p-24">
+      <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary gap-4 rounded-md p-16">
         <h2 className="font-semibold text-4xl">Account Login</h2>
         <input
           type="email"

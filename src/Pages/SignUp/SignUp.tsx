@@ -15,8 +15,8 @@ const SignUp = () => {
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("Admin");
-  const [role, setRole] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("Admin");
   const [specializtion, setSpecializtion] = useState("Other");
 
   const handleCreateAccount = async () => {
@@ -59,7 +59,7 @@ const SignUp = () => {
           EDUQUICK
         </h1>
       </div>
-      <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary gap-4 rounded-md p-14">
+      <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary gap-4 rounded-md p-10">
         <h2 className="font-semibold text-4xl">Create Account</h2>
         <input
           type="text"
@@ -121,8 +121,21 @@ const SignUp = () => {
           onClick={handleCreateAccount}
           className="bg-[#fff] text-[#111111] shadow-[#000] shadow-md p-3 rounded-md font-medium text-lg mt-8 active:bg-[#d4d4d4]"
         >
-          Login{" "}
+          Register as Admin{" "}
         </button>
+        <p
+          onClick={() => {
+            startTransition(() => {
+              navigate("/login");
+            });
+          }}
+          className="text-center font-medium text-lg"
+        >
+          Already have an account?{" "}
+          <span className="text-primary cursor-pointer font-semibold">
+            Login
+          </span>
+        </p>
       </div>
     </div>
   );

@@ -78,17 +78,17 @@ const AdminBySpecialization = () => {
         <h2 className="text-4xl font-medium ">
           {searchQuery.get("specialization")}
         </h2>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 justify-center items-center gap-16">
           {admins.map((admin, i) => (
             <div
               key={i}
-              className="w-56 hover:scale-105 duration-300 bg-[#202224] transition-all cursor-pointer border rounded-md p-4 flex flex-col gap-1 items-center justify-center"
+              className="w-[300px] h-[200px] hover:scale-105 duration-300 bg-[#202224] transition-all cursor-pointer border rounded-md p-4 flex flex-col gap-1 items-center justify-center"
             >
               {admin.profileImageUrl ? (
                 <img
                   src={admin.profileImageUrl}
                   alt={admin.fullName}
-                  className=" rounded-full w-20 h-20"
+                  className=" rounded-full w-16 h-16"
                 />
               ) : (
                 <FaUser className="border p-2 rounded-full text-6xl" />
