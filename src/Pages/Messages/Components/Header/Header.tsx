@@ -1,28 +1,41 @@
-import { IoSearch } from "react-icons/io5";
-import { FaDownload } from "react-icons/fa";
-import { TbInfoHexagonFilled } from "react-icons/tb";
-import { MdDelete } from "react-icons/md";
+import SupportCard from "../../../Admin/Components/Cards/SupportCard";
+import { IoChatboxSharp } from "react-icons/io5";
+import { BsPersonFillCheck } from "react-icons/bs";
+import { BsPersonFillExclamation } from "react-icons/bs";
+import { BsPersonFillSlash } from "react-icons/bs";
 
 const Header = () => {
   return (
-    <div className="flex  justify-between pl-6  pr-6">
-      <div className="w-1/2 flex items-center justify-center gap-2 pl-4 bg-[#D5D5D5] rounded-xl">
-        <label htmlFor="search" className="text-2xl cursor-pointer">
-          <IoSearch className="text-2xl text-[#000]" />
-        </label>
+    <div className="flex w-full justify-center gap-8">
+      <SupportCard
+        icon={<IoChatboxSharp />}
+        text="Total Complaints"
+        count={3}
+        onClick={() => null}
+        width={4}
+      />
+      <SupportCard
+        icon={<BsPersonFillCheck />}
+        text="Total solved"
+        count={3}
+        onClick={() => null}
+        width={4}
+      />
 
-        <input
-          type="text"
-          className="h-10 w-full rounded-xl outline-none bg-[#D5D5D5] text-[#000] placeholder:text-[#000]"
-          placeholder="Search mail"
-          id="search"
-        />
-      </div>
-      <div className="bg-[#D5D5D5] text-[#000] text-4xl gap-4 rounded-xl pl-4 pr-4 w-fit flex justify-center items-center">
-        <FaDownload className="cursor-pointer p-2 hover:bg-[#c4c4c4] rounded-full transition-all duration-200" />
-        <TbInfoHexagonFilled className="cursor-pointer p-2 hover:bg-[#c4c4c4] rounded-full transition-all duration-200" />
-        <MdDelete className="cursor-pointer p-2 hover:bg-[#c4c4c4] rounded-full transition-all duration-200" />
-      </div>
+      <SupportCard
+        icon={<BsPersonFillExclamation />}
+        text="Total unsolved"
+        count={3}
+        onClick={() => null}
+        width={4}
+      />
+      <SupportCard
+        icon={<BsPersonFillSlash />}
+        text="Total pending"
+        count={3}
+        onClick={() => null}
+        width={4}
+      />
     </div>
   );
 };

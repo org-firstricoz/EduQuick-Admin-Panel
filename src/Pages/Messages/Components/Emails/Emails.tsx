@@ -5,7 +5,6 @@ const Emails = () => {
   useTitle("Support • EduQuick");
   return (
     <div className="bg-secondary shadow-[#000] shadow-md w-full overflow-scroll rounded-md ">
-      {/* <Header /> */}
       <Email />
     </div>
   );

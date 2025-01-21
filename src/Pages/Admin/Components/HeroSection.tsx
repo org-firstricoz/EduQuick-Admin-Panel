@@ -6,10 +6,11 @@ import { FaWarehouse } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
 import ApproveAdmin from "./ApproveAdmin";
 // import TotalAdmin from "./Cards/TotalAdmin";
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import axios from "axios";
 import { baseURL } from "@baseURL";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 interface Admin {
   createdAt: string;
@@ -33,6 +34,8 @@ interface Specialization {
 
 const HeroSection = () => {
   const token = Cookies.get("token");
+
+  const navigate = useNavigate();
 
   const [admins, setAdmins] = useState<Admin[]>([]);
   const [techAdmins, setTechAdmins] = useState<Specialization | null>(null);
@@ -144,6 +147,12 @@ const HeroSection = () => {
     getAdmins();
   }, [status]);
 
+  const handleNavigation = (path: string) => {
+    startTransition(() => {
+      navigate(`/admins?specialization=${path}`);
+    });
+  };
+
   return (
     <div
       className=" w-full overflow-scroll p-2  pl-8 pr-8  ml-4 mr-4 rounded-xl flex flex-col gap-4 font-poppins"
@@ -155,28 +164,38 @@ const HeroSection = () => {
       <div className="flex w-full gap-4">
         <SupportCard
           icon={<TiGroup />}
+          onClick={() => handleNavigation("Technical Support")}
           text="Technical Support"
           count={techAdmins?.admins.length}
+          width={5}
         />
         <SupportCard
           icon={<MdContactSupport />}
+          onClick={() => handleNavigation("Customer Support")}
           text="Customer Support"
           count={supportAdmins?.admins.length}
+          width={5}
         />
         <SupportCard
           icon={<FaWarehouse />}
+          onClick={() => handleNavigation("Complaint Support")}
           text="Complaint Support"
           count={complaintAdmins?.admins.length}
+          width={5}
         />
         <SupportCard
           icon={<GiWallet />}
+          onClick={() => handleNavigation("Other")}
           text="Other"
           count={otherAdmins?.admins.length}
+          width={5}
         />
         <SupportCard
           icon={<IoIosPeople />}
+          onClick={() => handleNavigation("Total member")}
           text="Total member"
           count={admins.length}
+          width={5}
         />
       </div>
       <div className="flex gap-2">
