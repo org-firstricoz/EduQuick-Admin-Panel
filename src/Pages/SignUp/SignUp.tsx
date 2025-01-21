@@ -24,6 +24,31 @@ const SignUp = () => {
 
   const [otp, setOtp] = useState("");
 
+  const [passError, setPassError] = useState<string[]>([]);
+
+  const validatePassword = (password: string) => {
+    const errors = [];
+    const regexCapital = /[A-Z]/;
+    const regexNumber = /\d/;
+    const regexSpecial = /[@$!%*?&#]/;
+    const regexLength = /.{8,}/;
+
+    if (!regexCapital.test(password)) {
+      errors.push("Password must include at least one capital letter.");
+    }
+    if (!regexNumber.test(password)) {
+      errors.push("Password must include at least one number.");
+    }
+    if (!regexSpecial.test(password)) {
+      errors.push("Password must include at least one special character.");
+    }
+    if (!regexLength.test(password)) {
+      errors.push("Password must be at least 8 characters long.");
+    }
+
+    return errors;
+  };
+
   const handleCreateAccount = async () => {
     const pendingToast = toast.loading("Sending OTP...");
     try {
@@ -184,7 +209,10 @@ const SignUp = () => {
           <div className="w-full flex items-center pr-10 h-12  border-b">
             <input
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setPassError(validatePassword(password));
+              }}
               type={showPassword ? "text" : "password"}
               className="outline-none  w-full bg-secondary h-full text-lg text-[#fff] placeholder:text-[#fff] "
               placeholder="Password"
@@ -201,6 +229,12 @@ const SignUp = () => {
               {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
             </div>
           </div>
+
+          <ul style={{ color: "red" }}>
+            {passError.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
 
           <select
             className="bg-secondary p-2 text-lg border rounded-md"
