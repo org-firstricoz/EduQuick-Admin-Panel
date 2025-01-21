@@ -167,35 +167,30 @@ const HeroSection = () => {
           onClick={() => handleNavigation("Technical Support")}
           text="Technical Support"
           count={techAdmins?.admins.length}
-          width={5}
         />
         <SupportCard
           icon={<MdContactSupport />}
           onClick={() => handleNavigation("Customer Support")}
           text="Customer Support"
           count={supportAdmins?.admins.length}
-          width={5}
         />
         <SupportCard
           icon={<FaWarehouse />}
           onClick={() => handleNavigation("Complaint Support")}
           text="Complaint Support"
           count={complaintAdmins?.admins.length}
-          width={5}
         />
         <SupportCard
           icon={<GiWallet />}
           onClick={() => handleNavigation("Other")}
           text="Other"
           count={otherAdmins?.admins.length}
-          width={5}
         />
         <SupportCard
           icon={<IoIosPeople />}
           onClick={() => handleNavigation("Total member")}
           text="Total member"
           count={admins.length}
-          width={5}
         />
       </div>
       <div className="flex gap-2">

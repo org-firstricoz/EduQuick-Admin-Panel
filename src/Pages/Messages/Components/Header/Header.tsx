@@ -90,7 +90,7 @@ const Header = () => {
   ];
 
   return (
-    <div style={{ display: "flex", gap: "16px" }}>
+    <div className="flex justify-center gap-10">
       {supportCardData.map((card, index) => (
         <SupportCard
           key={index}
@@ -98,7 +98,6 @@ const Header = () => {
           text={card.text}
           count={card.count}
           onClick={card.onClick}
-          width={4}
         />
       ))}
     </div>

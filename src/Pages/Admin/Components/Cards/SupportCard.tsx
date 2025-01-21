@@ -5,14 +5,13 @@ interface props {
   text: string;
   count: number | undefined;
   onClick: () => void;
-  width: number;
 }
 
-const SupportCard = ({ icon, text, count, onClick, width }: props) => {
+const SupportCard = ({ icon, text, count, onClick }: props) => {
   return (
     <div
       onClick={onClick}
-      className={`w-1/${width} bg-secondary p-3 cursor-pointer rounded-md flex items-center gap-2 shadow-md shadow-[#000]`}
+      className={`w-1/5 bg-secondary p-3 cursor-pointer rounded-md flex items-center gap-2 shadow-md shadow-[#000]`}
     >
       <div className="p-2 bg-primary text-[#fff] rounded-full text-2xl">
         {icon}
