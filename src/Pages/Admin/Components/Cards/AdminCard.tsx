@@ -84,23 +84,25 @@ const AdminCard = ({ admin }: props) => {
 
   return (
     <div className="bg-[#111] shadow-[#000] shadow-md transition-all hover:bg-[#1d1d1d] duration-300 flex flex-col gap-1 p-3 rounded-md w-full">
-      <IconButton
-        onClick={() => {
-          setDel(admin);
-          isSuperAdmin
-            ? setOpen(true)
-            : toast.error("Only super admin can delete admins!");
-        }}
-        sx={{
-          marginLeft: "860px",
-        }}
-      >
-        <FaTrash
-          className={` drop-shadow-md ${
-            isSuperAdmin ? "cursor-pointer text-primary" : "text-[#ff4f58]"
-          } `}
-        />
-      </IconButton>
+      {isSuperAdmin && (
+        <IconButton
+          onClick={() => {
+            setDel(admin);
+            isSuperAdmin
+              ? setOpen(true)
+              : toast.error("Only super admin can delete admins!");
+          }}
+          sx={{
+            marginLeft: "860px",
+          }}
+        >
+          <FaTrash
+            className={` drop-shadow-md ${
+              isSuperAdmin ? "cursor-pointer text-primary" : "text-[#ff4f58]"
+            } `}
+          />
+        </IconButton>
+      )}
       <div className="flex items-center  w-11/12 -mt-10 gap-2">
         {admin.profileImageUrl ? (
           <img src={admin.profileImageUrl} className="w-10 h-10 rounded-full" />
