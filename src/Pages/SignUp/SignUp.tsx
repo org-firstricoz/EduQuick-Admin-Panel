@@ -19,7 +19,7 @@ const SignUp = () => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("Admin");
+  // const [role, setRole] = useState("Admin");
   const [specializtion, setSpecializtion] = useState("Other");
 
   const [otp, setOtp] = useState("");
@@ -96,7 +96,7 @@ const SignUp = () => {
         fullName,
         email,
         password,
-        role,
+        // role,
         specializtion,
       });
     } catch (error) {
@@ -236,14 +236,14 @@ const SignUp = () => {
             ))}
           </ul>
 
-          <select
+          {/* <select
             className="bg-secondary p-2 text-lg border rounded-md"
             onChange={(e) => setRole(e.target.value)}
             value={role}
           >
             <option value="Admin">Admin</option>
             <option value="Super Admin">Super Admin</option>
-          </select>
+          </select> */}
           <select
             className="bg-secondary p-2 text-lg border rounded-md"
             onChange={(e) => setSpecializtion(e.target.value)}
