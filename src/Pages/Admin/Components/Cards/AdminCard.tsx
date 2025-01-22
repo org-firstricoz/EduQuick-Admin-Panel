@@ -103,7 +103,11 @@ const AdminCard = ({ admin }: props) => {
           />
         </IconButton>
       )}
-      <div className="flex items-center  w-11/12 -mt-10 gap-2">
+      <div
+        className={`flex items-center  w-11/12 gap-2 ${
+          isSuperAdmin && "mt-10"
+        }`}
+      >
         {admin.profileImageUrl ? (
           <img src={admin.profileImageUrl} className="w-10 h-10 rounded-full" />
         ) : (
