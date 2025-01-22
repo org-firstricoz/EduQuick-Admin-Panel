@@ -20,7 +20,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [role, setRole] = useState("Admin");
-  const [specializtion, setSpecializtion] = useState("Other");
+  // const [specializtion, setSpecializtion] = useState("Other");
 
   const [otp, setOtp] = useState("");
 
@@ -92,12 +92,20 @@ const SignUp = () => {
 
       toast.dismiss(pendingToast);
 
+      const penToast = toast.loading("Registering Admin...");
+
       await axios.post(`${baseURL}/admin/register`, {
         fullName,
         email,
         password,
         // role,
-        specializtion,
+        // specializtion,
+      });
+
+      toast.dismiss(penToast);
+      toast.success("Ademin registered!");
+      startTransition(() => {
+        navigate("/login");
       });
     } catch (error) {
       console.log(error);
@@ -113,7 +121,7 @@ const SignUp = () => {
     const pendingToast = toast.loading("OTP sending...");
     try {
       await axios.post(`${baseURL}/admin/send-otp`, {
-        name,
+        fullName,
         email,
       });
 
@@ -244,7 +252,8 @@ const SignUp = () => {
             <option value="Admin">Admin</option>
             <option value="Super Admin">Super Admin</option>
           </select> */}
-          <select
+
+          {/*  <select
             className="bg-secondary p-2 text-lg border rounded-md"
             onChange={(e) => setSpecializtion(e.target.value)}
             value={specializtion}
@@ -254,6 +263,7 @@ const SignUp = () => {
             <option value="Sales Support">Sales Support</option>
             <option value="Other">Other</option>
           </select>
+           */}
 
           <button
             onClick={handleCreateAccount}

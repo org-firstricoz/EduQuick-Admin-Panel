@@ -66,19 +66,19 @@ const AdminBySpecialization = () => {
   }, [specialization]);
 
   return (
-    <div className="p-8">
+    <div className="p-4">
       <h1 className="text-primary font-jockey font-normal text-center text-4xl">
         EDUQUICK
       </h1>
       <IoIosArrowBack
         onClick={() => handleNavigation("/admin")}
-        className="p-2 text-4xl absolute left-16 top-16 rounded-full cursor-pointer border  "
+        className="p-2 text-4xl absolute left-16 top-10 rounded-full cursor-pointer border  "
       />
-      <div className="p-14 flex flex-col gap-4">
+      <div className="p-10 flex flex-col gap-4">
         <h2 className="text-4xl font-medium ">
           {searchQuery.get("specialization")}
         </h2>
-        <div className="grid grid-cols-4 justify-center items-center gap-16">
+        <div className="grid grid-cols-4 gap-4">
           {admins.map((admin, i) => (
             <div
               key={i}
