@@ -2,6 +2,7 @@ import { baseURL } from "@baseURL";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { useSearchParams } from "react-router-dom";
 
 interface Admin {
   email: string;
@@ -34,6 +35,8 @@ interface Complaints {
 
 const Email = () => {
   const [complaints, setComplaints] = useState<Complaints[]>([]);
+  const [query] = useSearchParams();
+  const filter = query.get("filter");
 
   const token = Cookies.get("token");
 
@@ -63,51 +66,65 @@ const Email = () => {
           <td>Subject</td>
           <td>Status</td>
         </tr>
-        {complaints.map((complaint, i) => (
-          <tr
-            key={i}
-            className=" hover:bg-[#242424] border-b transition-all duration-300 cursor-pointer rounded-md "
-          >
-            <td>
-              <h2 className="p-2 flex flex-col">
-                <span className="rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
-                  # {complaint.ticketId}
-                </span>
-                <span className="  rounded-sm font-extralight  w-56 text-nowrap overflow-hidden">
-                  {complaint.user.name}
-                </span>
-              </h2>
+        {complaints.filter((complaint) => {
+          return complaint.status.includes(filter ? filter : "");
+        }).length === 0 ? (
+          <tr>
+            <td colSpan={4} className="text-center p-3">
+              No data found
             </td>
-            <td>
-              <h2 className="p-2 flex flex-col">
-                <span className="rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
-                  {complaint.user.email}
-                </span>
-                <span className="  rounded-sm font-extralight  w-56 text-nowrap overflow-hidden">
-                  +91 {complaint.user.phoneNumber}
-                </span>
-              </h2>
-            </td>
-            <td>
-              <h2 className="p-2  rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
-                {complaint.subject}
-              </h2>
-            </td>
-            <td>
-              <h2
-                className={`p-2 rounded-md font-medium  w-fit text-nowrap overflow-hidden
+          </tr>
+        ) : (
+          complaints
+            .filter((complaint) => {
+              return complaint.status.includes(filter ? filter : "");
+            })
+            .map((complaint, i) => (
+              <tr
+                key={i}
+                className=" hover:bg-[#242424] border-b transition-all duration-300 cursor-pointer rounded-md "
+              >
+                <td>
+                  <h2 className="p-2 flex flex-col">
+                    <span className="rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
+                      # {complaint.ticketId}
+                    </span>
+                    <span className="  rounded-sm font-extralight  w-56 text-nowrap overflow-hidden">
+                      {complaint.user.name}
+                    </span>
+                  </h2>
+                </td>
+                <td>
+                  <h2 className="p-2 flex flex-col">
+                    <span className="rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
+                      {complaint.user.email}
+                    </span>
+                    <span className="  rounded-sm font-extralight  w-56 text-nowrap overflow-hidden">
+                      +91 {complaint.user.phoneNumber}
+                    </span>
+                  </h2>
+                </td>
+                <td>
+                  <h2 className="p-2  rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
+                    {complaint.subject}
+                  </h2>
+                </td>
+                <td>
+                  <h2
+                    className={`p-2 rounded-md font-medium  w-fit text-nowrap overflow-hidden
                 ${
                   complaint.status === "Resolved"
                     ? "bg-[#F0FFF8] text-[#18AB56]"
                     : "bg-[#FFF0F0] text-[#FFBC10]"
                 }
                 `}
-              >
-                {complaint.status}
-              </h2>
-            </td>
-          </tr>
-        ))}
+                  >
+                    {complaint.status}
+                  </h2>
+                </td>
+              </tr>
+            ))
+        )}
       </table>
     </div>
   );
