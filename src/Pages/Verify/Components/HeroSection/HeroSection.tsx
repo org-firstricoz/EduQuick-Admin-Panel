@@ -91,7 +91,7 @@ const HeroSection = () => {
 
   useEffect(() => {
     getCourses();
-  }, [courses, id]);
+  }, [courses, id, filter]);
 
   return (
     <div
