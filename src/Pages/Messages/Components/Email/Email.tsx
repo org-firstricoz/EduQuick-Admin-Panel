@@ -62,7 +62,6 @@ const Email = () => {
           <td>Contact</td>
           <td>Subject</td>
           <td>Status</td>
-          <td>Action</td>
         </tr>
         {complaints.map((complaint, i) => (
           <tr
