@@ -1,8 +1,11 @@
 import { baseURL } from "@baseURL";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { useSearchParams } from "react-router-dom";
+import ResolveDialog from "../ResolveDialog";
+import toast from "react-hot-toast";
 
 interface Admin {
   email: string;
@@ -35,19 +38,42 @@ interface Complaints {
 
 const Email = () => {
   const [complaints, setComplaints] = useState<Complaints[]>([]);
+  const [complaint, setComplaint] = useState<Complaints | null>(null);
   const [query] = useSearchParams();
   const filter = query.get("filter");
+
+  const [open, setOpen] = useState(false);
 
   const token = Cookies.get("token");
 
   const getContactUsMessages = async () => {
     try {
-      const response = await axios.get(`${baseURL}/complaints`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setComplaints(response.data.complaints);
+      if (filter === null) {
+        const response = await axios.get(`${baseURL}/complaints`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setComplaints(response.data.complaints);
+      } else if (filter === "All") {
+        const response = await axios.get(`${baseURL}/complaints`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setComplaints(response.data.complaints);
+      } else {
+        const response = await axios.get(
+          `${baseURL}/complaints/status/${filter}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setComplaints(response.data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -55,7 +81,7 @@ const Email = () => {
 
   useEffect(() => {
     getContactUsMessages();
-  }, []);
+  }, [filter, open]);
 
   return (
     <div className="w-full flex text-left  text-[#fff] flex-col">
@@ -65,69 +91,82 @@ const Email = () => {
           <td>Contact</td>
           <td>Subject</td>
           <td>Status</td>
+          <td>Action</td>
         </tr>
-        {complaints.filter((complaint) => {
-          return complaint.status.includes(filter ? filter : "");
-        }).length === 0 ? (
-          <tr>
-            <td colSpan={4} className="text-center p-3">
-              No data found
+        {complaints.map((complaint, i) => (
+          <tr
+            key={i}
+            className=" hover:bg-[#242424] border-b transition-all duration-300 cursor-pointer rounded-md "
+          >
+            <td>
+              <h2 className="p-2 flex flex-col">
+                <span className="rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
+                  # {complaint.ticketId}
+                </span>
+                <span className="  rounded-sm font-extralight  w-56 text-nowrap overflow-hidden">
+                  {complaint.user.name}
+                </span>
+              </h2>
             </td>
-          </tr>
-        ) : (
-          complaints
-            .filter((complaint) => {
-              return complaint.status.includes(filter ? filter : "");
-            })
-            .map((complaint, i) => (
-              <tr
-                key={i}
-                className=" hover:bg-[#242424] border-b transition-all duration-300 cursor-pointer rounded-md "
-              >
-                <td>
-                  <h2 className="p-2 flex flex-col">
-                    <span className="rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
-                      # {complaint.ticketId}
-                    </span>
-                    <span className="  rounded-sm font-extralight  w-56 text-nowrap overflow-hidden">
-                      {complaint.user.name}
-                    </span>
-                  </h2>
-                </td>
-                <td>
-                  <h2 className="p-2 flex flex-col">
-                    <span className="rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
-                      {complaint.user.email}
-                    </span>
-                    <span className="  rounded-sm font-extralight  w-56 text-nowrap overflow-hidden">
-                      +91 {complaint.user.phoneNumber}
-                    </span>
-                  </h2>
-                </td>
-                <td>
-                  <h2 className="p-2  rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
-                    {complaint.subject}
-                  </h2>
-                </td>
-                <td>
-                  <h2
-                    className={`p-2 rounded-md font-medium  w-fit text-nowrap overflow-hidden
+            <td>
+              <h2 className="p-2 flex flex-col">
+                <span className="rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
+                  {complaint.user.email}
+                </span>
+                <span className="  rounded-sm font-extralight  w-56 text-nowrap overflow-hidden">
+                  +91 {complaint.user.phoneNumber}
+                </span>
+              </h2>
+            </td>
+            <td>
+              <h2 className="p-2  rounded-sm font-normal  w-56 text-nowrap overflow-hidden">
+                {complaint.subject}
+              </h2>
+            </td>
+            <td>
+              <h2
+                className={`p-2 rounded-md font-medium  w-28 text-center text-nowrap overflow-hidden
                 ${
                   complaint.status === "Resolved"
                     ? "bg-[#F0FFF8] text-[#18AB56]"
                     : "bg-[#FFF0F0] text-[#FFBC10]"
                 }
                 `}
+              >
+                {complaint.status}
+              </h2>
+            </td>
+            <td>
+              <div className="group">
+                <BsThreeDotsVertical className=" p-2 text-4xl" />
+                <div className="bg-[#111111] absolute right-16 group-hover:flex group-hover:scale-110 scale-0  transition-all duration-300 shadow-[#000] shadow-md rounded-md w-36 hidden flex-col">
+                  <button
+                    className="p-2 border-b"
+                    onClick={() => {
+                      if (complaint.status === "Resolved") {
+                        toast.error("Complaint is already resolved!");
+                        return;
+                      }
+                      setOpen(true);
+                      setComplaint(complaint);
+                    }}
                   >
-                    {complaint.status}
-                  </h2>
-                </td>
-              </tr>
-            ))
-        )}
+                    Resolve
+                  </button>
+                  <button className="p-2">Delete</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        ))}
+        <ResolveDialog open={open} setOpen={setOpen} complaint={complaint} />
       </table>
     </div>
   );
 };
 
 export default Email;
+
+// .filter((complaint) => {
+//   return complaint.status.includes(filter ? filter : "");
+// })

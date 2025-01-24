@@ -28,6 +28,14 @@ const FilterDialog = ({ open, setOpen }: props) => {
         <div className="flex justify-center gap-4">
           <button
             className={`p-2 pl-6 pr-6 rounded-full ${
+              filter === "All" ? "bg-primary" : "border"
+            }`}
+            onClick={() => handleFilterChange("All")}
+          >
+            All
+          </button>
+          <button
+            className={`p-2 pl-6 pr-6 rounded-full ${
               filter === "Pending" ? "bg-primary" : "border"
             }`}
             onClick={() => handleFilterChange("Pending")}

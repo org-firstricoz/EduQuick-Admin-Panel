@@ -187,7 +187,7 @@ const Sidebar = () => {
         </div>
       </div>
       <div
-        onClick={() => handleNavigation("/support")}
+        onClick={() => handleNavigation("/support?filter=All")}
         className={`
         ${
           location.pathname === "/support"
