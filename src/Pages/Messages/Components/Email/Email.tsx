@@ -7,6 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import ResolveDialog from "../ResolveDialog";
 import toast from "react-hot-toast";
 import DeleteDialog from "../DeleteDialog";
+import { jwtDecode } from "jwt-decode";
 
 interface Admin {
   email: string;
@@ -37,6 +38,13 @@ interface Complaints {
   _id: string;
 }
 
+interface token {
+  id: string;
+  role: string;
+  iat: number;
+  exp: number;
+}
+
 const Email = () => {
   const [complaints, setComplaints] = useState<Complaints[]>([]);
   const [complaint, setComplaint] = useState<Complaints | null>(null);
@@ -45,8 +53,20 @@ const Email = () => {
 
   const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>();
 
   const token = Cookies.get("token");
+
+  useEffect(() => {
+    if (token) {
+      const decode = jwtDecode<token>(token);
+      if (decode.role === "Super Admin") {
+        setIsSuperAdmin(true);
+      } else if (decode.role === "Admin") {
+        setIsSuperAdmin(false);
+      }
+    }
+  }, []);
 
   const getContactUsMessages = async () => {
     try {
@@ -155,15 +175,17 @@ const Email = () => {
                   >
                     Resolve
                   </button>
-                  <button
-                    onClick={() => {
-                      setOpenDelete(true);
-                      setComplaint(complaint);
-                    }}
-                    className="p-2 bg-[#e7061188] hover:bg-[#e70612] duration-300 transition-all rounded-b-md"
-                  >
-                    Delete
-                  </button>
+                  {isSuperAdmin && (
+                    <button
+                      onClick={() => {
+                        setOpenDelete(true);
+                        setComplaint(complaint);
+                      }}
+                      className="p-2 bg-[#e7061188] hover:bg-[#e70612] duration-300 transition-all rounded-b-md"
+                    >
+                      Delete
+                    </button>
+                  )}
                 </div>
               </div>
             </td>
