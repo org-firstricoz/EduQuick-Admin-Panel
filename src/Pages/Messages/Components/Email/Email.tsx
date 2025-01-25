@@ -6,6 +6,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { useSearchParams } from "react-router-dom";
 import ResolveDialog from "../ResolveDialog";
 import toast from "react-hot-toast";
+import DeleteDialog from "../DeleteDialog";
 
 interface Admin {
   email: string;
@@ -43,6 +44,7 @@ const Email = () => {
   const filter = query.get("filter");
 
   const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
   const token = Cookies.get("token");
 
@@ -141,7 +143,7 @@ const Email = () => {
                 <BsThreeDotsVertical className=" p-2 text-4xl" />
                 <div className="bg-[#111111] absolute right-16 group-hover:flex group-hover:scale-110 scale-0  transition-all duration-300 shadow-[#000] shadow-md rounded-md w-36 hidden flex-col">
                   <button
-                    className="p-2 border-b"
+                    className="p-2"
                     onClick={() => {
                       if (complaint.status === "Resolved") {
                         toast.error("Complaint is already resolved!");
@@ -153,13 +155,26 @@ const Email = () => {
                   >
                     Resolve
                   </button>
-                  <button className="p-2">Delete</button>
+                  <button
+                    onClick={() => {
+                      setOpenDelete(true);
+                      setComplaint(complaint);
+                    }}
+                    className="p-2 bg-[#e7061188] hover:bg-[#e70612] duration-300 transition-all rounded-b-md"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </td>
           </tr>
         ))}
         <ResolveDialog open={open} setOpen={setOpen} complaint={complaint} />
+        <DeleteDialog
+          open={openDelete}
+          setOpen={setOpenDelete}
+          complaint={complaint}
+        />
       </table>
     </div>
   );
