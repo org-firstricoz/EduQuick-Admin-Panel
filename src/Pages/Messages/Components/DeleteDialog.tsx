@@ -1,5 +1,9 @@
+import { baseURL } from "@baseURL";
 import Dialog from "@dialog";
+import axios from "axios";
 import { IoClose } from "react-icons/io5";
+import Cookies from "js-cookie";
+import toast from "react-hot-toast";
 
 interface Admin {
   email: string;
@@ -44,6 +48,31 @@ interface props {
 // }
 
 const DeleteDialog = ({ open, setOpen, complaint }: props) => {
+  const token = Cookies.get("token");
+
+  const handleDeleteComplaint = async () => {
+    const pendingToast = toast.loading("Deleting complaint...");
+    try {
+      const response = await axios.delete(
+        `${baseURL}/complaints/${complaint?.ticketId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      toast.dismiss(pendingToast);
+      toast.success(response.data.message);
+    } catch (error) {
+      console.log(error);
+      toast.dismiss(pendingToast);
+      if (axios.isAxiosError(error)) {
+        const errMessage = error.response?.data.error;
+        toast.error(errMessage);
+      }
+    }
+  };
+
   return (
     <Dialog open={open} width={600} onClose={() => null}>
       <div className="w-full h-full flex flex-col gap-4">
@@ -59,7 +88,7 @@ const DeleteDialog = ({ open, setOpen, complaint }: props) => {
       </div>
       <div className="flex justify-center">
         <button
-          //   onClick={resolveComplaint}
+          onClick={handleDeleteComplaint}
           className="bg-primary pl-8 p-2 pr-8 rounded-md"
         >
           Delete Complaint

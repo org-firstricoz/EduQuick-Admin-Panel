@@ -103,7 +103,7 @@ const Email = () => {
 
   useEffect(() => {
     getContactUsMessages();
-  }, [filter, open]);
+  }, [filter, open, openDelete]);
 
   return (
     <div className="w-full flex text-left  text-[#fff] flex-col">
