@@ -63,6 +63,7 @@ const DeleteDialog = ({ open, setOpen, complaint }: props) => {
       );
       toast.dismiss(pendingToast);
       toast.success(response.data.message);
+      setOpen(false);
     } catch (error) {
       console.log(error);
       toast.dismiss(pendingToast);

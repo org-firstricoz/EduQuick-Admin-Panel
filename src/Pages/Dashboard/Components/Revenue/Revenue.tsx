@@ -4,6 +4,12 @@ import { baseURL } from "../../../../baseURL";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
+interface RevenueData {
+  date: string;
+  day: string;
+  revenue: number;
+}
+
 const Revenue = () => {
   const [revenue, setRevenue] = useState([]);
 
@@ -19,7 +25,20 @@ const Revenue = () => {
           },
         }
       );
-      setRevenue(response.data.weeklyRevenue);
+
+      const formattedRevenue = response.data.weeklyRevenue.map(
+        (item: RevenueData) => ({
+          ...item,
+          revenue: item.revenue / 100,
+        })
+      );
+
+      setRevenue((prevRevenue) => {
+        if (JSON.stringify(prevRevenue) !== JSON.stringify(formattedRevenue)) {
+          return formattedRevenue;
+        }
+        return prevRevenue;
+      });
     } catch (error) {
       console.log(error);
     }
@@ -27,16 +46,15 @@ const Revenue = () => {
 
   useEffect(() => {
     getTotalRevenue();
-  });
+  }, []);
 
   return (
-    <div className="w-full overflow-scroll bg-secondary  p-4 rounded-xl shadow-[#0a0a0a] shadow-xl">
+    <div className="w-full overflow-scroll bg-secondary p-4 rounded-xl shadow-[#0a0a0a] shadow-xl">
       <p className="text-primary text-xl font-semibold">Total Revenue</p>
       <BarChart width={1000} height={300} data={revenue}>
         <XAxis dataKey="day" stroke="#8884d8" />
         <YAxis />
         <Tooltip />
-
         <Bar dataKey="revenue" fill="#E70612" barSize={20} />
       </BarChart>
     </div>
