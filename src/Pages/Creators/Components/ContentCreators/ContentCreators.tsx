@@ -70,7 +70,7 @@ const ContentCreators = ({
           {creators.map((creator, i) => (
             <div
               key={i}
-              className="w-56 hover:scale-105 duration-300 bg-[#202224] transition-all cursor-pointer border rounded-md p-4 flex flex-col gap-1 items-center justify-center"
+              className="w-56 hover:scale-105 duration-300 bg-secondary dark:bg-[#fff] dark:text-[#111] transition-all cursor-pointer border rounded-md p-4 flex flex-col gap-1 items-center justify-center"
               onClick={() => {
                 setCreator(creator);
                 setOpenCreatorsDialog(false);

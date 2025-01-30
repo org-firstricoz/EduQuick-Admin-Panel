@@ -148,14 +148,14 @@ const UpdateVideo = () => {
         value={title}
         placeholder="Title"
         onChange={(e) => setTitle(e.target.value)}
-        className="border rounded-md placeholder:text-[#fff] w-1/2 bg-[#111111] p-3"
+        className="border rounded-md placeholder:text-[#fff] w-1/2 bg-secondary dark:bg-[#fff] dark:text-[#111] p-3"
       />
-      <div className="border rounded-md placeholder:text-[#fff] w-1/2 p-2 bg-[#111111]">
+      <div className="border rounded-md placeholder:text-[#fff] w-1/2 p-2 bg-secondary dark:bg-[#fff] dark:text-[#111]">
         <textarea
           value={description}
           placeholder="Description"
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full placeholder:text-[#fff] h-full outline-none rounded-md bg-[#111111]"
+          className="w-full placeholder:text-[#fff] h-full outline-none rounded-md bg-secondary dark:bg-[#fff] dark:text-[#111]"
         />
       </div>
 

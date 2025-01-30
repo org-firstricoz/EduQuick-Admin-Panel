@@ -9,6 +9,7 @@ import { MdOutlineFileUpload } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { useTitle } from "@hooks";
+import DarkMode from "../../Components/DarkMode";
 
 interface AdminUser {
   createdAt: string;
@@ -199,8 +200,9 @@ const UpdateAdmin = () => {
             navigate("/");
           });
         }}
-        className="text-4xl cursor-pointer text-[#fff] absolute top-8 left-8"
+        className="text-4xl cursor-pointer bg-secondary dark:bg-[#fff] dark:text-[#111] text-[#fff] absolute top-8 left-8"
       />
+      <DarkMode />
       <h2 className="text-center text-3xl font-semibold">Update Admin </h2>
       <div className=" flex justify-center items-center w-full">
         <div className="flex gap-6">
@@ -212,7 +214,7 @@ const UpdateAdmin = () => {
               />
               <button
                 onClick={() => setOpen(true)}
-                className="p-2 pl-5 pr-5 transition-all duration-300 rounded-full mt-2 hover:bg-[#1b1b1b]"
+                className="p-2 pl-5 pr-5 transition-all duration-300 dark:border rounded-full mt-2 hover:bg-[#1b1b1b]"
               >
                 Choose again
               </button>
@@ -245,7 +247,7 @@ const UpdateAdmin = () => {
           <div className="w-full h-full flex flex-col gap-2 justify-center items-center">
             <p>Image Type</p>
             <select
-              className="bg-[#000] text-center p-2 border outline-none rounded-md"
+              className="bg-secondary dark:bg-[#fff] dark:text-[#111] text-center p-2 border outline-none rounded-md"
               onChange={(e) => setImgType(e.target.value)}
             >
               <option value="">Select Image Type</option>
@@ -270,14 +272,14 @@ const UpdateAdmin = () => {
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           placeholder="Full Name"
-          className="w-1/2 p-2 border placeholder:text-[#fff] bg-[#111111] text-lg  rounded-md"
+          className="w-1/2 p-2 border placeholder:text-[#fff] bg-secondary dark:bg-[#fff] dark:text-[#111] dark:border text-lg  rounded-md"
         />
         <input
           type="text"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
           placeholder="Phone Number"
-          className="w-1/2 p-2 border placeholder:text-[#fff] bg-[#111111] text-lg  rounded-md"
+          className="w-1/2 p-2 border placeholder:text-[#fff] bg-secondary dark:bg-[#fff] dark:text-[#111] dark:border text-lg  rounded-md"
         />
       </div>
       <div className="flex justify-center gap-4">

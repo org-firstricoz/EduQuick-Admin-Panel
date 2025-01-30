@@ -158,14 +158,14 @@ const VideoDialog = ({
           onChange={(e) => setTitle(e.target.value)}
           type="text"
           placeholder="Title"
-          className="w-1/2 bg-secondary outline-none border p-3 text-lg rounded-md"
+          className="w-1/2 bg-secondary dark:bg-[#fff] dark:text-[#111] outline-none border p-3 text-lg rounded-md"
         />
         <div className="w-1/2 border rounded-md ">
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
-            className="w-full rounded-md p-2 text-lg outline-none h-16 bg-secondary"
+            className="w-full rounded-md p-2 text-lg outline-none h-16 bg-secondary dark:bg-[#fff] dark:text-[#111]"
           />
         </div>
         <input
@@ -173,7 +173,7 @@ const VideoDialog = ({
           onChange={(e) => setVideoSequence(e.target.value)}
           type="number"
           placeholder="Video Sequence"
-          className="w-fit bg-secondary outline-none border p-3 text-lg rounded-md"
+          className="w-fit bg-secondary dark:bg-[#fff] dark:text-[#111] outline-none border p-3 text-lg rounded-md"
         />
         <div>
           <ThumbnailDialog
@@ -220,12 +220,12 @@ const VideoDialog = ({
           onChange={(e) => setDuration(e.target.value)}
           type="number"
           placeholder="Video duration"
-          className="w-1/2 bg-secondary outline-none border p-3 text-lg rounded-md"
+          className="w-1/2 bg-secondary dark:bg-[#fff] dark:text-[#111] outline-none border p-3 text-lg rounded-md"
         />
         <select
           value={quality}
           onChange={(e) => setQuality(e.target.value)}
-          className="w-fit bg-secondary p-2 border outline-none rounded-md"
+          className="w-fit bg-secondary dark:bg-[#fff] dark:text-[#111] p-2 border outline-none rounded-md"
         >
           <option>Video Quality</option>
           <option value="1080p">1080p</option>

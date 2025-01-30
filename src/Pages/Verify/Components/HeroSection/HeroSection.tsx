@@ -121,7 +121,7 @@ const HeroSection = () => {
           <p>{filter}</p>
         </button>
       </div>
-      <div className="w-full h-full overflow-scroll p-4 bg-secondary shadow-[#000] shadow-md rounded-md">
+      <div className="w-full h-full overflow-scroll p-4 bg-secondary dark:bg-[#fff] dark:text-[#111] shadow-[#000] shadow-md rounded-md">
         <table className="w-full  text-center">
           <tr className=" text-secondary h-16 text-xl font-medium">
             <td>#</td>
@@ -137,7 +137,7 @@ const HeroSection = () => {
             courses.map((course, i: number) => (
               <tr
                 key={i}
-                className="font-medium border-b text-xl bg-[#111111] rounded-md hover:bg-[#2d2d2d] cursor-pointer duration-300 "
+                className="font-medium border-b text-xl bg-secondary dark:bg-[#fff] dark:text-[#111] rounded-md hover:bg-[#2d2d2d] cursor-pointer duration-300 "
               >
                 <td className="p-4">{i < 9 ? `0${i + 1}` : i + 1}</td>
                 <td>

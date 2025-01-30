@@ -97,7 +97,7 @@ const HeroSection = () => {
       </div>
 
       {/* Users table */}
-      <div className="flex flex-col items-center  bg-secondary p-4 rounded-md shadow-[#000] shadow-md justify-center">
+      <div className="flex flex-col items-center  bg-secondary dark:bg-[#fff] dark:border p-4 rounded-md shadow-[#000] shadow-md justify-center">
         <FormatDialog
           open={openFormat}
           setOpen={setOpenFormat}

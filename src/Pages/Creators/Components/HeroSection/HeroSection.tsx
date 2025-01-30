@@ -115,7 +115,7 @@ const HeroSection = () => {
 
   return (
     <div
-      className="w-full bg-secondary p-6 shadow-[#000] shadow-md rounded-md overflow-scroll flex flex-col gap-4 m-4"
+      className="w-full bg-secondary dark:bg-[#fff] dark:text-[#111] p-6 shadow-[#000] shadow-md rounded-md overflow-scroll flex flex-col gap-4 m-4"
       style={{
         maxHeight: 520,
       }}
@@ -151,14 +151,14 @@ const HeroSection = () => {
         onChange={(e) => setTitle(e.target.value)}
         type="text"
         placeholder="Title"
-        className="w-1/2 bg-secondary placeholder:text-[#fff] outline-none border p-3 text-lg rounded-md"
+        className="w-1/2 bg-secondary dark:bg-[#fff] placeholder:text-[#fff] dark:placeholder:text-[#111] outline-none border p-3 text-lg rounded-md"
       />
       <div className="w-1/2 border rounded-md ">
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
-          className="w-full rounded-md p-2 placeholder:text-[#fff] text-lg outline-none h-16 bg-secondary"
+          className="w-full rounded-md p-2 placeholder:text-[#fff] dark:placeholder:text-[#111] text-lg outline-none h-16 bg-secondary dark:bg-[#fff]"
         />
       </div>
       <div>
@@ -223,7 +223,7 @@ const HeroSection = () => {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-fit p-2 rounded-md border outline-none bg-secondary"
+            className="w-fit p-2 rounded-md border outline-none bg-secondary dark:bg-[#fff]"
           >
             <option value="">Select</option>
             <option value="Mobile Tricks">Mobile Tricks</option>
@@ -241,7 +241,7 @@ const HeroSection = () => {
           <select
             value={trending.toString()} // Convert boolean to string for the select value
             onChange={(e) => setTrending(e.target.value === "true")} // Convert string back to boolean
-            className="w-fit p-2 rounded-md border outline-none bg-secondary"
+            className="w-fit p-2 rounded-md border outline-none bg-secondary dark:bg-[#fff]"
           >
             <option value="true">Yes</option>
             <option value="false">No</option>
@@ -253,7 +253,7 @@ const HeroSection = () => {
           <select
             value={free.toString()} // Convert boolean to string for the select value
             onChange={(e) => setFree(e.target.value === "true")} // Convert string back to boolean
-            className="w-fit p-2 rounded-md border outline-none bg-secondary"
+            className="w-fit p-2 rounded-md border outline-none bg-secondary dark:bg-[#fff]"
           >
             <option value="true">Yes</option>
             <option value="false">No</option>

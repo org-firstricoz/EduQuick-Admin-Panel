@@ -21,7 +21,7 @@ const Dialog: React.FC<propTypes> = ({ open, onClose, children, width }) => {
           maxHeight: 600,
           maxWidth: 1100,
         }}
-        className={`bg-[#202224] shadow-2xl overflow-scroll  p-6 transition-all max-w-md
+        className={`bg-secondary dark:bg-[#fff] dark:text-[#111] shadow-2xl overflow-scroll  p-6 transition-all max-w-md
         ${open ? "scale-100 opacity-100" : "scale-110 opacity-0"}
         `}
       >

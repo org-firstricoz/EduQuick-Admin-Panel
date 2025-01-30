@@ -125,7 +125,7 @@ const HeroSection = () => {
       </div>
 
       {/* Subscription Holders table */}
-      <div className="flex flex-col items-center justify-center bg-secondary shadow-[#000] shadow-md p-4 rounded-md ">
+      <div className="flex flex-col items-center justify-center bg-secondary dark:bg-[#fff] dark:border shadow-[#000] shadow-md p-4 rounded-md ">
         <FormatDialog
           title="Subscription Holders"
           url="user/users-or-creators"

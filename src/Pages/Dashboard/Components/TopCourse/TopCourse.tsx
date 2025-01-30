@@ -43,7 +43,7 @@ const TopCourse = () => {
   });
 
   return (
-    <div className="w-full overflow-scroll cursor-pointer bg-secondary mb-2  rounded-xl shadow-[#0a0a0a] shadow-xl">
+    <div className="w-full overflow-scroll cursor-pointer bg-secondary dark:bg-[#fff] mb-2 dark:shadow-sm dark:border rounded-xl shadow-[#0a0a0a] shadow-xl">
       <p className="text-primary text-xl font-semibold m-4">Top Courses</p>
 
       <table
@@ -51,7 +51,7 @@ const TopCourse = () => {
         style={{ width: "95%" }}
         className="m-6 text-center"
       >
-        <tr className="text-secondary bg-secondary mt-4 text-sm font-normal">
+        <tr className="text-secondary bg-secondary dark:bg-[#fff]  mt-4 text-sm font-normal">
           <td>#</td>
           <td>Name</td>
           <td>View</td>

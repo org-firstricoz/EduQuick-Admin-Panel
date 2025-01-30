@@ -55,7 +55,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className="font-poppins shadow-[#000] shadow-xl overflow-scroll bg-secondary rounded-tr-xl w-80 text-lg flex flex-col justify-start items-center "
+      className="font-poppins shadow-[#000] dark:shadow-sm shadow-xl dark:border overflow-scroll bg-secondary dark:bg-[#fff] rounded-tr-xl w-80 text-lg flex flex-col justify-start items-center "
       style={{
         height: "calc(100vh - 69px)",
       }}
@@ -66,7 +66,7 @@ const Sidebar = () => {
         ${
           location.pathname === "/"
             ? "bg-primary shadow-[#111] shadow-md text-[#fff] "
-            : " text-secondary"
+            : " bg-secondary dark:bg-[#fff] dark:text-[#111]"
         }
         p-3 rounded-r-md  flex items-center w-full transition-all duration-150 active:bg-[#464646]  justify-center gap-1  cursor-pointer
         `}
@@ -84,7 +84,7 @@ const Sidebar = () => {
         ${
           location.pathname === "/users"
             ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
-            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            : " bg-secondary dark:bg-[#fff] dark:text-[#111] hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
         p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
@@ -102,7 +102,7 @@ const Sidebar = () => {
         ${
           location.pathname === "/subscription"
             ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
-            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            : " bg-secondary dark:bg-[#fff] dark:text-[#111] hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
         p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
@@ -120,7 +120,7 @@ const Sidebar = () => {
         ${
           location.pathname === "/leaderboard"
             ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
-            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            : " bg-secondary dark:bg-[#fff] dark:text-[#111] hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
         p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
@@ -138,7 +138,7 @@ const Sidebar = () => {
         ${
           location.pathname === "/create"
             ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
-            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            : " bg-secondary dark:bg-[#fff] dark:text-[#111] hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
         p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
@@ -156,7 +156,7 @@ const Sidebar = () => {
         ${
           location.pathname === "/courses"
             ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
-            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            : " bg-secondary dark:bg-[#fff] dark:text-[#111] hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
         p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
@@ -174,7 +174,7 @@ const Sidebar = () => {
         ${
           location.pathname === "/verify-course"
             ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
-            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            : " bg-secondary dark:bg-[#fff] dark:text-[#111] hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
         p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
@@ -192,7 +192,7 @@ const Sidebar = () => {
         ${
           location.pathname === "/support"
             ? "bg-primary shadow-[#000] shadow-md text-[#fff]"
-            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            : " bg-secondary dark:bg-[#fff] dark:text-[#111] hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
         p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
@@ -210,7 +210,7 @@ const Sidebar = () => {
         ${
           location.pathname === "/admin"
             ? "bg-primary shadow-[#000] shadow-md text-[#fff] "
-            : " text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
+            : " bg-secondary dark:bg-[#fff] dark:text-[#111] hover:bg-[#292929] transition-all duration-150 active:bg-[#464646]"
         }
         p-3 w-full rounded-r-md flex items-center gap-1 justify-center cursor-pointer
         `}
@@ -225,7 +225,7 @@ const Sidebar = () => {
 
       <div
         onClick={() => setLogoutDialog(true)}
-        className=" text-secondary hover:bg-[#292929] transition-all duration-150 active:bg-[#464646] p-4 w-full rounded-xl flex items-center gap-1 justify-center cursor-pointer"
+        className=" bg-secondary dark:bg-[#fff] dark:text-[#111] hover:bg-[#292929] transition-all duration-150 active:bg-[#464646] p-4 w-full rounded-xl flex items-center gap-1 justify-center cursor-pointer"
       >
         <div className="flex justify-start items-center w-1/4 ">
           <PiSignOutBold className="text-3xl" />
@@ -249,7 +249,7 @@ const Sidebar = () => {
             </button>
             <button
               onClick={handleSignOut}
-              className="border text-[#fff] rounded-md p-2 pl-6 pr-6"
+              className="border bg-secondary dark:bg-[#fff] dark:text-[#111] rounded-md p-2 pl-6 pr-6"
             >
               Sign Out
             </button>

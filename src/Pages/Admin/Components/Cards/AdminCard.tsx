@@ -83,7 +83,7 @@ const AdminCard = ({ admin }: props) => {
   };
 
   return (
-    <div className="bg-[#111] shadow-[#000] shadow-md transition-all hover:bg-[#1d1d1d] duration-300 flex flex-col gap-1 p-3 rounded-md w-full">
+    <div className="bg-secondary dark:bg-[#fff] dark:text-[#111] shadow-[#000] dark:shadow-sm dark:border shadow-md transition-all hover:bg-[#1d1d1d] duration-300 flex flex-col gap-1 p-3 rounded-md w-full">
       {isSuperAdmin && (
         <IconButton
           onClick={() => {

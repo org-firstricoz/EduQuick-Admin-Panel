@@ -154,14 +154,14 @@ const HeroSection = () => {
         placeholder="Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="w-1/2 border placeholder:text-[#fff] rounded-md outline-none p-2 text-xl bg-[#111111]"
+        className="w-1/2 border placeholder:text-[#fff] rounded-md outline-none p-2 text-xl bg-secondary dark:bg-[#fff] dark:text-[#111]"
       />
       <div className="w-1/2 border rounded-md ">
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Description"
-          className="w-full rounded-md placeholder:text-[#fff] p-2 text-lg outline-none h-16 bg-[#111111]"
+          className="w-full rounded-md placeholder:text-[#fff] p-2 text-lg outline-none h-16 bg-secondary dark:bg-[#fff] dark:text-[#111]"
         />
       </div>
       <div>
@@ -175,7 +175,7 @@ const HeroSection = () => {
                   navigate(`/update-video/${id}/videos?video=${video.id}`);
                 });
               }}
-              className="bg-[#000] cursor-pointer flex flex-col gap-2 w-72 p-2 rounded-t-md"
+              className="bg-secondary dark:bg-[#fff] dark:text-[#111] dark:border cursor-pointer flex flex-col gap-2 w-72 p-2 rounded-t-md"
             >
               <img
                 src={video.thumbnailUrl ? video.thumbnailUrl : course?.imgUrl}
@@ -191,7 +191,7 @@ const HeroSection = () => {
         <label>Category</label>
         <select
           onChange={(e) => setCategory(e.target.value)}
-          className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
+          className="w-fit p-2 rounded-md border outline-none bg-secondary dark:bg-[#fff] dark:text-[#111]"
         >
           <option value="">{course?.category}</option>
           <option value="Mobile Tricks">Mobile Tricks</option>
@@ -208,7 +208,7 @@ const HeroSection = () => {
         <select
           value={trending.toString()}
           onChange={(e) => setTrending(e.target.value === "true")}
-          className="w-fit p-2 rounded-md border outline-none bg-[#111111]"
+          className="w-fit p-2 rounded-md border outline-none bg-secondary dark:bg-[#fff] dark:text-[#111]"
         >
           <option value="true">Yes</option>
           <option value="false">No</option>

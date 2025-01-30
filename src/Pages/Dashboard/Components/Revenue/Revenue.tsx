@@ -49,7 +49,7 @@ const Revenue = () => {
   }, []);
 
   return (
-    <div className="w-full overflow-scroll bg-secondary p-4 rounded-xl shadow-[#0a0a0a] shadow-xl">
+    <div className="w-full overflow-scroll bg-secondary dark:bg-[#fff] p-4 rounded-xl dark:shadow-sm dark:border shadow-[#0a0a0a] shadow-xl">
       <p className="text-primary text-xl font-semibold">Total Revenue</p>
       <BarChart width={1000} height={300} data={revenue}>
         <XAxis dataKey="day" stroke="#8884d8" />

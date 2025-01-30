@@ -167,11 +167,11 @@ const HeroSection = () => {
               setSearch(e.target.value);
               handleCourseSearch();
             }}
-            className="w-96 rounded-full p-2 pl-4 pr-4 text-base bg-[#111111] h-full"
+            className="w-96 rounded-full p-2 pl-4 pr-4 text-base bg-secondary dark:bg-[#fff] dark:text-[#111] h-full"
           />
         </div>
       </div>
-      <div className="w-full h-full overflow-scroll bg-secondary shadow-md shadow-[#000] p-4 rounded-md">
+      <div className="w-full h-full overflow-scroll bg-secondary dark:bg-[#fff] dark:text-[#111] shadow-md shadow-[#000] p-4 rounded-md">
         <table className="w-full text-center">
           <thead>
             <tr className="text-secondary rounded-md h-16 text-xl font-medium">
@@ -185,7 +185,7 @@ const HeroSection = () => {
             {courses.map((data, i: number) => (
               <tr
                 key={i}
-                className="font-medium border-b text-xl duration-300 transition-all hover:bg-[#1d1d1d] cursor-pointer bg-[#181818]"
+                className="font-medium border-b text-xl duration-300 transition-all hover:bg-[#1d1d1d] cursor-pointer bg-secondary dark:bg-[#fff] dark:text-[#111]"
               >
                 <td>
                   <img src={data.imgUrl} className="w-32 h-20" alt="" />

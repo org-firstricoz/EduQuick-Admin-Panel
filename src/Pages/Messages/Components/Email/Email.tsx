@@ -118,7 +118,7 @@ const Email = () => {
         {complaints.map((complaint, i) => (
           <tr
             key={i}
-            className=" hover:bg-[#242424] border-b transition-all duration-300 cursor-pointer rounded-md "
+            className=" hover:bg-[#242424] bg-secondary dark:bg-[#fff] dark:text-[#111] border-b transition-all duration-300 cursor-pointer rounded-md "
           >
             <td>
               <h2 className="p-2 flex flex-col">
@@ -150,8 +150,8 @@ const Email = () => {
                 className={`p-2 rounded-md font-medium  w-28 text-center text-nowrap overflow-hidden
                 ${
                   complaint.status === "Resolved"
-                    ? "bg-[#F0FFF8] text-[#18AB56]"
-                    : "bg-[#FFF0F0] text-[#FFBC10]"
+                    ? "bg-[#F0FFF8] text-[#18AB56] dark:border"
+                    : "bg-[#FFF0F0] text-[#FFBC10] dark:border"
                 }
                 `}
               >
