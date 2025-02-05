@@ -1,6 +1,7 @@
-import { startTransition } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminCard from "./Cards/AdminCard";
+import AdminCardLoader from "../../../Components/LoadingScreens/AdminCardLoader";
 
 interface Admin {
   createdAt: string;
@@ -25,8 +26,16 @@ interface props {
 const ApproveAdmin = ({ admins, status, setStatus }: props) => {
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (admins) {
+      setIsLoading(false);
+    }
+  });
+
   return (
-    <div className="w-full  shadow-[#000] shadow-md rounded-md bg-secondary dark:bg-[#fff] dark:text-[#111] flex flex-col p-10 gap-4 justify-center">
+    <div className="w-full min-h-[500px]  shadow-[#000] shadow-md rounded-md bg-secondary dark:bg-[#fff] dark:text-[#111] flex flex-col p-10 gap-4 justify-start">
       <h2 className="text-left text-2xl font-normal">Approve Admins</h2>
       <div className="flex gap-2">
         <button
@@ -74,10 +83,10 @@ const ApproveAdmin = ({ admins, status, setStatus }: props) => {
           className="p-2 rounded-md outline-none w-full bg-secondary"
         />
       </div> */}
-      {admins.length === 0 ? (
-        <div className="text-center bg-secondary text-lg font-bold text-red-500">
-          No admins found
-        </div>
+      {isLoading ? (
+        <>
+          <AdminCardLoader />
+        </>
       ) : (
         admins.map((admin, i) => <AdminCard key={i} admin={admin} />)
       )}

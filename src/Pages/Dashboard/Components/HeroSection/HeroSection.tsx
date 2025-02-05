@@ -8,7 +8,7 @@ const HeroSection = () => {
     <div
       className=" w-full overflow-scroll pl-4 pr-4 p-2 flex flex-col gap-4 font-poppins"
       style={{
-        height: "calc(100vh - 80px)",
+        height: "calc(100vh - 63px)",
       }}
     >
       <div className=" flex gap-4">

@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { startTransition, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../../../context/AuthContext";
 
 interface Admin {
   email: string;
@@ -29,18 +30,15 @@ interface AdminUser {
 
 const Nav = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [admin, setAdmin] = useState<Admin | null>(null);
   const [adminUser, setAdminUser] = useState<AdminUser | null>(null);
 
-  const token = Cookies.get("token");
+  const { token, isLoggedIn } = useAuthContext();
   const getsessionCode = () => {
     if (token) {
-      setIsLoggedIn(true);
       const user = jwtDecode<Admin>(token);
       setAdmin(user);
     } else {
-      setIsLoggedIn(false);
       startTransition(() => {
         navigate("/login");
       });

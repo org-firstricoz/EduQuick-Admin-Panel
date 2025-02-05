@@ -49,6 +49,7 @@ const Login = () => {
         const token = response.data.token;
         console.log(token);
         Cookies.set("token", token);
+        localStorage.setItem("token", token);
         startTransition(() => {
           navigate("/");
         });

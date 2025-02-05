@@ -1,7 +1,8 @@
 import Nav from "@dashboard/Components/Nav/Nav";
 import Sidebar from "@dashboard/Components/Sidebar/Sidebar";
 import { useTitle } from "@hooks";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
+import DashboardLoader from "../../Components/LoadingScreens/DashboardLoader";
 
 const HeroSection = lazy(
   () => import("@dashboard/Components/HeroSection/HeroSection")
@@ -15,7 +16,10 @@ const Dashboard = () => {
       <Nav />
       <div className="flex pr-7">
         <Sidebar />
-        <HeroSection />
+
+        <Suspense fallback={<DashboardLoader />}>
+          <HeroSection />
+        </Suspense>
       </div>
     </div>
   );
