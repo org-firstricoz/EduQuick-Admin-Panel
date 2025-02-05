@@ -1,4 +1,3 @@
-import { useToken } from "@hooks";
 import {
   ReactNode,
   createContext,
@@ -22,7 +21,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>();
 
-  const token = useToken;
+  const token = localStorage.getItem("token");
   const checkAuth = () => {
     if (token) {
       setIsLoggedIn(true);

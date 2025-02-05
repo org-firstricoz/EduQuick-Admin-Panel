@@ -4,15 +4,18 @@ import Cookies from "js-cookie";
 import { startTransition, useState } from "react";
 import toast from "react-hot-toast";
 import { CiUser } from "react-icons/ci";
+import { FaUsers } from "react-icons/fa";
 import { GoGraph } from "react-icons/go";
 import { IoBagHandleOutline, IoChatboxEllipsesOutline } from "react-icons/io5";
-import { MdLeaderboard } from "react-icons/md";
+import {
+  MdLeaderboard,
+  MdOutlineAddCircle,
+  MdSubscriptions,
+} from "react-icons/md";
 import { PiSignOutBold } from "react-icons/pi";
 import { RiDashboardFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { FaUsers } from "react-icons/fa";
-import { MdSubscriptions } from "react-icons/md";
-import { MdOutlineAddCircle } from "react-icons/md";
+import { useAuthContext } from "../../../../context/AuthContext";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -25,7 +28,7 @@ const Sidebar = () => {
     });
   };
 
-  const token = Cookies.get("token");
+  const { token } = useAuthContext();
 
   const handleSignOut = async () => {
     const pendingToast = toast.loading("Logging out...");
@@ -42,6 +45,7 @@ const Sidebar = () => {
         setLogoutDialog(false);
         toast.success("Logged out!");
         Cookies.remove("token");
+        localStorage.removeItem("token");
         handleNavigation("/login");
       }
     } catch (error) {
