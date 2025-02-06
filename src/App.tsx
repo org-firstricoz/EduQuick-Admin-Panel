@@ -9,7 +9,7 @@ const App = () => {
   return (
     <>
       <Suspense fallback={<LoadingScreen />}>
-        <div className="hidden md:block bg-[#111] dark:bg-[#fff] text-[#fff] dark:text-[#111]">
+        <div className="hidden md:block bg-[#111] w-screen h-screen dark:bg-[#fff] text-[#fff] dark:text-[#111]">
           <Router />
         </div>
       </Suspense>

@@ -1,6 +1,6 @@
 const LoadingScreen = () => {
   return (
-    <div className="flex flex-col gap-10 w-full h-screen justify-center items-center">
+    <div className="flex bg-secondary dark:bg-[#fff] flex-col gap-10 w-full h-screen justify-center items-center">
       <h1 className="text-primary font-jockey font-normal text-7xl">
         EDUQUICK
       </h1>

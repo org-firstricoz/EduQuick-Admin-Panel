@@ -6,6 +6,8 @@ import { jwtDecode } from "jwt-decode";
 import { startTransition, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../../context/AuthContext";
+import toast from "react-hot-toast";
+import DarkMode from "../../../../Components/DarkMode";
 
 interface Admin {
   email: string;
@@ -60,14 +62,22 @@ const Nav = () => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const errorMessage = error.response?.data.message;
-        console.log(errorMessage);
+        toast.error(errorMessage);
+        startTransition(() => {
+          navigate("/login");
+        });
       }
     }
   };
   useEffect(() => {
     getsessionCode();
-    getAdminById();
-  }, [token, admin?.id]);
+  }, [token]); // Only update when token changes
+
+  useEffect(() => {
+    if (admin?.id) {
+      getAdminById();
+    }
+  }, [admin?.id]);
 
   const handleNavigation = (path: string) => {
     startTransition(() => {
@@ -83,22 +93,25 @@ const Nav = () => {
 
       <div className="flex items-center gap-2">
         {isLoggedIn ? (
-          <div
-            onClick={() => handleNavigation(`/admin/profile/${admin?.id}`)}
-            className="flex items-center cursor-pointer justify-center gap-2"
-          >
-            <img
-              src={
-                adminUser?.profileImageUrl ? adminUser.profileImageUrl : User
-              }
-              className="w-12 h-12 rounded-full"
-              alt="Admin Profile Image"
-            />
-            <div className="flex flex-col">
-              <p className="text-primary">{adminUser?.fullName}</p>
-              <p className="font-thin text-sm">{adminUser?.role}</p>
+          <>
+            <div
+              onClick={() => handleNavigation(`/admin/profile/${admin?.id}`)}
+              className="flex items-center cursor-pointer justify-center gap-2"
+            >
+              <img
+                src={
+                  adminUser?.profileImageUrl ? adminUser.profileImageUrl : User
+                }
+                className="w-12 h-12 rounded-full"
+                alt="Admin Profile Image"
+              />
+              <div className="flex flex-col">
+                <p className="text-primary">{adminUser?.fullName}</p>
+                <p className="font-thin text-sm">{adminUser?.role}</p>
+              </div>
             </div>
-          </div>
+            <DarkMode />
+          </>
         ) : (
           <button
             onClick={() => handleNavigation("/login")}

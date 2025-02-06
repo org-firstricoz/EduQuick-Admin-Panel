@@ -1,15 +1,14 @@
 import { baseURL } from "@baseURL";
 import Dialog from "@dialog";
+import { useTitle } from "@hooks";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { startTransition, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { IoMdClose } from "react-icons/io";
+import { IoChevronBackCircleOutline } from "react-icons/io5";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
-import { IoChevronBackCircleOutline } from "react-icons/io5";
-import { useTitle } from "@hooks";
-import DarkMode from "../../Components/DarkMode";
 
 interface AdminUser {
   createdAt: string;
@@ -200,9 +199,8 @@ const UpdateAdmin = () => {
             navigate("/");
           });
         }}
-        className="text-4xl cursor-pointer bg-secondary dark:bg-[#fff] dark:text-[#111] text-[#fff] absolute top-8 left-8"
+        className="text-4xl cursor-pointer dark:bg-[#fff] dark:text-[#111] text-[#fff] absolute top-8 left-8"
       />
-      <DarkMode />
       <h2 className="text-center text-3xl font-semibold">Update Admin </h2>
       <div className=" flex justify-center items-center w-full">
         <div className="flex gap-6">
