@@ -71,13 +71,13 @@ const Login = () => {
           EDUQUICK
         </h1>
       </div>
-      <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary gap-4 rounded-md p-16">
+      <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary dark:bg-[#fff] gap-4 rounded-md p-16">
         <h2 className="font-semibold text-4xl">Account Login</h2>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="outline-none border-b-2 w-full bg-secondary h-16 text-xl text-[#fff] placeholder:text-[#fff] "
+          className="outline-none border-b-2 w-full bg-secondary dark:bg-[#fff] dark:text-[#111] dark:placeholder:text-[#111] h-16 text-xl text-[#fff] placeholder:text-[#fff] "
           placeholder="Email Adress"
           autoFocus
         />
@@ -86,7 +86,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type={showPassword ? "text" : "password"}
-            className="outline-none  w-full bg-secondary h-full text-xl text-[#fff] placeholder:text-[#fff] "
+            className="outline-none  w-full bg-secondary dark:bg-[#fff] dark:text-[#111] dark:placeholder:text-[#111] h-full text-xl text-[#fff] placeholder:text-[#fff] "
             placeholder="Password"
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -95,7 +95,7 @@ const Login = () => {
             }}
           />
           <div
-            className="text-3xl transition-all duration-150 cursor-pointer hover:bg-[#1b1b1b] active:bg-[#272727] p-4 rounded-full"
+            className="text-3xl transition-all duration-150 cursor-pointer hover:bg-[#1b1b1b] dark:hover:bg-[#e2e2e2] active:bg-[#272727] p-4 rounded-full"
             onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}

@@ -93,7 +93,7 @@ const AdminCard = ({ admin }: props) => {
               : toast.error("Only super admin can delete admins!");
           }}
           sx={{
-            marginLeft: "860px",
+            marginLeft: "900px",
           }}
         >
           <FaTrash

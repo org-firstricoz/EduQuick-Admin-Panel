@@ -146,7 +146,7 @@ const SignUp = () => {
       </div>
 
       {showOTP ? (
-        <div className="w-2/3 shadow-[#000] shadow-md flex flex-col items-start bg-secondary gap-2 rounded-md p-24">
+        <div className="w-2/3 shadow-[#000] shadow-md flex flex-col items-start bg-secondary dark:bg-[#fff] gap-2 rounded-md p-24">
           <h2 className="font-semibold text-4xl">OTP Verification</h2>
           <p className="text-secondary">
             Enter the verification code we just sent on your email address
@@ -196,13 +196,13 @@ const SignUp = () => {
           </div>
         </div>
       ) : (
-        <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary gap-4 rounded-md p-10">
+        <div className="w-9/12 shadow-[#000] shadow-md flex flex-col bg-secondary dark:bg-[#fff] gap-4 rounded-md p-10">
           <h2 className="font-semibold text-4xl">Create Account</h2>
           <input
             type="text"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
-            className="outline-none  border-b w-full bg-secondary h-12 text-lg text-[#fff] placeholder:text-[#fff] "
+            className="outline-none  border-b w-full bg-secondary dark:bg-[#fff] dark:text-[#111] dark:placeholder:text-[#111] h-12 text-lg text-[#fff] placeholder:text-[#fff] "
             placeholder="Full Name"
             autoFocus
           />
@@ -210,7 +210,7 @@ const SignUp = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="outline-none  border-b w-full bg-secondary h-12 text-lg text-[#fff] placeholder:text-[#fff] "
+            className="outline-none  border-b w-full bg-secondary dark:bg-[#fff] dark:text-[#111] dark:placeholder:text-[#111] h-12 text-lg text-[#fff] placeholder:text-[#fff] "
             placeholder="Email Adress"
             // autoFocus
           />
@@ -222,7 +222,7 @@ const SignUp = () => {
                 setPassError(validatePassword(password));
               }}
               type={showPassword ? "text" : "password"}
-              className="outline-none  w-full bg-secondary h-full text-lg text-[#fff] placeholder:text-[#fff] "
+              className="outline-none  w-full bg-secondary h-full dark:bg-[#fff] dark:text-[#111] dark:placeholder:text-[#111]  text-lg text-[#fff] placeholder:text-[#fff] "
               placeholder="Password"
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
@@ -231,7 +231,7 @@ const SignUp = () => {
               }}
             />
             <div
-              className="text-3xl transition-all duration-150 cursor-pointer hover:bg-[#1b1b1b] active:bg-[#272727] p-4 rounded-full"
+              className="text-3xl transition-all duration-150 cursor-pointer hover:bg-[#1b1b1b] dark:hover:bg-[#e2e2e2] active:bg-[#272727] p-4 rounded-full"
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
