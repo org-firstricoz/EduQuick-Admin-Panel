@@ -46,36 +46,97 @@ const Router = () => {
   return (
     <div>
       <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="*" element={<NotFound />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
-            <Route path="/otp-verification" element={<OTPVerification />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/subscription" element={<SubscriptionHolders />} />
-            <Route path="/users" element={<UsersPage />} />
-            <Route path="/admin" element={<AdminPage />} />
-            <Route path="/admins" element={<AdminBySpecialization />} />
-            <Route path="/admin/change-password" element={<UpdatePassword />} />
-            <Route path="/admin/profile/:id" element={<UpdateAdmin />} />
-            <Route path="/pending-requests" element={<PendingAdmins />} />
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/courses" element={<Products />} />
-            <Route
-              path="/course-verifycation/:id"
-              element={<CourseVerifycation />}
-            />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/create" element={<Creators />} />
-            <Route path="/verify-course" element={<Verify />} />
-            <Route path="/top-courses" element={<TopCoursePage />} />
-            <Route path="/support" element={<Inbox />} />
-            <Route path="/update-course/:id" element={<UpdateCourse />} />
-            <Route path="/update-video/:id/videos" element={<UpdateVideo />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          <Route path="*" element={<NotFound />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
+          <Route path="/otp-verification" element={<OTPVerification />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route
+            path="/subscription"
+            element={
+              <Layout>
+                <SubscriptionHolders />
+              </Layout>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <Layout>
+                <UsersPage />
+              </Layout>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <Layout>
+                <AdminPage />
+              </Layout>
+            }
+          />
+          <Route path="/admins" element={<AdminBySpecialization />} />
+          <Route path="/admin/change-password" element={<UpdatePassword />} />
+          <Route path="/admin/profile/:id" element={<UpdateAdmin />} />
+          <Route path="/pending-requests" element={<PendingAdmins />} />
+          <Route
+            path="/"
+            element={
+              <Layout>
+                <Dashboard />
+              </Layout>
+            }
+          />
+          <Route
+            path="/leaderboard"
+            element={
+              <Layout>
+                <Leaderboard />
+              </Layout>
+            }
+          />
+          <Route
+            path="/courses"
+            element={
+              <Layout>
+                <Products />
+              </Layout>
+            }
+          />
+          <Route
+            path="/course-verifycation/:id"
+            element={<CourseVerifycation />}
+          />
+          <Route path="/settings" element={<Settings />} />
+          <Route
+            path="/create"
+            element={
+              <Layout>
+                <Creators />
+              </Layout>
+            }
+          />
+          <Route
+            path="/verify-course"
+            element={
+              <Layout>
+                <Verify />
+              </Layout>
+            }
+          />
+          <Route path="/top-courses" element={<TopCoursePage />} />
+          <Route
+            path="/support"
+            element={
+              <Layout>
+                <Inbox />
+              </Layout>
+            }
+          />
+          <Route path="/update-course/:id" element={<UpdateCourse />} />
+          <Route path="/update-video/:id/videos" element={<UpdateVideo />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
