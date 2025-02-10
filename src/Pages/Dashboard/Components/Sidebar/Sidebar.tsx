@@ -59,7 +59,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className="font-poppins shadow-[#000] dark:shadow-sm shadow-xl dark:border overflow-scroll bg-secondary dark:bg-[#fff] rounded-tr-xl w-80 text-lg flex flex-col justify-start items-center "
+      className="font-poppins shadow-[#000]  dark:shadow-sm shadow-xl dark:border overflow-scroll bg-secondary dark:bg-[#fff] rounded-tr-xl w-64 text-lg flex flex-col justify-start items-center "
       style={{
         height: "calc(100vh - 69px)",
       }}

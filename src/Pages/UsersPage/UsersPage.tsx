@@ -1,5 +1,3 @@
-import Nav from "@dashboard/Components/Nav/Nav";
-import Sidebar from "@dashboard/Components/Sidebar/Sidebar";
 import { useTitle } from "@hooks";
 import { lazy, Suspense } from "react";
 import UsersPageLoader from "../../Components/LoadingScreens/UsersPageLoader";
@@ -11,13 +9,9 @@ const UsersPage = () => {
 
   return (
     <div>
-      <Nav />
-      <div className="flex ">
-        <Sidebar />
-        <Suspense fallback={<UsersPageLoader />}>
-          <HeroSection />
-        </Suspense>
-      </div>
+      <Suspense fallback={<UsersPageLoader />}>
+        <HeroSection />
+      </Suspense>
     </div>
   );
 };
